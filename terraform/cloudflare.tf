@@ -14,12 +14,12 @@ resource "cloudflare_zone_settings_override" "nspehler" {
   }
 }
 
-# Ghost Admin
-resource "cloudflare_record" "ghost_admin" {
+# DatoCMS
+resource "cloudflare_record" "datocms" {
   zone_id = cloudflare_zone.nspehler.id
   name    = "admin"
-  value   = aws_eip.nspehler.public_ip
-  type    = "A"
+  value   = "admin.datocms.com"
+  type    = "CNAME"
   ttl     = "1"
-  proxied = "true"
+  proxied = "false"
 }
