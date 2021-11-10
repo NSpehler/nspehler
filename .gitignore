@@ -1,0 +1,5 @@
+.DS_Store
+
+# Serverless
+server/s_*
+server/serverless_sdk/
