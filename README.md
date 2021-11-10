@@ -1,4 +1,10 @@
-### Hi there 👋
+### Hey! 👋
+
+I'm Nicolas, a full-stack developer with experience in designing modern front-end experiences, as well as a strong focus on automation, growth hacking and data scraping to help scale businesses through technology.
+
+I'm also a digital nomad, currently living and working from Bali, Indonesia for the next couple of months. If you happen to be there, let's meet up!
+
+Most recently, I've led the Growth Engineering team at PayFit for the past 2 years and I’m currently open to new client work. Feel free to reach out and I'll be happy to discuss!
 
 <!--
 **NSpehler/NSpehler** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
