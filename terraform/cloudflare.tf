@@ -8,7 +8,7 @@ resource "cloudflare_zone_settings_override" "nspehler" {
   zone_id = cloudflare_zone.nspehler.id
 
   settings {
-    ssl                      = "strict"
+    ssl                      = "flexible"
     always_use_https         = "on"
     automatic_https_rewrites = "on"
   }
@@ -50,4 +50,14 @@ resource "cloudflare_record" "datocms" {
   type    = "CNAME"
   ttl     = "1"
   proxied = "false"
+}
+
+# Revue
+resource "cloudflare_record" "revue" {
+  zone_id = cloudflare_zone.nspehler.id
+  name    = "news"
+  value   = "www.getrevue.co"
+  type    = "CNAME"
+  ttl     = "1"
+  proxied = "true"
 }
