@@ -2,8 +2,8 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    siteUrl: process.env.SITE_URL,
-    title: process.env.SITE_NAME,
+    siteUrl: process.env.GATSBY_APP_URL,
+    title: process.env.GATSBY_APP_NAME,
   },
   plugins: [
     {
@@ -15,13 +15,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: process.env.SITE_NAME,
-        short_name: process.env.SITE_NAME,
+        name: process.env.GATSBY_APP_NAME,
+        short_name: process.env.GATSBY_APP_NAME,
         start_url: `/`,
         background_color: `#000000`,
         theme_color: `#000000`,
         display: `standalone`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/icon.inline.svg`,
       },
     },
     {
@@ -48,6 +48,21 @@ module.exports = {
     "gatsby-transformer-remark",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: process.env.GATSBY_APP_URL,
+        sitemap: `${process.env.GATSBY_APP_URL}/sitemap/sitemap-index.xml`,
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
+    "gatsby-plugin-sitemap",
+    {
+      resolve: `gatsby-plugin-react-helmet-canonical-urls`,
+      options: {
+        siteUrl: process.env.GATSBY_APP_URL,
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
