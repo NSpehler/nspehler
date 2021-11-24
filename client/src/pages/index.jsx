@@ -16,7 +16,7 @@ const IndexPage = ({ data, location }) => (
           email: "nspehler@hey.com",
           telephone: "+1 (415) 513-0099",
           url: process.env.GATSBY_APP_URL,
-          logo: `${process.env.GATSBY_APP_URL}/nspehler-icon.png`,
+          logo: `${process.env.GATSBY_APP_URL}/nspehler-logo.png`,
           sameAs: data.footer.social.map((social) => social.link),
         })}
       </script>
