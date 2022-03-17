@@ -8,7 +8,7 @@ resource "cloudflare_zone_settings_override" "nspehler" {
   zone_id = cloudflare_zone.nspehler.id
 
   settings {
-    ssl                      = "flexible"
+    ssl                      = "full"
     always_use_https         = "on"
     automatic_https_rewrites = "on"
   }
