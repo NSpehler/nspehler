@@ -13,7 +13,6 @@ data "aws_caller_identity" "current" {}
 
 provider "cloudflare" {}
 
-# Backup Terraform state in S3
 terraform {
   cloud {
     organization = "nspehler"
