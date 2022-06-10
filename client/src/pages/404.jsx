@@ -4,7 +4,9 @@ import { Layout } from "../components/Layout"
 
 const NotFoundPage = ({ location }) => (
   <Layout location={location}>
-    <h1>Page not found</h1>
+    <div className="prose prose-xl lg:prose-2xl dark:prose-light">
+      <p>Page not found</p>
+    </div>
   </Layout>
 )
 

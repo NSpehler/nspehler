@@ -57,7 +57,7 @@ export const Header = ({ location }) => {
               <Link
                 to={linkResolver(item.link)}
                 className={`${
-                  location.pathname.includes(item.link.slug)
+                  (location.pathname.includes(item.link.slug) || (!item.link.slug && location.pathname === `/`))
                     ? `text-gray-900 border-gray-600 dark:text-white dark:border-white`
                     : `text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 border-transparent`
                 } relative top-[1px] border-b inline-flex pb-5 items-center text-lg font-medium transition-all`}
@@ -77,7 +77,7 @@ export const Header = ({ location }) => {
                 <Link
                   to={linkResolver(item.link)}
                   className={`${
-                    location.pathname.includes(item.link.slug)
+                    (location.pathname.includes(item.link.slug) || (!item.link.slug && location.pathname === `/`))
                       ? `text-gray-900 dark:text-white`
                       : `text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100`
                   } block text-lg font-medium transition-all`}

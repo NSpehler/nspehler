@@ -1,7 +1,7 @@
 export const linkResolver = (link) => {
-  if (!link || !link.slug) return null
+  if (!link) return null
 
-  if (link.model.apiKey === "home") {
+  if (!link.slug || link.model.apiKey === "home") {
     return `/`
   }
 

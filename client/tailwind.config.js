@@ -1,6 +1,7 @@
 module.exports = {
-  mode: "jit",
-  purge: ["./src/**/*.{js,jsx,ts,tsx,scss,svg}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx,scss,svg}",
+  ],
   darkMode: "media",
   theme: {
     extend: {
@@ -30,6 +31,7 @@ module.exports = {
               },
               a: {
                 color: theme("colors.white"),
+                borderColor: theme("colors.white"),
                 "&:hover": {
                   color: theme("colors.gray.300"),
                   borderColor: theme("colors.gray.300"),

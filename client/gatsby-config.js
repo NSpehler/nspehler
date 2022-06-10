@@ -72,17 +72,9 @@ module.exports = {
       __key: "images",
     },
     {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "pages",
-        path: "./src/pages/",
-      },
-      __key: "pages",
-    },
-    {
       resolve: `gatsby-plugin-plausible`,
       options: {
-        domain: `nspehler.com`,
+        domain: process.env.GATSBY_APP_URL,
       },
     },
     `gatsby-plugin-gatsby-cloud`,
