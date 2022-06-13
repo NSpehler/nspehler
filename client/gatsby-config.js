@@ -74,7 +74,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-plausible`,
       options: {
-        domain: process.env.GATSBY_APP_URL,
+        domain: process.env.PLAUSIBLE_DOMAIN,
       },
     },
     `gatsby-plugin-gatsby-cloud`,
