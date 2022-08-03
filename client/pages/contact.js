@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { renderMetaTags, useQuerySubscription, StructuredText } from "react-datocms"
 import { Layout } from "@/components/layout"
-import { request } from "@/lib/datocms"
+import { createSubscription } from "@/lib/datocms"
 import { siteFragment, headerFragment, footerFragment, contactFragment } from "@/lib/fragments"
 
 const CONTACT_QUERY = `
@@ -26,23 +26,11 @@ const CONTACT_QUERY = `
 `
 
 export const getStaticProps = async (context) => {
-  const graphqlRequest = {
-    query: CONTACT_QUERY,
-    preview: context.preview,
-  }
-
   return {
     props: {
-      subscription: context.preview
-        ? {
-            ...graphqlRequest,
-            initialData: await request(graphqlRequest),
-            token: process.env.NEXT_DATOCMS_API_TOKEN,
-          }
-        : {
-            enabled: false,
-            initialData: await request(graphqlRequest),
-          },
+      subscription: await createSubscription(context, {
+        query: CONTACT_QUERY
+      })
     },
   }
 }
