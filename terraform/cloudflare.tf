@@ -14,32 +14,23 @@ resource "cloudflare_zone_settings_override" "nspehler" {
   }
 }
 
-# Gatsby Cloud
-resource "cloudflare_record" "gatsby_cloud" {
+# Vercel
+resource "cloudflare_record" "vercel" {
   zone_id = cloudflare_zone.nspehler.id
   name    = local.domain
-  value   = "199.232.194.22"
+  value   = "76.76.21.21"
   type    = "A"
   ttl     = "1"
-  proxied = "true"
+  proxied = "false"
 }
 
-resource "cloudflare_record" "gatsby_cloud_secondary" {
-  zone_id = cloudflare_zone.nspehler.id
-  name    = local.domain
-  value   = "199.232.198.22"
-  type    = "A"
-  ttl     = "1"
-  proxied = "true"
-}
-
-resource "cloudflare_record" "gatsby_cloud_www" {
+resource "cloudflare_record" "vercel_www" {
   zone_id = cloudflare_zone.nspehler.id
   name    = "www"
-  value   = "nspehler.gatsbyjs.io"
+  value   = "cname.vercel-dns.com"
   type    = "CNAME"
   ttl     = "1"
-  proxied = "true"
+  proxied = "false"
 }
 
 # DatoCMS
