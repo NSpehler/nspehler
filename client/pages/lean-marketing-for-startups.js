@@ -2,7 +2,7 @@ import Head from "next/head"
 import { renderMetaTags, useQuerySubscription, StructuredText } from "react-datocms"
 import { Layout } from "@/components/layout"
 import { Button } from "@/components/button"
-import { request } from "@/lib/datocms"
+import { createSubscription } from "@/lib/datocms"
 import { siteFragment, headerFragment, footerFragment, researchFragment } from "@/lib/fragments"
 
 const RESEARCH_QUERY = `
@@ -27,23 +27,11 @@ const RESEARCH_QUERY = `
 `
 
 export const getStaticProps = async (context) => {
-  const graphqlRequest = {
-    query: RESEARCH_QUERY,
-    preview: context.preview,
-  }
-
   return {
     props: {
-      subscription: context.preview
-        ? {
-            ...graphqlRequest,
-            initialData: await request(graphqlRequest),
-            token: process.env.NEXT_DATOCMS_API_TOKEN,
-          }
-        : {
-            enabled: false,
-            initialData: await request(graphqlRequest),
-          },
+      subscription: await createSubscription(context, {
+        query: RESEARCH_QUERY
+      })
     },
   }
 }

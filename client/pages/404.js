@@ -1,7 +1,7 @@
 import { useQuerySubscription } from "react-datocms"
 import { Layout } from "@/components/layout"
-import { request } from "@/lib/datocms"
-import { siteFragment, headerFragment, footerFragment } from "@/lib/fragments"
+import { createSubscription } from "@/lib/datocms"
+import { headerFragment, footerFragment } from "@/lib/fragments"
 
 const NOT_FOUND_QUERY = `
   {
@@ -17,23 +17,11 @@ const NOT_FOUND_QUERY = `
 `
 
 export const getStaticProps = async (context) => {
-  const graphqlRequest = {
-    query: NOT_FOUND_QUERY,
-    preview: context.preview,
-  }
-
   return {
     props: {
-      subscription: context.preview
-        ? {
-            ...graphqlRequest,
-            initialData: await request(graphqlRequest),
-            token: process.env.NEXT_DATOCMS_API_TOKEN,
-          }
-        : {
-            enabled: false,
-            initialData: await request(graphqlRequest),
-          },
+      subscription: await createSubscription(context, {
+        query: NOT_FOUND_QUERY
+      })
     },
   }
 }

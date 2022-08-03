@@ -1,10 +1,10 @@
 import Head from "next/head"
 import { renderMetaTags, useQuerySubscription, StructuredText } from "react-datocms"
 import { Layout } from "@/components/layout"
-import { request } from "@/lib/datocms"
+import { createSubscription } from "@/lib/datocms"
 import { siteFragment, headerFragment, footerFragment, homeFragment } from "@/lib/fragments"
 
-const HOMEPAGE_QUERY = `
+const HOME_QUERY = `
   {
     site: _site {
       ...siteFragment
@@ -26,23 +26,11 @@ const HOMEPAGE_QUERY = `
 `
 
 export const getStaticProps = async (context) => {
-  const graphqlRequest = {
-    query: HOMEPAGE_QUERY,
-    preview: context.preview,
-  }
-
   return {
     props: {
-      subscription: context.preview
-        ? {
-            ...graphqlRequest,
-            initialData: await request(graphqlRequest),
-            token: process.env.NEXT_DATOCMS_API_TOKEN,
-          }
-        : {
-            enabled: false,
-            initialData: await request(graphqlRequest),
-          },
+      subscription: await createSubscription(context, {
+        query: HOME_QUERY
+      })
     },
   }
 }

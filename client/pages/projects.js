@@ -2,7 +2,7 @@ import Head from "next/head"
 import { renderMetaTags, useQuerySubscription, StructuredText } from "react-datocms"
 import { Layout } from "@/components/layout"
 import { List } from "@/components/list"
-import { request } from "@/lib/datocms"
+import { createSubscription } from "@/lib/datocms"
 import { siteFragment, headerFragment, footerFragment, projectsPageFragment, projectFragment } from "@/lib/fragments"
 
 const PROJECTS_QUERY = `
@@ -31,23 +31,11 @@ const PROJECTS_QUERY = `
 `
 
 export const getStaticProps = async (context) => {
-  const graphqlRequest = {
-    query: PROJECTS_QUERY,
-    preview: context.preview,
-  }
-
   return {
     props: {
-      subscription: context.preview
-        ? {
-            ...graphqlRequest,
-            initialData: await request(graphqlRequest),
-            token: process.env.NEXT_DATOCMS_API_TOKEN,
-          }
-        : {
-            enabled: false,
-            initialData: await request(graphqlRequest),
-          },
+      subscription: await createSubscription(context, {
+        query: PROJECTS_QUERY
+      })
     },
   }
 }
