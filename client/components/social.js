@@ -12,6 +12,8 @@ export const Social = ({ title, link, icon }) => (
     <Image
       src={icon}
       alt={title}
+      width={24}
+      height={24}
       className="h-6 w-6 hover:opacity-80 transition-all"
       aria-hidden="true"
     />
