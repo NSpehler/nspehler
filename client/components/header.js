@@ -23,9 +23,9 @@ export const Header = ({ header }) => {
             <div className="relative z-10 flex">
               <div className="flex-shrink-0 lg:flex lg:flex-wrap lg:items-center lg:space-x-4">
                 <Link href="/">
-                  <h3 className="text-3xl text-gray-900 dark:text-white cursor-pointer">
+                  <a className="text-3xl text-gray-900 dark:text-white">
                     {header.title}
-                  </h3>
+                  </a>
                 </Link>
                 <span className="text-3xl text-gray-300 dark:text-gray-500">
                   {coordinates}
