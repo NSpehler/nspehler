@@ -23,7 +23,7 @@ export const Header = ({ header }) => {
             <div className="relative z-10 flex">
               <div className="flex-shrink-0 lg:flex lg:flex-wrap lg:items-center lg:space-x-4">
                 <Link href="/">
-                  <a className="text-3xl text-gray-900 dark:text-white">
+                  <a className="block text-3xl text-gray-900 dark:text-white">
                     {header.title}
                   </a>
                 </Link>
