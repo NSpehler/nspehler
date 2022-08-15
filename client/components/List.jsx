@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ListItem } from "./list-item"
+import { ListItem } from "./"
 
 export const List = ({ items }) => (
   <ul className="divide-y divide-gray-200 dark:divide-gray-600 lg:-mt-8">

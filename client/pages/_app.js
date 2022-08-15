@@ -2,7 +2,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import PlausibleProvider from "next-plausible"
 
-import "../styles/globals.scss"
+import "@/styles/globals.scss"
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
