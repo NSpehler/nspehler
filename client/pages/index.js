@@ -25,22 +25,27 @@ const HOME_QUERY = `
   ${homeFragment}
 `
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async ({ preview = false }) => {
   return {
     props: {
-      subscription: await createSubscription(context, {
+      subscription: await createSubscription(preview, {
         query: HOME_QUERY
-      })
+      }),
+      preview
     },
   }
 }
 
-export const Home = ({ subscription }) => {
+export const Home = ({ subscription, preview }) => {
   const { data } = useQuerySubscription(subscription)
 
   return (
     <>
-      <Layout header={data.header} footer={data.footer}>
+      <Layout
+        header={data.header}
+        footer={data.footer}
+        preview={preview}
+      >
         <Head>
           {renderMetaTags(data.home.seo.concat(data.site.favicon))}
           <script type="application/ld+json">
