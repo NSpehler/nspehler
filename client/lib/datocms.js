@@ -18,8 +18,8 @@ export const request = ({ query, variables, includeDrafts, excludeInvalid }) => 
   return client.request(query, variables)
 }
 
-export const createSubscription = async (context, graphqlRequest) => {
-  return context.preview
+export const createSubscription = async (preview, graphqlRequest) => {
+  return preview
     ? {
         ...graphqlRequest,
         initialData: await request(graphqlRequest),

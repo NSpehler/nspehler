@@ -25,22 +25,27 @@ const CONTACT_QUERY = `
   ${contactFragment}
 `
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async ({ preview = false }) => {
   return {
     props: {
-      subscription: await createSubscription(context, {
+      subscription: await createSubscription(preview, {
         query: CONTACT_QUERY
-      })
+      }),
+      preview
     },
   }
 }
 
-export const Contact = ({ subscription }) => {
+export const Contact = ({ subscription, preview }) => {
   const { data } = useQuerySubscription(subscription)
 
   return (
     <>
-      <Layout header={data.header} footer={data.footer}>
+      <Layout
+        header={data.header}
+        footer={data.footer}
+        preview={preview}
+      >
         <Head>
           {renderMetaTags(data.contact.seo.concat(data.site.favicon))}
         </Head>

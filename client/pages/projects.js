@@ -30,22 +30,27 @@ const PROJECTS_QUERY = `
   ${projectFragment}
 `
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async ({ preview = false }) => {
   return {
     props: {
-      subscription: await createSubscription(context, {
+      subscription: await createSubscription(preview, {
         query: PROJECTS_QUERY
-      })
+      }),
+      preview
     },
   }
 }
 
-export const Projects = ({ subscription }) => {
+export const Projects = ({ subscription, preview }) => {
   const { data } = useQuerySubscription(subscription)
 
   return (
     <>
-      <Layout header={data.header} footer={data.footer}>
+      <Layout
+        header={data.header}
+        footer={data.footer}
+        preview={preview}
+      >
         <Head>
           {renderMetaTags(data.projectsPage.seo.concat(data.site.favicon))}
         </Head>

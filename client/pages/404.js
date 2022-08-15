@@ -16,22 +16,27 @@ const NOT_FOUND_QUERY = `
   ${footerFragment}
 `
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async ({ preview = false }) => {
   return {
     props: {
-      subscription: await createSubscription(context, {
+      subscription: await createSubscription(preview, {
         query: NOT_FOUND_QUERY
-      })
+      }),
+      preview
     },
   }
 }
 
-export const NotFound = ({ subscription }) => {
+export const NotFound = ({ subscription, preview }) => {
   const { data } = useQuerySubscription(subscription)
 
   return (
     <>
-      <Layout header={data.header} footer={data.footer}>
+      <Layout
+        header={data.header}
+        footer={data.footer}
+        preview={preview}
+      >
         <div className="prose prose-xl lg:prose-2xl dark:prose-light">
           <p>Page not found</p>
         </div>

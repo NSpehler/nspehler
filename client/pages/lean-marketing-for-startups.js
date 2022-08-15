@@ -26,22 +26,27 @@ const RESEARCH_QUERY = `
   ${researchFragment}
 `
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async ({ preview = false }) => {
   return {
     props: {
-      subscription: await createSubscription(context, {
+      subscription: await createSubscription(preview, {
         query: RESEARCH_QUERY
-      })
+      }),
+      preview
     },
   }
 }
 
-export const Work = ({ subscription }) => {
+export const Work = ({ subscription, preview }) => {
   const { data } = useQuerySubscription(subscription)
 
   return (
     <>
-      <Layout header={data.header} footer={data.footer}>
+      <Layout
+        header={data.header}
+        footer={data.footer}
+        preview={preview}
+      >
         <Head>
           {renderMetaTags(data.research.seo.concat(data.site.favicon))}
         </Head>

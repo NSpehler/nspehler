@@ -30,22 +30,27 @@ const WORK_QUERY = `
   ${workFragment}
 `
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async ({ preview = false }) => {
   return {
     props: {
-      subscription: await createSubscription(context, {
+      subscription: await createSubscription(preview, {
         query: WORK_QUERY
-      })
+      }),
+      preview
     },
   }
 }
 
-export const Work = ({ subscription }) => {
+export const Work = ({ subscription, preview }) => {
   const { data } = useQuerySubscription(subscription)
 
   return (
     <>
-      <Layout header={data.header} footer={data.footer}>
+      <Layout
+        header={data.header}
+        footer={data.footer}
+        preview={preview}
+      >
         <Head>
           {renderMetaTags(data.workPage.seo.concat(data.site.favicon))}
         </Head>
