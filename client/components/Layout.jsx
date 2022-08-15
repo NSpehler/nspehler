@@ -1,8 +1,6 @@
 import React from "react"
 
-import { Header } from "./header"
-import { Footer } from "./footer"
-import { Preview } from "./preview"
+import { Header, Footer, Preview } from "./"
 
 export const Layout = ({ header, footer, preview, children }) => (
   <>
