@@ -11,5 +11,9 @@ resource "aws_s3_bucket_public_access_block" "nspehler" {
 
 resource "aws_s3_bucket" "nspehler_layers" {
   bucket = "nspehler-layers"
+}
+
+resource "aws_s3_bucket_acl" "nspehler_layers" {
+  bucket = aws_s3_bucket.nspehler_layers.id
   acl    = "private"
 }
