@@ -10,7 +10,6 @@ resource "mongodbatlas_project_ip_access_list" "nspehler" {
 
 resource "mongodbatlas_database_user" "nspehler" {
   username           = "nspehler"
-  password           = "ac7VCyvsB6eZYPmNvF3e"
   project_id         = mongodbatlas_project.nspehler.id
   auth_database_name = "admin"
 
