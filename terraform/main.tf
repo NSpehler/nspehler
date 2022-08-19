@@ -1,4 +1,5 @@
 locals {
+  name   = "Nicolas Spehler"
   domain = "nspehler.com"
 }
 
