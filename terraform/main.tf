@@ -14,6 +14,8 @@ data "aws_caller_identity" "current" {}
 
 provider "cloudflare" {}
 
+provider "mongodbatlas" {}
+
 terraform {
   cloud {
     organization = "nspehler"
