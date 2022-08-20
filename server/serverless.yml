@@ -1,0 +1,33 @@
+org: nspehler
+app: nspehler
+service: nspehler
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: prod
+  region: eu-west-1
+  memorySize: 256
+  timeout: 29
+  environment:
+    DB_URL: ${param:DB_URL}
+  layers:
+    - arn:aws:lambda:eu-west-1:035114897561:layer:nspehler:1
+
+functions:
+  AirbnbMonitoring:
+    handler: airbnb/monitoring/lambda_function.lambda_handler
+    name: ${self:service}-${self:provider.stage}-airbnb-monitoring
+    description: Monitor new Airbnb listings
+    environment:
+      AIRBNB_API_KEY: ${param:AIRBNB_API_KEY}
+      AIRBNB_SHA256_HASH: ${param:AIRBNB_SHA256_HASH}
+    events:
+      - schedule:
+          rate: rate(1 hour)
+
+package:
+  exclude:
+    - layer/**
+    - package.json
+    - yarn.lock
