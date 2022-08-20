@@ -12,13 +12,14 @@ provider:
   environment:
     DB_URL: ${param:DB_URL}
   layers:
-    - arn:aws:lambda:eu-west-1:035114897561:layer:nspehler:1
+    - arn:aws:lambda:eu-west-1:035114897561:layer:nspehler:2
 
 functions:
   AirbnbMonitoring:
     handler: airbnb/monitoring/lambda_function.lambda_handler
     name: ${self:service}-${self:provider.stage}-airbnb-monitoring
     description: Monitor new Airbnb listings
+    timeout: 120
     environment:
       AIRBNB_API_KEY: ${param:AIRBNB_API_KEY}
       AIRBNB_SHA256_HASH: ${param:AIRBNB_SHA256_HASH}
