@@ -1,20 +1,22 @@
 import os
 import json
 import time
-import cloudscraper
+import urllib.parse
 
 from retrying import retry
 from pymongo import UpdateOne
 from bson.objectid import ObjectId
+from scrapingbee import ScrapingBeeClient
 
 from utils.database import database
 
 
 def lambda_handler(event, context):
+    client = ScrapingBeeClient(api_key=os.environ["SCRAPINGBEE_API_KEY"])
     searches = get_searches()
     for search in searches:
         print(f"[{search['_id']}] Get listings")
-        listings = get_listings(search_id=search["_id"], variables=search["variables"])
+        listings = get_listings(client=client, search_id=search["_id"], variables=search["variables"], limit=320)
         
         print(f"[{search['_id']}] Found {len(listings)} listings")
         upsert_listings(search_id=search["_id"], listings=listings)
@@ -51,9 +53,10 @@ def upsert_listings(search_id: ObjectId, listings: list = []):
 
 
 @retry(wait_fixed=2000)
-def get_listings(search_id: ObjectId, variables: dict = {}, offset: int = 0, limit: int = 300, listings: list = []) -> list:
+def get_listings(client, search_id: ObjectId, variables: dict = {}, offset: int = 0, limit: int = 320, listings: list = []) -> list:
     """Get paginated Airbnb listings for search parameters"""
     variables["exploreRequest"]["itemsOffset"] = offset    
+    print(f"[{search_id}~{offset}] Get page")
     
     extensions = {
         "persistedQuery": {
@@ -71,13 +74,18 @@ def get_listings(search_id: ObjectId, variables: dict = {}, offset: int = 0, lim
         "locale": "en",
         "currency": "EUR",
         "variables": json.dumps(variables),
-        "extensions": json.dumps(extensions)
+        "extensions": json.dumps(extensions),
     }
     
-    scraper = cloudscraper.create_scraper()
-    r = scraper.get("https://www.airbnb.com/api/v3/ExploreSections", headers=headers, params=params)
+    params = urllib.parse.urlencode(params)
+    r = client.get(f"https://www.airbnb.com/api/v3/ExploreSections?{params}",
+        headers=headers,
+        params={
+            "render_js": False
+        }
+    )
     if r.status_code != 200:
-        print(f"[{search_id}~{offset}] An error has occured, retrying...")
+        print(f"[{search_id}~{offset}] Error {r.status_code}, retrying...")
         raise Exception()
     
     r = r.json()
@@ -94,4 +102,4 @@ def get_listings(search_id: ObjectId, variables: dict = {}, offset: int = 0, lim
     
     time.sleep(2)
     offset = len(listings)
-    return get_listings(search_id=search_id, variables=variables, offset=offset, listings=listings)
+    return get_listings(client=client, search_id=search_id, variables=variables, offset=offset, limit=limit, listings=listings)
