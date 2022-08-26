@@ -19,7 +19,7 @@ functions:
     handler: airbnb/monitoring/lambda_function.lambda_handler
     name: ${self:service}-${self:provider.stage}-airbnb-monitoring
     description: Monitor new Airbnb listings
-    timeout: 120
+    timeout: 240
     environment:
       AIRBNB_API_KEY: ${param:AIRBNB_API_KEY}
       AIRBNB_SHA256_HASH: ${param:AIRBNB_SHA256_HASH}

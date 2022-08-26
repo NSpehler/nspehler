@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     searches = get_searches()
     for search in searches:
         print(f"[{search['_id']}] Get listings")
-        listings = get_listings(client=client, search_id=search["_id"], variables=search["variables"], limit=320)
+        listings = get_listings(client=client, search_id=search["_id"], variables=search["variables"], limit=320, listings=[])
         
         print(f"[{search['_id']}] Found {len(listings)} listings")
         upsert_listings(search_id=search["_id"], listings=listings)
