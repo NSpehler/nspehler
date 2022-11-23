@@ -9,8 +9,8 @@ const Preview = async (req, res) => {
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({})
 
-  // Redirect to the homepage
-  res.writeHead(307, { Location: "/" })
+  // Redirect to requested URL or homepage
+  res.writeHead(307, { Location: req.query.redirect || "/" })
   res.end()
 }
 

@@ -1,5 +1,5 @@
 import { useQuerySubscription } from "react-datocms"
-import { Layout } from "@/components/Layout"
+import { Layout } from "@/components/layout"
 import { createSubscription } from "@/lib/datocms"
 import { headerFragment, footerFragment } from "@/lib/fragments"
 

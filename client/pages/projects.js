@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { renderMetaTags, useQuerySubscription, StructuredText } from "react-datocms"
-import { Layout } from "@/components/Layout"
-import { List } from "@/components/List"
+import { Layout } from "@/components/layout"
+import { List } from "@/components/utils"
 import { createSubscription } from "@/lib/datocms"
 import { siteFragment, headerFragment, footerFragment, projectsPageFragment, projectFragment } from "@/lib/fragments"
 
