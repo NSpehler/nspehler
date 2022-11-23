@@ -19,6 +19,8 @@ export const request = ({ query, variables, includeDrafts, excludeInvalid }) => 
 }
 
 export const createSubscription = async (preview, graphqlRequest) => {
+  if (preview) graphqlRequest["includeDrafts"] = true
+
   return preview
     ? {
         ...graphqlRequest,

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Header, Footer, Preview } from "./"
+import { Header, Footer, Preview } from "@/components/layout"
 
 export const Layout = ({ header, footer, preview, children }) => (
   <>

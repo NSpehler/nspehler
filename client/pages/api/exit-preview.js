@@ -1,9 +1,9 @@
-const Exit = async (_, res) => {
-  // Exit the current user from "Preview Mode". This function accepts no args.
+const Exit = async (req, res) => {
+  // Exit the current user from "Preview Mode"
   res.clearPreviewData()
 
-  // Redirect the user back to the index page.
-  res.writeHead(307, { Location: '/' })
+  // Redirect to requested URL or homepage
+  res.writeHead(307, { Location: req.query.redirect || "/" })
   res.end()
 }
 

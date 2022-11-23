@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Social } from "./"
+import { Social } from "@/components/utils"
 
 export const Footer = ({ footer }) => (
   <footer className="border-t border-gray-200 dark:border-gray-600">
