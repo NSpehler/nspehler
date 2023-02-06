@@ -1,5 +1,8 @@
+import React, { useEffect } from "react"
 import Head from "next/head"
 import { renderMetaTags, useQuerySubscription, StructuredText } from "react-datocms"
+import Cal, { getCalApi } from "@calcom/embed-react"
+
 import { Layout } from "@/components/layout"
 import { createSubscription } from "@/lib/datocms"
 import { siteFragment, headerFragment, footerFragment, contactFragment } from "@/lib/fragments"
@@ -39,6 +42,13 @@ export const getStaticProps = async ({ preview = false }) => {
 export const Contact = ({ subscription, preview }) => {
   const { data } = useQuerySubscription(subscription)
 
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi();
+      cal("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false});
+    })();
+  }, [])
+
   return (
     <>
       <Layout
@@ -52,6 +62,10 @@ export const Contact = ({ subscription, preview }) => {
         <div className="prose prose-xl lg:prose-2xl dark:prose-light">
           <StructuredText data={data.contact.content} />
         </div>
+        <Cal
+          calLink={data.contact.meetingLink}
+          className="w-full h-full overflow-scroll mt-8 lg:mt-12"
+        />
       </Layout>
     </>
   )

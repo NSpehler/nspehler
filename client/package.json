@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.0.9",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "coordinates-parser": "^1.1.3",
