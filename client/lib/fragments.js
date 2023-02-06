@@ -35,6 +35,7 @@ export const contactFragment = `
     content {
       value
     }
+    meetingLink
     seo: _seoMetaTags {
       ...metaTagsFragment
     }
