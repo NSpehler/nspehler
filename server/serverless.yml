@@ -24,9 +24,9 @@ functions:
       AIRBNB_API_KEY: ${param:AIRBNB_API_KEY}
       AIRBNB_SHA256_HASH: ${param:AIRBNB_SHA256_HASH}
       SCRAPINGBEE_API_KEY: ${param:SCRAPINGBEE_API_KEY}
-    events:
-      - schedule:
-          rate: rate(12 hours)
+    # events:
+    #   - schedule:
+    #       rate: rate(12 hours)
 
 package:
   exclude:
