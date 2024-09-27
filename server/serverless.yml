@@ -38,9 +38,9 @@ functions:
     name: ${self:service}-${self:provider.stage}-tove-lo-monitoring
     description: Monitor Tove Lo product availability
     timeout: 30
-    events:
-      - schedule:
-          rate: rate(5 minutes)
+    # events:
+    #   - schedule:
+    #       rate: rate(5 minutes)
 
 package:
   exclude:
