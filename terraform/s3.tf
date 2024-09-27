@@ -17,3 +17,13 @@ resource "aws_s3_bucket_acl" "nspehler_layers" {
   bucket = aws_s3_bucket.nspehler_layers.id
   acl    = "private"
 }
+
+resource "aws_s3_bucket" "nspehler_layers_us" {
+  bucket = "nspehler-layers-us"
+  region = "us-east-1"
+}
+
+resource "aws_s3_bucket_acl" "nspehler_layers_us" {
+  bucket = aws_s3_bucket.nspehler_layers_us.id
+  acl    = "private"
+}
