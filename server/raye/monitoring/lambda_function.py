@@ -7,7 +7,7 @@ from utils.slack import Slack
 products = [
     {
         "name": "RAYE - My 21st Century Symphony",
-        "url": "https://shop.rayeofficial.com/products/my-21st-century-blues-my-21st-century-symphony-with-the-heritage-orchestra-live-at-the-royal-albert-hall-2xlp-red",
+        "url": "https://raye-merch.myshopify.com/products/my-21st-century-blues-my-21st-century-symphony-with-the-heritage-orchestra-live-at-the-royal-albert-hall-2xlp-red",
     }
 ]
 
