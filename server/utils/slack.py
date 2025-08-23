@@ -8,8 +8,6 @@ from typing import List, Dict
 
 @dataclass
 class Slack:
-    channel: str = "#offtherecord"
-    username: str = "Off The Record"
     url: str = os.environ["SLACK_WEBHOOK_URL"]
     blocks: List[Dict] = field(default_factory=list)
 
@@ -17,8 +15,6 @@ class Slack:
         r = requests.post(
             url=self.url,
             json={
-                "channel": self.channel,
-                "username": self.username,
                 "blocks": json.dumps(self.blocks),
             },
         )
@@ -70,6 +66,59 @@ class Slack:
                             "emoji": True,
                         },
                         "url": url,
+                        "style": "primary",
+                    }
+                ],
+            }
+        )
+
+        self.send()
+
+    def send_tracking_alert(self, tracking_number: str, label: str, latest_event: dict, cta: str = None, url: str = None):
+        self.blocks = []
+        self.header(f"📦 {label} - {tracking_number}")
+
+        self.body(f"*New tracking update:*\n🕐 {latest_event['date']}\n📍 {latest_event['description']}")
+
+        if cta and url:
+            self.blocks.append(
+                {
+                    "type": "actions",
+                    "elements": [
+                        {
+                            "type": "button",
+                            "text": {
+                                "type": "plain_text",
+                                "text": cta,
+                                "emoji": True,
+                            },
+                            "url": url,
+                            "style": "primary",
+                        }
+                    ],
+                }
+            )
+
+        self.send()
+
+    def send_domain_alert(self, domain: str):
+        self.blocks = []
+        self.header(f"🌐 {domain}")
+
+        self.body(f"The domain *{domain}* is now available!")
+
+        self.blocks.append(
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Register domain",
+                            "emoji": True,
+                        },
+                        "url": os.environ["CLOUDFLARE_DOMAIN_REGISTRATION_URL"],
                         "style": "primary",
                     }
                 ],
