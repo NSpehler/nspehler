@@ -22,14 +22,14 @@ resource "mongodbatlas_database_user" "nspehler" {
 resource "mongodbatlas_cluster" "nspehler" {
   project_id   = mongodbatlas_project.nspehler.id
   name         = "nspehler"
-  disk_size_gb = "2"
+  disk_size_gb = "5"
 
   provider_name               = "TENANT"
   backing_provider_name       = "AWS"
   provider_region_name        = "EU_WEST_1"
   provider_instance_size_name = "M2"
 
-  mongo_db_major_version       = "5.0"
+  mongo_db_major_version       = "8.0"
   auto_scaling_disk_gb_enabled = "false"
 }
 
