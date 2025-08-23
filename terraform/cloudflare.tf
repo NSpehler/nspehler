@@ -43,16 +43,6 @@ resource "cloudflare_record" "datocms" {
   proxied = "false"
 }
 
-# Revue
-resource "cloudflare_record" "revue" {
-  zone_id = cloudflare_zone.nspehler.id
-  name    = "news"
-  value   = "www.getrevue.co"
-  type    = "CNAME"
-  ttl     = "1"
-  proxied = "true"
-}
-
 # Cloudflare Email
 resource "cloudflare_record" "cloudflare_email_mx_1" {
   zone_id  = cloudflare_zone.nspehler.id
