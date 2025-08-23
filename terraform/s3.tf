@@ -24,6 +24,7 @@ resource "aws_s3_bucket" "nspehler_layers_us" {
 }
 
 resource "aws_s3_bucket_acl" "nspehler_layers_us" {
-  bucket = aws_s3_bucket.nspehler_layers_us.id
-  acl    = "private"
+  provider = aws.us-east-1
+  bucket   = aws_s3_bucket.nspehler_layers_us.id
+  acl      = "private"
 }
