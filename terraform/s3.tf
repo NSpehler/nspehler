@@ -13,9 +13,13 @@ resource "aws_s3_bucket" "nspehler_layers" {
   bucket = "nspehler-layers"
 }
 
-resource "aws_s3_bucket_acl" "nspehler_layers" {
+resource "aws_s3_bucket_public_access_block" "nspehler_layers" {
   bucket = aws_s3_bucket.nspehler_layers.id
-  acl    = "private"
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket" "nspehler_layers_us" {
@@ -23,8 +27,12 @@ resource "aws_s3_bucket" "nspehler_layers_us" {
   bucket   = "nspehler-layers-us"
 }
 
-resource "aws_s3_bucket_acl" "nspehler_layers_us" {
+resource "aws_s3_bucket_public_access_block" "nspehler_layers_us" {
   provider = aws.us-east-1
   bucket   = aws_s3_bucket.nspehler_layers_us.id
-  acl      = "private"
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
