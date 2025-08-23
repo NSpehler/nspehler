@@ -25,6 +25,14 @@ functions:
     # events:
     #   - schedule:
     #       rate: rate(12 hours)
+  DomainNameMonitoring:
+    handler: domain_name/monitoring/lambda_function.lambda_handler
+    name: ${self:service}-${self:provider.stage}-domain-name-monitoring
+    description: Monitor availability of domain names
+    timeout: 30
+    # events:
+    #   - schedule:
+    #       rate: rate(5 minutes)
 package:
   exclude:
     - layer/**
