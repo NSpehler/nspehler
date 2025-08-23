@@ -19,8 +19,8 @@ resource "aws_s3_bucket_acl" "nspehler_layers" {
 }
 
 resource "aws_s3_bucket" "nspehler_layers_us" {
-  bucket = "nspehler-layers-us"
-  region = "us-east-1"
+  provider = aws.us-east-1
+  bucket   = "nspehler-layers-us"
 }
 
 resource "aws_s3_bucket_acl" "nspehler_layers_us" {
