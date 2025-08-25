@@ -1,55 +1,247 @@
 import requests
 
-from bs4 import BeautifulSoup
+from datetime import datetime
+from typing import Dict, List, Optional
 
+from utils.database import database
 from utils.slack import Slack
 
-products = [
+STORES = [
     {
-        "name": "RAYE - My 21st Century Symphony",
-        "url": "https://raye-merch.myshopify.com/products/my-21st-century-blues-my-21st-century-symphony-with-the-heritage-orchestra-live-at-the-royal-albert-hall-2xlp-red",
+        "name": "UK Store",
+        "url": "https://ukshop.rayeofficial.com/products.json?limit=1000",
+        "collection": "raye_uk",
+        "flag": ":flag-gb:",
+        "country": "UK"
+    },
+    {
+        "name": "EU Store", 
+        "url": "https://raye-store-eu.myshopify.com/products.json?limit=1000",
+        "collection": "raye_eu",
+        "flag": ":flag-eu:",
+        "country": "EU"
+    },
+    {
+        "name": "US Store",
+        "url": "https://usshop.rayeofficial.com/products.json?limit=1000", 
+        "collection": "raye_us",
+        "flag": ":flag-us:",
+        "country": "US"
     }
 ]
 
 
-def lambda_handler(event, context):
-    for product in products:
-        print(f"[{product['name']}] Checking availability...")
-        is_available = check_product_availability(url=product["url"])
-
-        if is_available:
-            print(f"[{product['name']}] Product is back in stock!")
-            slack = Slack()
-            slack.send_product_alert(name=product["name"], url=product["url"])
-        else:
-            print(f"[{product['name']}] Product is still out of stock")
-
+def lambda_handler(event, context):    
+    for store in STORES:
+        try:
+            print(f"Processing {store['name']} ({store['country']})...")
+            
+            # Fetch products from the store
+            products_data = fetch_products(url=store["url"])
+            
+            if not products_data:
+                print(f"Failed to fetch products from {store['name']}")
+                continue
+            
+            # Filter vinyl products
+            vinyl_products = filter_vinyl_products(products=products_data.get("products", []))
+            print(f"Found {len(vinyl_products)} vinyl products in {store['name']}")
+            
+            # Process each vinyl product
+            for product in vinyl_products:
+                process_product(product=product, store=store)
+                
+        except Exception as e:
+            print(f"Error processing {store['name']}: {str(e)}")
+    
+    print("RAYE products monitoring completed")
     return True
 
 
-def check_product_availability(url):
+def fetch_products(url: str) -> Optional[Dict]:
+    """Fetch products from a RAYE store URL"""
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=30)
         response.raise_for_status()
-        soup = BeautifulSoup(response.text, "html.parser")
-
-        add_to_cart_button = soup.find("button", {"name": "add", "type": "submit"})
-        if add_to_cart_button:
-            is_disabled = add_to_cart_button.has_attr("disabled")
-            button_text = add_to_cart_button.find("span").text.strip().lower()
-
-            if not is_disabled and button_text == "add to cart":
-                return True
-            elif is_disabled and button_text == "sold out":
-                return False
-            else:
-                print(
-                    f"Unexpected button state: disabled={is_disabled}, text='{button_text}'"
-                )
-                return False
-        else:
-            print(f"[{url}] Add to cart button not found")
-            return False
+        return response.json()
     except Exception as e:
-        print(f"[{url}] Error checking product availability: {str(e)}")
-        return False
+        print(f"Error fetching products from {url}: {str(e)}")
+        return None
+
+
+def filter_vinyl_products(products: List[Dict]) -> List[Dict]:
+    """Filter products to only include vinyl items"""
+    vinyl_products = []
+    
+    for product in products:
+        if product.get("product_type", "").lower() == "vinyl":
+            vinyl_products.append(product)
+    
+    return vinyl_products
+
+
+@database
+def process_product(product: Dict, store: Dict) -> None:
+    """Process a single vinyl product and check if it's new"""
+    product_id = product.get("id")
+    if not product_id:
+        print("Product missing ID, skipping...")
+        return
+    
+    collection_name = store["collection"]
+    collection = getattr(database, collection_name)
+    
+    # Check if product already exists in database
+    existing_product = collection.find_one({"_id": product_id})
+    
+    if existing_product:
+        # Product exists, check for availability changes
+        check_availability_changes(product=product, existing_product=existing_product, store=store)
+        
+        # Update the product in database
+        update_product_in_db(product=product, collection=collection)
+    else:
+        # New product detected
+        print(f"New vinyl product detected: {product.get('title')} in {store['name']}")
+        
+        # Add to database
+        add_product_to_db(product=product, collection=collection)
+        
+        # Send Slack notification for new product
+        send_new_product_notification(product=product, store=store)
+
+
+def check_availability_changes(product: Dict, existing_product: Dict, store: Dict) -> None:
+    """Check if product availability has changed and send notification if needed"""
+    current_available = is_product_available(product=product)
+    previous_available = existing_product.get("available", False)
+    
+    # If product became available (was unavailable, now available)
+    if current_available and not previous_available:
+        print(f"Product became available: {product.get('title')} in {store['name']}")
+        send_availability_notification(product=product, store=store)
+
+
+def is_product_available(product: Dict) -> bool:
+    """Check if any variant of the product is available"""
+    variants = product.get("variants", [])
+    return any(variant.get("available", False) for variant in variants)
+
+
+def add_product_to_db(product: Dict, collection) -> None:
+    """Add a new product to the database"""
+    product_data = {
+        **product,
+        "_id": product.get("id"),
+        "available": is_product_available(product=product),
+        "first_seen": datetime.utcnow(),
+        "last_checked": datetime.utcnow()
+    }
+    
+    collection.insert_one(product_data)
+    print(f"Added product to database: {product.get('title')}")
+
+
+def update_product_in_db(product: Dict, collection) -> None:
+    """Update an existing product in the database"""
+    update_data = {
+        **product,
+        "available": is_product_available(product=product),
+        "last_checked": datetime.utcnow()
+    }
+    
+    query = {"_id": product.get("id")}
+    values = {"$set": update_data}
+    collection.update_one(query, values)
+
+
+def get_product_price(product: Dict) -> Optional[str]:
+    """Get the price of the first available variant"""
+    variants = product.get("variants", [])
+    if variants:
+        return variants[0].get("price")
+    return None
+
+
+def get_product_url(product: Dict, store: Dict) -> str:
+    """Generate the product URL based on store and product handle"""
+    base_url = store["url"].split("/products.json")[0]
+    handle = product.get("handle", "")
+    return f"{base_url}/products/{handle}"
+
+
+def send_new_product_notification(product: Dict, store: Dict) -> None:
+    """Send Slack notification for new vinyl product"""
+    try:
+        slack = Slack()
+        
+        product_title = product.get("title")
+        product_url = get_product_url(product=product, store=store)
+        available = is_product_available(product=product)
+        flag = store["flag"]
+        
+        header = f"{flag} New RAYE vinyl release"
+        availability_text = "✅ Available" if available else "❌ Sold Out"
+        
+        message = f"*{product_title}*\n{availability_text}"
+        
+        slack.blocks = []
+        slack.header(header)
+        slack.body(message)
+        
+        slack.blocks.append({
+            "type": "actions",
+            "elements": [{
+                "type": "button",
+                "text": {
+                    "type": "plain_text",
+                    "text": "View Product",
+                    "emoji": True,
+                },
+                "url": product_url,
+                "style": "primary",
+            }]
+        })
+        
+        slack.send()
+        print(f"Sent new product notification for: {product_title}")
+        
+    except Exception as e:
+        print(f"Error sending new product notification: {str(e)}")
+
+
+def send_availability_notification(product: Dict, store: Dict) -> None:
+    """Send Slack notification when product becomes available"""
+    try:
+        slack = Slack()
+        
+        product_title = product.get("title")
+        product_url = get_product_url(product=product, store=store)
+        flag = store["flag"]
+        
+        header = f"{flag} RAYE vinyl back in stock"
+        message = f"*{product_title}*\n🔥 Now available!"
+        
+        slack.blocks = []
+        slack.header(header)
+        slack.body(message)
+        
+        slack.blocks.append({
+            "type": "actions", 
+            "elements": [{
+                "type": "button",
+                "text": {
+                    "type": "plain_text",
+                    "text": "Buy Now",
+                    "emoji": True,
+                },
+                "url": product_url,
+                "style": "primary",
+            }]
+        })
+        
+        slack.send()
+        print(f"Sent availability notification for: {product_title}")
+        
+    except Exception as e:
+        print(f"Error sending availability notification: {str(e)}")
