@@ -33,7 +33,7 @@ STORES = [
     },
     {
         "name": "Fred again..",
-        "url": "https://store.fredagain.com/products.json?limit=1000",
+        "url": "https://shop.fredagain.com/products.json?limit=1000",
         "collection": "fred_again",
         "flag": ":flag-gb:",
         "country": "UK",
@@ -194,9 +194,8 @@ def send_new_product_notification(product: Dict, store: Dict) -> None:
         available = is_product_available(product=product)
         flag = store["flag"]
         name = store["name"]
-        product_type = store["product_type"]
         
-        header = f"{flag} New {name} {product_type} release"
+        header = f"{flag} New {name} vinyl release"
         availability_text = "✅ Available" if available else "❌ Sold Out"
         
         message = f"*{product_title}*\n{availability_text}"
