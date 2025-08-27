@@ -49,17 +49,17 @@ functions:
     events:
       - schedule:
           rate: rate(5 minutes)
-  RayeMonitoring:
-    handler: raye/monitoring/lambda_function.lambda_handler
-    name: ${self:service}-${self:provider.stage}-raye-monitoring
-    description: Monitor new RAYE vinyl releases
-    timeout: 60
+  ShopifyMonitoring:
+    handler: shopify/monitoring/lambda_function.lambda_handler
+    name: ${self:service}-${self:provider.stage}-shopify-monitoring
+    description: Monitor Shopify stores for new releases
+    timeout: 120
     events:
       - schedule:
           rate: rate(5 minutes)
-  RayeStockMonitoring:
-    handler: raye/stock_monitoring/lambda_function.lambda_handler
-    name: ${self:service}-${self:provider.stage}-raye-stock-monitoring
+  RayeMonitoring:
+    handler: raye/monitoring/lambda_function.lambda_handler
+    name: ${self:service}-${self:provider.stage}-raye-monitoring
     description: Monitor RAYE product availability
     timeout: 30
     # events:
