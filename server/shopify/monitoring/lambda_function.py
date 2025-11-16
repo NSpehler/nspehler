@@ -13,7 +13,7 @@ STORES = [
         "collection": "raye_uk",
         "flag": ":flag-gb:",
         "country": "UK",
-        "product_type": "vinyl"
+        "product_type": ["vinyl"]
     },
     {
         "name": "RAYE", 
@@ -21,7 +21,7 @@ STORES = [
         "collection": "raye_eu",
         "flag": ":flag-eu:",
         "country": "EU",
-        "product_type": "vinyl"
+        "product_type": ["vinyl"]
     },
     {
         "name": "RAYE",
@@ -29,7 +29,7 @@ STORES = [
         "collection": "raye_us",
         "flag": ":flag-us:",
         "country": "US",
-        "product_type": "vinyl"
+        "product_type": ["vinyl"]
     },
     {
         "name": "Fred again..",
@@ -37,7 +37,15 @@ STORES = [
         "collection": "fred_again",
         "flag": ":flag-gb:",
         "country": "UK",
-        "product_type": "media"
+        "product_type": ["media"]
+    },
+    {
+        "name": "Jhene Aiko",
+        "url": "https://shop.jheneaiko.com/products.json?limit=1000",
+        "collection": "jhene_aiko",
+        "flag": ":flag-us:",
+        "country": "UK",
+        "product_type": ["1LP", "2LP", "3LP"]
     }
 ]
 
@@ -59,7 +67,9 @@ def lambda_handler(event, context):
                 products=products_data.get("products", []), 
                 product_type=store["product_type"]
             )
-            print(f"Found {len(filtered_products)} {store['product_type']} products in {store['name']}")
+            
+            product_type_str = '/'.join(store['product_type'])
+            print(f"Found {len(filtered_products)} {product_type_str} products in {store['name']}")
             
             # Process each product
             for product in filtered_products:
@@ -83,12 +93,14 @@ def fetch_products(url: str) -> Optional[Dict]:
         return None
 
 
-def filter_products_by_type(products: List[Dict], product_type: str) -> List[Dict]:
-    """Filter products by the specified product type"""
+def filter_products_by_type(products: List[Dict], product_type: List[str]) -> List[Dict]:
+    """Filter products by the specified product type(s)"""
     filtered_products = []
     
+    product_types_lower = [pt.lower() for pt in product_type]
+    
     for product in products:
-        if product.get("product_type", "").lower() == product_type.lower():
+        if product.get("product_type", "").lower() in product_types_lower:
             filtered_products.append(product)
     
     return filtered_products
@@ -116,7 +128,8 @@ def process_product(product: Dict, store: Dict) -> None:
         update_product_in_db(product=product, collection=collection)
     else:
         # New product detected
-        print(f"New {store['product_type']} product detected: {product.get('title')} in {store['name']}")
+        product_type_str = '/'.join(store['product_type'])
+        print(f"New {product_type_str} product detected: {product.get('title')} in {store['name']}")
         
         # Add to database
         add_product_to_db(product=product, collection=collection)
@@ -234,9 +247,9 @@ def send_availability_notification(product: Dict, store: Dict) -> None:
         product_url = get_product_url(product=product, store=store)
         flag = store["flag"]
         name = store["name"]
-        product_type = store["product_type"]
+        product_type_str = '/'.join(store['product_type'])
         
-        header = f"{flag} {name} {product_type} back in stock"
+        header = f"{flag} {name} {product_type_str} back in stock"
         message = f"*{product_title}*\n🔥 Now available!"
         
         slack.blocks = []
