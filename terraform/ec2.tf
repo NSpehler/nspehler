@@ -22,7 +22,7 @@ resource "aws_instance" "nspehler" {
 
 resource "aws_eip" "nspehler" {
   instance = aws_instance.nspehler.id
-  vpc      = true
+  domain   = "vpc"
 }
 
 output "nspehler_private_key_pem" {
