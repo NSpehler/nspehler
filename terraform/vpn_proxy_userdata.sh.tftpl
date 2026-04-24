@@ -33,16 +33,29 @@ EOF
 printf '%s\n%s\n' "$NORD_USERNAME" "$NORD_PASSWORD" > /etc/openvpn/client/nord.auth
 chmod 600 /etc/openvpn/client/nord.auth
 
-cat > /etc/openvpn/client/nord-up.sh <<'EOF'
+cat > /etc/openvpn/client/nord-up.sh <<'UPEOF'
 #!/bin/bash
 set -eux
-ip rule add fwmark 0x1 table 100 2>/dev/null || true
-ip route replace default dev "$1" table 100
-iptables -t mangle -C OUTPUT -m owner --uid-owner tinyproxy -j MARK --set-mark 0x1 2>/dev/null || \
-  iptables -t mangle -A OUTPUT -m owner --uid-owner tinyproxy -j MARK --set-mark 0x1
-echo 2 > /proc/sys/net/ipv4/conf/"$1"/rp_filter
+
+DEV="$1"
+TUN_IP="$4"
+
+ip rule del from "$TUN_IP" lookup 100 2>/dev/null || true
+ip rule add from "$TUN_IP" lookup 100 priority 100
+ip route replace default dev "$DEV" src "$TUN_IP" table 100
+echo 2 > /proc/sys/net/ipv4/conf/"$DEV"/rp_filter
 echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter
-EOF
+
+iptables -t mangle -D OUTPUT -o "$DEV" -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1200 2>/dev/null || true
+iptables -t mangle -D POSTROUTING -o "$DEV" -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1200 2>/dev/null || true
+iptables -t mangle -A OUTPUT -o "$DEV" -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1200
+iptables -t mangle -A POSTROUTING -o "$DEV" -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1200
+
+sed -i '/^Bind /d' /etc/tinyproxy/tinyproxy.conf
+echo "Bind $TUN_IP" >> /etc/tinyproxy/tinyproxy.conf
+
+systemctl restart tinyproxy.service
+UPEOF
 chmod 755 /etc/openvpn/client/nord-up.sh
 
 cat > /etc/tinyproxy/tinyproxy.conf <<EOF
@@ -62,6 +75,4 @@ ConnectPort 563
 EOF
 
 systemctl enable --now openvpn-client@nord.service
-sleep 10
-systemctl restart tinyproxy.service
 systemctl enable tinyproxy.service
