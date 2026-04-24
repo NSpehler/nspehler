@@ -2,7 +2,9 @@
 set -euxo pipefail
 exec > >(tee /var/log/user-data.log | logger -t user-data -s 2>/dev/console) 2>&1
 
-dnf install -y openvpn tinyproxy jq iptables-services
+export DEBIAN_FRONTEND=noninteractive
+apt-get update
+apt-get install -y openvpn tinyproxy jq awscli iptables
 
 SECRET=$(aws secretsmanager get-secret-value \
   --region ${region} \
@@ -49,8 +51,6 @@ Group tinyproxy
 Port 8888
 Listen 0.0.0.0
 Timeout 600
-DefaultErrorFile "/usr/share/tinyproxy/default.html"
-StatFile "/usr/share/tinyproxy/stats.html"
 LogFile "/var/log/tinyproxy/tinyproxy.log"
 LogLevel Info
 PidFile "/run/tinyproxy/tinyproxy.pid"
@@ -63,4 +63,5 @@ EOF
 
 systemctl enable --now openvpn-client@nord.service
 sleep 10
-systemctl enable --now tinyproxy.service
+systemctl restart tinyproxy.service
+systemctl enable tinyproxy.service

@@ -145,20 +145,20 @@ resource "aws_iam_instance_profile" "vpn_proxy" {
   role = aws_iam_role.vpn_proxy.name
 }
 
-data "aws_ami" "al2023" {
+data "aws_ami" "ubuntu" {
   provider    = aws.us-east-1
   most_recent = true
-  owners      = ["amazon"]
+  owners      = ["099720109477"]
 
   filter {
     name   = "name"
-    values = ["al2023-ami-2023.*-x86_64"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
 }
 
 resource "aws_instance" "vpn_proxy" {
   provider               = aws.us-east-1
-  ami                    = data.aws_ami.al2023.id
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t3.nano"
   subnet_id              = aws_subnet.vpn_proxy.id
   vpc_security_group_ids = [aws_security_group.vpn_proxy.id]
