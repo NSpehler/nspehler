@@ -1,0 +1,66 @@
+#!/bin/bash
+set -euxo pipefail
+exec > >(tee /var/log/user-data.log | logger -t user-data -s 2>/dev/console) 2>&1
+
+dnf install -y openvpn tinyproxy jq iptables-services
+
+SECRET=$(aws secretsmanager get-secret-value \
+  --region ${region} \
+  --secret-id ${secret_id} \
+  --query SecretString --output text)
+
+OVPN_CONFIG=$(echo "$SECRET" | jq -r .ovpn_config)
+NORD_USERNAME=$(echo "$SECRET" | jq -r .nord_username)
+NORD_PASSWORD=$(echo "$SECRET" | jq -r .nord_password)
+PROXY_USERNAME=$(echo "$SECRET" | jq -r .proxy_username)
+PROXY_PASSWORD=$(echo "$SECRET" | jq -r .proxy_password)
+
+install -d -m 700 /etc/openvpn/client
+umask 077
+
+printf '%s\n' "$OVPN_CONFIG" > /etc/openvpn/client/nord.conf
+cat >> /etc/openvpn/client/nord.conf <<'EOF'
+
+auth-user-pass /etc/openvpn/client/nord.auth
+pull-filter ignore "redirect-gateway"
+route-noexec
+script-security 2
+up /etc/openvpn/client/nord-up.sh
+EOF
+
+printf '%s\n%s\n' "$NORD_USERNAME" "$NORD_PASSWORD" > /etc/openvpn/client/nord.auth
+chmod 600 /etc/openvpn/client/nord.auth
+
+cat > /etc/openvpn/client/nord-up.sh <<'EOF'
+#!/bin/bash
+set -eux
+ip rule add fwmark 0x1 table 100 2>/dev/null || true
+ip route replace default dev "$1" table 100
+iptables -t mangle -C OUTPUT -m owner --uid-owner tinyproxy -j MARK --set-mark 0x1 2>/dev/null || \
+  iptables -t mangle -A OUTPUT -m owner --uid-owner tinyproxy -j MARK --set-mark 0x1
+echo 2 > /proc/sys/net/ipv4/conf/"$1"/rp_filter
+echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter
+EOF
+chmod 755 /etc/openvpn/client/nord-up.sh
+
+cat > /etc/tinyproxy/tinyproxy.conf <<EOF
+User tinyproxy
+Group tinyproxy
+Port 8888
+Listen 0.0.0.0
+Timeout 600
+DefaultErrorFile "/usr/share/tinyproxy/default.html"
+StatFile "/usr/share/tinyproxy/stats.html"
+LogFile "/var/log/tinyproxy/tinyproxy.log"
+LogLevel Info
+PidFile "/run/tinyproxy/tinyproxy.pid"
+MaxClients 20
+Allow 0.0.0.0/0
+BasicAuth $PROXY_USERNAME $PROXY_PASSWORD
+ConnectPort 443
+ConnectPort 563
+EOF
+
+systemctl enable --now openvpn-client@nord.service
+sleep 10
+systemctl enable --now tinyproxy.service
