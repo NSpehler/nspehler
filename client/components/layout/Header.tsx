@@ -1,15 +1,16 @@
 "use client"
 
-import { formatCoordinates } from "@/lib/coordinates"
-import { HeaderFragment } from "@/lib/datocms/commonFragments"
-import { type FragmentOf, readFragment } from "@/lib/datocms/graphql"
-import { linkResolver } from "@/lib/linkResolver"
-import { cn } from "@/lib/utils"
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
 import { MenuIcon, XIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
+
+import { formatCoordinates } from "@/lib/coordinates"
+import { HeaderFragment } from "@/lib/datocms/commonFragments"
+import { type FragmentOf, readFragment } from "@/lib/datocms/graphql"
+import { linkResolver } from "@/lib/linkResolver"
+import { cn } from "@/lib/utils"
 
 type Props = {
   data: FragmentOf<typeof HeaderFragment>
@@ -68,7 +69,7 @@ export const Header = ({ data }: Props) => {
         {({ open }) => (
           <div className="relative">
             <div className="relative z-50 flex items-start justify-between pt-8 pb-2 lg:py-10">
-              <div className="min-w-0 lg:flex lg:shrink-0 lg:flex-wrap lg:items-center lg:space-x-4">
+              <div className="min-w-0 justify-items-start lg:flex lg:shrink-0 lg:flex-wrap lg:items-center lg:gap-4">
                 <Link
                   href="/"
                   className="block text-3xl text-gray-900 dark:text-white"
@@ -109,7 +110,7 @@ export const Header = ({ data }: Props) => {
 
             <MenuItems
               transition
-              className="absolute inset-x-0 top-full z-40 mt-2 origin-top rounded-2xl border border-gray-200 bg-white p-2 shadow-lg transition duration-200 ease-out focus:outline-none data-closed:-translate-y-2 data-closed:opacity-0 lg:hidden dark:border-gray-600 dark:bg-black"
+              className="absolute inset-x-0 top-full z-40 mt-2 origin-top rounded-2xl border border-gray-200 bg-white p-2 shadow-lg transition duration-200 ease-out focus:outline-none data-closed:-translate-y-2 data-closed:opacity-0 lg:hidden dark:border-gray-700 dark:bg-black"
             >
               {header.links.map((item) => {
                 const active = isActive(
@@ -140,7 +141,7 @@ export const Header = ({ data }: Props) => {
       </Menu>
 
       <nav
-        className="relative hidden border-b border-gray-200 lg:flex lg:space-x-8 dark:border-gray-600"
+        className="relative hidden border-b border-gray-200 lg:flex lg:gap-8 dark:border-gray-700"
         aria-label="Navigation"
       >
         {header.links.map((item, index) => {

@@ -13,10 +13,6 @@ export const query = graphql(
         content {
           value
         }
-        downloadTitle
-        downloadLink {
-          url
-        }
         _seoMetaTags {
           ...TagFragment
         }

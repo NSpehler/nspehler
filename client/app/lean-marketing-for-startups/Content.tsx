@@ -1,5 +1,4 @@
 import { Preview } from "@/components/layout"
-import { Button } from "@/components/ui"
 import type { ResultOf } from "@/lib/datocms/graphql"
 import type { ContentComponentType } from "@/lib/datocms/realtime/generatePageComponent"
 import { notFound } from "next/navigation"
@@ -21,12 +20,6 @@ const Content: ContentComponentType<PageProps, ResultOf<typeof query>> = ({
       >
         <StructuredText data={data.page.content} />
       </div>
-      {data.page.downloadTitle && data.page.downloadLink && (
-        <Button
-          title={data.page.downloadTitle}
-          link={data.page.downloadLink.url}
-        />
-      )}
       {isDraftMode && <Preview editingUrl={data.page._editingUrl} />}
     </>
   )

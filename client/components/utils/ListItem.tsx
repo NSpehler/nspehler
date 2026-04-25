@@ -1,5 +1,6 @@
 import { stripStega } from "@datocms/content-link"
 import { isEmptyDocument } from "datocms-structured-text-utils"
+import { ArrowUpRightIcon } from "lucide-react"
 import { type CdaStructuredTextValue, StructuredText } from "react-datocms"
 
 type Item = {
@@ -14,19 +15,23 @@ type Props = {
 }
 
 export const ListItem = ({ item }: Props) => (
-  <li className="py-8">
-    <div className="flex items-baseline justify-between space-x-3">
+  <li className="grid gap-2 py-8">
+    <div className="flex items-baseline justify-between gap-3">
       <a
         href={item.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="mb-2 inline-flex text-xl font-medium text-gray-900 transition-all hover:text-gray-600 dark:text-white dark:hover:text-gray-300"
+        className="group inline-flex items-center gap-1 text-xl font-medium text-gray-900 transition-colors hover:text-gray-600 dark:text-white dark:hover:text-gray-300"
       >
         {item.title}
+        <ArrowUpRightIcon
+          className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          aria-hidden="true"
+        />
       </a>
-      <h4 className="text-xl font-medium text-gray-300 dark:text-gray-500">
+      <span className="shrink-0 text-xl font-medium text-gray-300 tabular-nums dark:text-gray-500">
         {item._createdAt.split("-")[0]}
-      </h4>
+      </span>
     </div>
     {item.content && !isEmptyDocument(stripStega(item.content)) && (
       <div

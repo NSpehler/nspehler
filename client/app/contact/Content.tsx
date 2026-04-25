@@ -1,5 +1,5 @@
 import { Preview } from "@/components/layout"
-import { CalEmbed } from "@/components/ui"
+import { CalEmbed } from "@/components/utils"
 import type { ResultOf } from "@/lib/datocms/graphql"
 import type { ContentComponentType } from "@/lib/datocms/realtime/generatePageComponent"
 import { notFound } from "next/navigation"
@@ -15,13 +15,15 @@ const Content: ContentComponentType<PageProps, ResultOf<typeof query>> = ({
 
   return (
     <>
-      <div
-        className="prose prose-xl lg:prose-2xl dark:prose-invert"
-        data-datocms-content-link-group
-      >
-        <StructuredText data={data.page.content} />
+      <div className="grid gap-8 lg:gap-12">
+        <div
+          className="prose prose-xl lg:prose-2xl dark:prose-invert"
+          data-datocms-content-link-group
+        >
+          <StructuredText data={data.page.content} />
+        </div>
+        <CalEmbed calLink={data.page.meetingLink} />
       </div>
-      <CalEmbed calLink={data.page.meetingLink} />
       {isDraftMode && <Preview editingUrl={data.page._editingUrl} />}
     </>
   )

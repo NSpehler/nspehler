@@ -1,5 +1,10 @@
-import { ContentLink, Footer, Header, Layout } from "@/components/layout"
-import { ThemeProvider } from "@/components/layout/ThemeProvider"
+import {
+  ContentLink,
+  Footer,
+  Header,
+  Layout,
+  ThemeProvider,
+} from "@/components/layout"
 import {
   FooterFragment,
   HeaderFragment,
