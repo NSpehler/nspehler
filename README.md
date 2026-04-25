@@ -18,7 +18,7 @@ I build production-grade web applications, marketing websites, internal tools an
 A few client web applications I've built end-to-end as a freelance engineer:
 
 - **[goalGetr](https://goalgetr.co)** — An ice hockey training platform helping players track their progress, follow structured drills and level up their game.
-- **[Nucase](https://nucase.no)** — A home renovation platform for the Norwegian market, connecting homeowners with contractors and streamlining the renovation process from quote to completion.
+- **[Nucase](https://app.nucase.no)** — A home renovation platform for the Norwegian market, connecting homeowners with contractors and streamlining the renovation process from quote to completion.
 - **[Smartvatten Solutions Advisor](https://advisor.smartvatten.com)** — A sales and lead generation tool for Smartvatten, helping prospects discover the right water management solutions for their building and turning that interest into qualified leads.
 
 #### Currently 🚀
