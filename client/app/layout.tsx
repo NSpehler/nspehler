@@ -63,8 +63,8 @@ export default async function RootLayout({ children }: Props) {
 
   const content = (
     <>
-      <div className="mx-auto max-w-5xl px-4 lg:px-8">
-        {header && <Header data={header} />}
+      {header && <Header data={header} />}
+      <div className="mx-auto max-w-5xl px-5 md:px-8">
         <Layout>{children}</Layout>
         {footer && <Footer data={footer} />}
       </div>

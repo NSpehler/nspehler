@@ -14,7 +14,7 @@ export const Social = ({ title, link, icon }: Props) => (
       alt={title}
       width={24}
       height={24}
-      className="size-6 transition hover:opacity-70 dark:hover:opacity-100 dark:hover:brightness-125"
+      className="size-6 opacity-60 transition-opacity hover:opacity-100"
       aria-hidden="true"
     />
   </a>

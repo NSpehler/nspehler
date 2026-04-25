@@ -21,7 +21,7 @@ export const ListItem = ({ item }: Props) => (
         href={item.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex items-center gap-1 text-xl font-medium text-gray-900 transition-colors hover:text-gray-600 dark:text-white dark:hover:text-gray-300"
+        className="group inline-flex items-center gap-1 text-xl font-medium text-neutral-900 transition-colors hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
       >
         {item.title}
         <ArrowUpRightIcon
@@ -29,7 +29,7 @@ export const ListItem = ({ item }: Props) => (
           aria-hidden="true"
         />
       </a>
-      <span className="shrink-0 text-xl font-medium text-gray-300 tabular-nums dark:text-gray-500">
+      <span className="shrink-0 text-xl font-medium text-neutral-300 tabular-nums dark:text-neutral-500">
         {item._createdAt.split("-")[0]}
       </span>
     </div>

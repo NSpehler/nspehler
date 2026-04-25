@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const List = ({ items }: Props) => (
-  <ul className="divide-y divide-gray-200 lg:-mt-8 dark:divide-gray-700">
+  <ul className="divide-y divide-neutral-200 md:-mt-8 dark:divide-neutral-800">
     {items?.map((item) => (
       <ListItem key={item.id ?? item.link} item={item} />
     ))}

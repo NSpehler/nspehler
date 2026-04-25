@@ -32,7 +32,7 @@ const Content: ContentComponentType<PageProps, ResultOf<typeof query>> = ({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div
-        className="prose prose-xl lg:prose-2xl dark:prose-invert"
+        className="prose prose-xl dark:prose-invert"
         data-datocms-content-link-group
       >
         <StructuredText data={data.page.content} />

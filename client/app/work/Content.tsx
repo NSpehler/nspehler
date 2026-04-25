@@ -15,9 +15,9 @@ const Content: ContentComponentType<PageProps, ResultOf<typeof query>> = ({
 
   return (
     <>
-      <div className="lg:grid lg:grid-cols-3 lg:items-start lg:gap-8">
+      <div className="md:grid md:grid-cols-3 md:items-start md:gap-8">
         <div
-          className="prose prose-xl lg:prose-2xl dark:prose-invert"
+          className="prose prose-xl dark:prose-invert"
           data-datocms-content-link-group
         >
           <StructuredText data={data.page.content} />

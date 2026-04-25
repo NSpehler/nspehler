@@ -5,5 +5,5 @@ type Props = {
 }
 
 export const Layout = ({ children }: Props) => (
-  <main className="py-8 lg:py-12">{children}</main>
+  <main className="py-8 md:py-12">{children}</main>
 )

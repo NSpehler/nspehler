@@ -57,12 +57,12 @@ export const ThemeSwitcher = () => {
     <div
       role="radiogroup"
       aria-label="Theme"
-      className="relative inline-flex items-center rounded-full border border-gray-200 bg-white p-0.5 dark:border-gray-700 dark:bg-gray-900"
+      className="relative inline-flex items-center rounded-full border border-neutral-200 bg-white p-0.5 dark:border-neutral-800 dark:bg-neutral-900"
     >
       <span
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute top-0.5 bottom-0.5 rounded-full bg-gray-100 dark:bg-gray-700",
+          "pointer-events-none absolute top-0.5 bottom-0.5 rounded-full bg-neutral-100 dark:bg-neutral-700",
           {
             "transition-[left,width,opacity] duration-300 ease-out": animate,
           },
@@ -89,8 +89,8 @@ export const ThemeSwitcher = () => {
             className={cn(
               "relative inline-flex size-7 items-center justify-center rounded-full transition-colors",
               {
-                "text-gray-900 dark:text-white": active,
-                "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300":
+                "text-neutral-900 dark:text-white": active,
+                "text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300":
                   !active,
               },
             )}
