@@ -82,7 +82,7 @@ export const Header = ({ data }: Props) => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 flex flex-col bg-white/25 backdrop-blur-md md:h-auto dark:bg-black/25",
+        "sticky top-0 z-50 flex flex-col bg-white/40 backdrop-blur-md md:h-auto dark:bg-black/40",
         { "h-dvh": menuOpen },
       )}
     >
