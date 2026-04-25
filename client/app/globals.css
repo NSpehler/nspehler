@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+ * Dark mode is class-based and driven by `next-themes`, which toggles the
+ * `dark` class on <html>. The "system" preference is also resolved by
+ * next-themes into the same class so the styling logic stays uniform.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Tailwind 4's default `gray` palette sits at hue 264 (a cool slate-blue).
+ * We remap it to `neutral` (zero chroma) so the entire site reads as a
+ * true monochrome — no blue tint in light mode, no blue cast in dark mode.
+ * Every `text-gray-*`, `bg-gray-*`, `border-gray-*` etc. across the site
+ * now resolves to a neutral gray, including the focus rings and the
+ * `--tw-prose-*` variables read by @tailwindcss/typography.
+ */
+@theme {
+  --color-gray-50: var(--color-neutral-50);
+  --color-gray-100: var(--color-neutral-100);
+  --color-gray-200: var(--color-neutral-200);
+  --color-gray-300: var(--color-neutral-300);
+  --color-gray-400: var(--color-neutral-400);
+  --color-gray-500: var(--color-neutral-500);
+  --color-gray-600: var(--color-neutral-600);
+  --color-gray-700: var(--color-neutral-700);
+  --color-gray-800: var(--color-neutral-800);
+  --color-gray-900: var(--color-neutral-900);
+  --color-gray-950: var(--color-neutral-950);
+}
+
+/*
+ * Dark mode prose colors are handled by @tailwindcss/typography's built-in
+ * `prose-invert` modifier — applied as `dark:prose-invert` on each element.
+ * The block below only customizes the link styling (underlined border)
+ * which is not part of the plugin's defaults.
+ */
+.prose a {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: var(--tw-prose-links);
+  padding-bottom: 0.25rem;
+  text-decoration: none;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+
+.prose a:hover {
+  color: var(--color-gray-600);
+  border-color: var(--color-gray-600);
+}
+
+.prose-invert a:hover {
+  color: var(--color-gray-300);
+  border-color: var(--color-gray-300);
+}
+
+body {
+  @apply antialiased;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
