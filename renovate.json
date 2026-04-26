@@ -1,0 +1,59 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "mode": "auto",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":dependencyDashboard",
+    "schedule:weekly"
+  ],
+  "timezone": "Asia/Makassar",
+  "labels": ["dependencies"],
+  "prHourlyLimit": 3,
+  "prConcurrentLimit": 8,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "schedule": ["before 6am on monday"]
+  },
+  "packageRules": [
+    {
+      "description": "Auto-merge patch updates across all ecosystems",
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Auto-merge devDependency minors (npm)",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": true
+    },
+    {
+      "description": "Group DatoCMS packages",
+      "matchPackagePatterns": ["^@datocms/", "^datocms-", "^react-datocms$"],
+      "groupName": "datocms"
+    },
+    {
+      "description": "Group Tailwind packages",
+      "matchPackagePatterns": ["tailwindcss", "^@tailwindcss/"],
+      "groupName": "tailwind"
+    },
+    {
+      "description": "Group ESLint + Prettier",
+      "matchPackagePatterns": ["eslint", "prettier"],
+      "groupName": "linters"
+    },
+    {
+      "description": "Group React + types",
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
+      "groupName": "react"
+    },
+    {
+      "description": "Major updates need review — never auto-merge",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "addLabels": ["major-update"]
+    }
+  ]
+}
