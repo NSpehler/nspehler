@@ -15,7 +15,6 @@ type Props = {
 }
 
 type Underline = { left: number; width: number; visible: boolean }
-type MobileMenuState = { open: boolean; pathname: string }
 
 const HIDDEN: Underline = { left: 0, width: 0, visible: false }
 
@@ -32,22 +31,10 @@ export const Header = ({ data }: Props) => {
     (slug && pathname.includes(slug)) || (!slug && pathname === "/")
 
   const linkRefs = useRef<Array<HTMLAnchorElement | null>>([])
+  const previousPathname = useRef(pathname)
   const [underline, setUnderline] = useState<Underline>(HIDDEN)
   const [animate, setAnimate] = useState(false)
-  const [mobileMenu, setMobileMenu] = useState<MobileMenuState>({
-    open: false,
-    pathname,
-  })
-
-  const menuOpen = mobileMenu.open && mobileMenu.pathname === pathname
-  const closeMenu = () =>
-    setMobileMenu((current) => ({ ...current, open: false }))
-  const toggleMenu = () =>
-    setMobileMenu((current) =>
-      current.open && current.pathname === pathname
-        ? { ...current, open: false }
-        : { open: true, pathname },
-    )
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const measure = () => {
     const activeIndex = header.links.findIndex((item) =>
@@ -76,13 +63,23 @@ export const Header = ({ data }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Auto-close the menu when the route changes. Deferring avoids a synchronous
+  // state update during the effect while still closing before the next paint.
+  useEffect(() => {
+    if (previousPathname.current === pathname) return
+    previousPathname.current = pathname
+
+    const id = requestAnimationFrame(() => setMenuOpen(false))
+    return () => cancelAnimationFrame(id)
+  }, [pathname])
+
   // Escape to close while the menu is open. Scroll lock is handled in CSS
   // via `html:has(#mobile-menu[aria-hidden="false"])` so it self-releases at
   // the md breakpoint without any matchMedia wiring.
   useEffect(() => {
     if (!menuOpen) return
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeMenu()
+      if (event.key === "Escape") setMenuOpen(false)
     }
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
@@ -109,7 +106,7 @@ export const Header = ({ data }: Props) => {
             <div className="min-w-0 flex-1 overflow-hidden md:flex md:flex-none md:flex-wrap md:items-center md:gap-4 md:overflow-visible">
               <Link
                 href="/"
-                onClick={closeMenu}
+                onClick={() => setMenuOpen(false)}
                 className="block text-2xl font-medium tracking-tight text-neutral-900 md:text-3xl dark:text-white"
               >
                 {header.title}
@@ -121,7 +118,7 @@ export const Header = ({ data }: Props) => {
             <div className="flex items-center md:hidden">
               <button
                 type="button"
-                onClick={toggleMenu}
+                onClick={() => setMenuOpen((open) => !open)}
                 data-open={menuOpen ? "" : undefined}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
@@ -182,42 +179,43 @@ export const Header = ({ data }: Props) => {
           </nav>
         </div>
 
-        {menuOpen && (
-          <nav
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation"
-            aria-hidden={!menuOpen}
-            className="min-h-0 flex-1 overflow-y-auto mask-[linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%-2rem),transparent_100%)] pt-6 pb-12 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
-          >
-            <ul className="flex flex-col gap-6">
-              {header.links.map((item) => {
-                const active = isActive(
-                  "slug" in item.link ? item.link.slug : undefined,
-                )
-                return (
-                  <li key={item.title}>
-                    <Link
-                      href={linkResolver(item.link)}
-                      onClick={closeMenu}
-                      className={cn(
-                        "block text-4xl font-medium tracking-tight transition-colors",
-                        {
-                          "text-neutral-900 dark:text-white": active,
-                          "text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white":
-                            !active,
-                        },
-                      )}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
-        )}
+        <nav
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation"
+          aria-hidden={!menuOpen}
+          className={cn(
+            "min-h-0 flex-1 overflow-y-auto mask-[linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%-2rem),transparent_100%)] pt-6 pb-12 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden",
+            { hidden: !menuOpen },
+          )}
+        >
+          <ul className="flex flex-col gap-6">
+            {header.links.map((item) => {
+              const active = isActive(
+                "slug" in item.link ? item.link.slug : undefined,
+              )
+              return (
+                <li key={item.title}>
+                  <Link
+                    href={linkResolver(item.link)}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "block text-4xl font-medium tracking-tight transition-colors",
+                      {
+                        "text-neutral-900 dark:text-white": active,
+                        "text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white":
+                          !active,
+                      },
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
       </div>
     </header>
   )
