@@ -50,6 +50,11 @@
       "groupName": "react"
     },
     {
+      "description": "Group Next.js + eslint-config-next (released in lockstep)",
+      "matchPackageNames": ["next", "eslint-config-next"],
+      "groupName": "nextjs"
+    },
+    {
       "description": "Major updates need review — never auto-merge",
       "matchUpdateTypes": ["major"],
       "automerge": false,
