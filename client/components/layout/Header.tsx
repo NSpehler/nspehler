@@ -15,6 +15,7 @@ type Props = {
 }
 
 type Underline = { left: number; width: number; visible: boolean }
+type MobileMenuState = { open: boolean; pathname: string }
 
 const HIDDEN: Underline = { left: 0, width: 0, visible: false }
 
@@ -33,7 +34,20 @@ export const Header = ({ data }: Props) => {
   const linkRefs = useRef<Array<HTMLAnchorElement | null>>([])
   const [underline, setUnderline] = useState<Underline>(HIDDEN)
   const [animate, setAnimate] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [mobileMenu, setMobileMenu] = useState<MobileMenuState>({
+    open: false,
+    pathname,
+  })
+
+  const menuOpen = mobileMenu.open && mobileMenu.pathname === pathname
+  const closeMenu = () =>
+    setMobileMenu((current) => ({ ...current, open: false }))
+  const toggleMenu = () =>
+    setMobileMenu((current) =>
+      current.open && current.pathname === pathname
+        ? { ...current, open: false }
+        : { open: true, pathname },
+    )
 
   const measure = () => {
     const activeIndex = header.links.findIndex((item) =>
@@ -62,18 +76,13 @@ export const Header = ({ data }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Auto-close the menu when the route changes.
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
-
   // Escape to close while the menu is open. Scroll lock is handled in CSS
   // via `html:has(#mobile-menu[aria-hidden="false"])` so it self-releases at
   // the md breakpoint without any matchMedia wiring.
   useEffect(() => {
     if (!menuOpen) return
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false)
+      if (event.key === "Escape") closeMenu()
     }
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
@@ -100,7 +109,7 @@ export const Header = ({ data }: Props) => {
             <div className="min-w-0 flex-1 overflow-hidden md:flex md:flex-none md:flex-wrap md:items-center md:gap-4 md:overflow-visible">
               <Link
                 href="/"
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
                 className="block text-2xl font-medium tracking-tight text-neutral-900 md:text-3xl dark:text-white"
               >
                 {header.title}
@@ -112,7 +121,7 @@ export const Header = ({ data }: Props) => {
             <div className="flex items-center md:hidden">
               <button
                 type="button"
-                onClick={() => setMenuOpen((open) => !open)}
+                onClick={toggleMenu}
                 data-open={menuOpen ? "" : undefined}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
@@ -191,7 +200,7 @@ export const Header = ({ data }: Props) => {
                   <li key={item.title}>
                     <Link
                       href={linkResolver(item.link)}
-                      onClick={() => setMenuOpen(false)}
+                      onClick={closeMenu}
                       className={cn(
                         "block text-4xl font-medium tracking-tight transition-colors",
                         {
