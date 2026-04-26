@@ -31,18 +31,28 @@
     },
     {
       "description": "Group DatoCMS packages",
-      "matchPackagePatterns": ["^@datocms/", "^datocms-", "^react-datocms$"],
-      "groupName": "datocms"
+      "groupName": "datocms",
+      "matchPackageNames": [
+        "/^@datocms//",
+        "/^datocms-/",
+        "/^react-datocms$/"
+      ]
     },
     {
       "description": "Group Tailwind packages",
-      "matchPackagePatterns": ["tailwindcss", "^@tailwindcss/"],
-      "groupName": "tailwind"
+      "groupName": "tailwind",
+      "matchPackageNames": [
+        "/tailwindcss/",
+        "/^@tailwindcss//"
+      ]
     },
     {
       "description": "Group ESLint + Prettier",
-      "matchPackagePatterns": ["eslint", "prettier"],
-      "groupName": "linters"
+      "groupName": "linters",
+      "matchPackageNames": [
+        "/eslint/",
+        "/prettier/"
+      ]
     },
     {
       "description": "Group React + types",
