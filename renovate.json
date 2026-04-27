@@ -65,6 +65,11 @@
       "groupName": "nextjs"
     },
     {
+      "description": "Group Node runtime + @types/node so types don't drift ahead of runtime",
+      "matchPackageNames": ["node", "@types/node"],
+      "groupName": "node"
+    },
+    {
       "description": "Major updates need review — never auto-merge",
       "matchUpdateTypes": ["major"],
       "automerge": false,
