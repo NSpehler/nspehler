@@ -64,6 +64,7 @@ export const Header = ({ data }: Props) => {
 
   // Auto-close the menu when the route changes.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false)
   }, [pathname])
 
