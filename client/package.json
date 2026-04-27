@@ -47,6 +47,7 @@
     "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "^10.1.8",
     "knip": "^6.6.3",
+    "portless": "^0.10.3",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
