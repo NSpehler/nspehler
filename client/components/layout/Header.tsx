@@ -31,7 +31,6 @@ export const Header = ({ data }: Props) => {
     (slug && pathname.includes(slug)) || (!slug && pathname === "/")
 
   const linkRefs = useRef<Array<HTMLAnchorElement | null>>([])
-  const previousPathname = useRef(pathname)
   const [underline, setUnderline] = useState<Underline>(HIDDEN)
   const [animate, setAnimate] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -63,14 +62,10 @@ export const Header = ({ data }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Auto-close the menu when the route changes. Deferring avoids a synchronous
-  // state update during the effect while still closing before the next paint.
+  // Auto-close the menu when the route changes.
   useEffect(() => {
-    if (previousPathname.current === pathname) return
-    previousPathname.current = pathname
-
-    const id = requestAnimationFrame(() => setMenuOpen(false))
-    return () => cancelAnimationFrame(id)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMenuOpen(false)
   }, [pathname])
 
   // Escape to close while the menu is open. Scroll lock is handled in CSS
