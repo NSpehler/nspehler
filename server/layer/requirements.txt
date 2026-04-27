@@ -1,4 +1,4 @@
-beautifulsoup4==4.11.1
+beautifulsoup4==4.14.3
 cloudscraper==1.2.71
 dnspython==2.8.0
 pymongo==4.6.3
