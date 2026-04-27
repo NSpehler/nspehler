@@ -9,18 +9,14 @@ export const query = graphql(
       page: home {
         _modelApiKey
         _editingUrl
+        title
         content {
           value
         }
         _seoMetaTags {
           ...TagFragment
         }
-      }
-      footer {
-        social {
-          title
-          link
-        }
+        structuredData
       }
     }
   `,

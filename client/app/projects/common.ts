@@ -16,6 +16,7 @@ export const query = graphql(
         _seoMetaTags {
           ...TagFragment
         }
+        structuredData
       }
       items: allProjects(orderBy: _createdAt_DESC) {
         id

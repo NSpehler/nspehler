@@ -1,5 +1,5 @@
 import { Preview } from "@/components/layout"
-import { List } from "@/components/utils"
+import { List, StructuredData } from "@/components/utils"
 import type { ResultOf } from "@/lib/datocms/graphql"
 import type { ContentComponentType } from "@/lib/datocms/realtime/generatePageComponent"
 import { notFound } from "next/navigation"
@@ -15,6 +15,11 @@ const Content: ContentComponentType<PageProps, ResultOf<typeof query>> = ({
 
   return (
     <>
+      <StructuredData
+        id={`${data.page._modelApiKey}-structured-data`}
+        data={data.page.structuredData}
+      />
+      <h1 className="sr-only">{data.page.title}</h1>
       <div className="md:grid md:grid-cols-3 md:items-start md:gap-8">
         <div
           className="prose prose-xl dark:prose-invert"

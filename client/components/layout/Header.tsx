@@ -7,6 +7,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { formatCoordinates } from "@/lib/coordinates"
 import { HeaderFragment } from "@/lib/datocms/commonFragments"
 import { type FragmentOf, readFragment } from "@/lib/datocms/graphql"
+import { useReducedMotion } from "@/lib/hooks"
 import { linkResolver } from "@/lib/linkResolver"
 import { cn } from "@/lib/utils"
 
@@ -34,6 +35,8 @@ export const Header = ({ data }: Props) => {
   const [underline, setUnderline] = useState<Underline>(HIDDEN)
   const [animate, setAnimate] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const reducedMotion = useReducedMotion()
+  const animateUnderline = animate && !reducedMotion
 
   const measure = () => {
     const activeIndex = header.links.findIndex((item) =>
@@ -121,8 +124,8 @@ export const Header = ({ data }: Props) => {
                 className="group relative -top-1 -right-1 inline-flex size-10 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
               >
                 <span aria-hidden="true" className="relative block size-4">
-                  <span className="absolute inset-x-0 top-1/2 h-px -translate-y-[3px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:rotate-45" />
-                  <span className="absolute inset-x-0 top-1/2 h-px translate-y-[3px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:-rotate-45" />
+                  <span className="absolute inset-x-0 top-1/2 h-px -translate-y-[3px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:rotate-45 motion-reduce:transition-none" />
+                  <span className="absolute inset-x-0 top-1/2 h-px translate-y-[3px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:-rotate-45 motion-reduce:transition-none" />
                 </span>
               </button>
             </div>
@@ -143,6 +146,7 @@ export const Header = ({ data }: Props) => {
                   }}
                   key={item.title}
                   href={linkResolver(item.link)}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "inline-flex items-center pb-5 text-base font-medium transition-colors",
                     {
@@ -162,7 +166,7 @@ export const Header = ({ data }: Props) => {
                 "pointer-events-none absolute -bottom-px h-px bg-neutral-900 dark:bg-white",
                 {
                   "transition-[left,width,opacity] duration-300 ease-out":
-                    animate,
+                    animateUnderline,
                 },
               )}
               style={{
@@ -193,6 +197,7 @@ export const Header = ({ data }: Props) => {
                     <Link
                       href={linkResolver(item.link)}
                       onClick={() => setMenuOpen(false)}
+                      aria-current={active ? "page" : undefined}
                       className={cn(
                         "block text-4xl font-medium tracking-tight transition-colors",
                         {

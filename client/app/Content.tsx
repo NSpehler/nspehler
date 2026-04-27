@@ -1,9 +1,8 @@
 import { Preview } from "@/components/layout"
+import { StructuredData } from "@/components/utils"
 import type { ResultOf } from "@/lib/datocms/graphql"
 import type { ContentComponentType } from "@/lib/datocms/realtime/generatePageComponent"
-import { stripStega } from "@datocms/content-link"
 import { notFound } from "next/navigation"
-import Script from "next/script"
 import { StructuredText } from "react-datocms"
 
 import type { PageProps, query } from "./common"
@@ -14,23 +13,13 @@ const Content: ContentComponentType<PageProps, ResultOf<typeof query>> = ({
 }) => {
   if (!data.page) notFound()
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: process.env.NEXT_PUBLIC_APP_NAME,
-    email: "nicolas@spehler.com",
-    url: process.env.NEXT_PUBLIC_APP_URL,
-    image: `${process.env.NEXT_PUBLIC_APP_URL}/nspehler-logo.png`,
-    sameAs: data.footer?.social.map((s) => stripStega(s.link)) ?? [],
-  }
-
   return (
     <>
-      <Script
-        id="person-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <StructuredData
+        id={`${data.page._modelApiKey}-structured-data`}
+        data={data.page.structuredData}
       />
+      <h1 className="sr-only">{data.page.title}</h1>
       <div
         className="prose prose-xl dark:prose-invert"
         data-datocms-content-link-group

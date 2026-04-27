@@ -11,7 +11,7 @@ export const Social = ({ title, link, icon }: Props) => (
     <span className="sr-only">{title}</span>
     <Image
       src={icon}
-      alt={title}
+      alt=""
       width={24}
       height={24}
       className="size-6 opacity-60 transition-opacity hover:opacity-100"

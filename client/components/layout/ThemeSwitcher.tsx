@@ -1,5 +1,6 @@
 "use client"
 
+import { useReducedMotion } from "@/lib/hooks"
 import { cn } from "@/lib/utils"
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -21,6 +22,8 @@ export const ThemeSwitcher = () => {
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([])
   const [pill, setPill] = useState<Pill>(HIDDEN)
   const [animate, setAnimate] = useState(false)
+  const reducedMotion = useReducedMotion()
+  const animatePill = animate && !reducedMotion
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -64,7 +67,8 @@ export const ThemeSwitcher = () => {
         className={cn(
           "pointer-events-none absolute top-0.5 bottom-0.5 rounded-full bg-neutral-100 dark:bg-neutral-700",
           {
-            "transition-[left,width,opacity] duration-300 ease-out": animate,
+            "transition-[left,width,opacity] duration-300 ease-out":
+              animatePill,
           },
         )}
         style={{
