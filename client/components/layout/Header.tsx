@@ -179,43 +179,42 @@ export const Header = ({ data }: Props) => {
           </nav>
         </div>
 
-        <nav
-          id="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation"
-          aria-hidden={!menuOpen}
-          className={cn(
-            "min-h-0 flex-1 overflow-y-auto mask-[linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%-2rem),transparent_100%)] pt-6 pb-12 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden",
-            { hidden: !menuOpen },
-          )}
-        >
-          <ul className="flex flex-col gap-6">
-            {header.links.map((item) => {
-              const active = isActive(
-                "slug" in item.link ? item.link.slug : undefined,
-              )
-              return (
-                <li key={item.title}>
-                  <Link
-                    href={linkResolver(item.link)}
-                    onClick={() => setMenuOpen(false)}
-                    className={cn(
-                      "block text-4xl font-medium tracking-tight transition-colors",
-                      {
-                        "text-neutral-900 dark:text-white": active,
-                        "text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white":
-                          !active,
-                      },
-                    )}
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </nav>
+        {menuOpen && (
+          <nav
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation"
+            aria-hidden={!menuOpen}
+            className="min-h-0 flex-1 overflow-y-auto mask-[linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%-2rem),transparent_100%)] pt-6 pb-12 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
+          >
+            <ul className="flex flex-col gap-6">
+              {header.links.map((item) => {
+                const active = isActive(
+                  "slug" in item.link ? item.link.slug : undefined,
+                )
+                return (
+                  <li key={item.title}>
+                    <Link
+                      href={linkResolver(item.link)}
+                      onClick={() => setMenuOpen(false)}
+                      className={cn(
+                        "block text-4xl font-medium tracking-tight transition-colors",
+                        {
+                          "text-neutral-900 dark:text-white": active,
+                          "text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white":
+                            !active,
+                        },
+                      )}
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+        )}
       </div>
     </header>
   )
