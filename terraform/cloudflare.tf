@@ -20,7 +20,7 @@ resource "cloudflare_record" "vercel" {
   name    = local.domain
   value   = "216.198.79.1"
   type    = "A"
-  ttl     = "auto"
+  ttl     = "1"
   proxied = "false"
 }
 
@@ -29,7 +29,7 @@ resource "cloudflare_record" "vercel_www" {
   name    = "www"
   value   = "781b238b346f34de.vercel-dns-017.com"
   type    = "CNAME"
-  ttl     = "auto"
+  ttl     = "1"
   proxied = "false"
 }
 
