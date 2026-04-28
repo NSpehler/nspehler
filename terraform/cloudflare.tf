@@ -18,18 +18,18 @@ resource "cloudflare_zone_settings_override" "nspehler" {
 resource "cloudflare_record" "vercel" {
   zone_id = cloudflare_zone.nspehler.id
   name    = local.domain
-  value   = "76.76.21.21"
+  value   = "216.198.79.1"
   type    = "A"
-  ttl     = "1"
+  ttl     = "auto"
   proxied = "false"
 }
 
 resource "cloudflare_record" "vercel_www" {
   zone_id = cloudflare_zone.nspehler.id
   name    = "www"
-  value   = "cname.vercel-dns.com"
+  value   = "781b238b346f34de.vercel-dns-017.com"
   type    = "CNAME"
-  ttl     = "1"
+  ttl     = "auto"
   proxied = "false"
 }
 
