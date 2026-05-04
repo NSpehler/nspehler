@@ -52,7 +52,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         label: "Live preview",
         url: new URL(
           `/api/draft-mode/enable?redirect=${url}&token=${token}`,
-          request.url,
+          process.env.NEXT_PUBLIC_APP_URL,
         ).toString(),
       })
 
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           label: "Published version",
           url: new URL(
             `/api/draft-mode/disable?redirect=${url}`,
-            request.url,
+            process.env.NEXT_PUBLIC_APP_URL,
           ).toString(),
         })
       }
