@@ -13,10 +13,11 @@ I build production-grade web applications, marketing websites, internal tools an
 - **[Intigriti](https://intigriti.com)** — Freelance Full-Stack Engineer building Europe’s leading bug bounty platform’s marketing website [intigriti.com](https://intigriti.com) and blog from the ground up in Next.js + DatoCMS, with a modular block architecture and Algolia-powered search.
 - **[Alma](https://almapay.com)** — Lead Growth Engineer where I rebuilt [almapay.com](https://almapay.com) in React + Next.js + Tailwind + DatoCMS, scaled lead generation across a global database of e-commerce merchants with serverless Python, and integrated AI for lead scoring, categorization and risk analysis.
 
-#### Web apps I’ve built 🚢
+#### Apps I’ve built 🚢
 
-A few client web applications I’ve built end-to-end as a freelance engineer:
+A few iOS and web applications I’ve built end-to-end as a freelance engineer:
 
+- **[Analog](https://analogapp.co)** — An iPhone app for vinyl collectors that identifies what’s playing on your turntable and turns your record collection into curated listening sessions. Built with real-time audio recognition and Analog Studio, an AI-powered playlist builder for records you already own.
 - **[goalGetr](https://goalgetr.co)** — An ice hockey training platform helping players track their progress, follow structured drills and level up their game.
 - **[Nucase](https://app.nucase.no)** — A home renovation platform for the Norwegian market, connecting homeowners with contractors and streamlining the renovation process from quote to completion.
 - **[PaperDrop](https://paperdrop.com)** — A fully-featured form builder for PaperDrop’s job management platform, helping UK contractors run their business without paperwork by turning any PDF template into an interactive form completed from the field.
