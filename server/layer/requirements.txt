@@ -4,5 +4,5 @@ dnspython==2.8.0
 pymongo==4.17.0
 requests==2.33.1
 retrying==1.4.2
-scrapingbee==1.1.8
+scrapingbee==1.2.0
 slack-sdk==3.42.0
