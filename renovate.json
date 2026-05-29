@@ -74,6 +74,11 @@
       "matchUpdateTypes": ["major"],
       "automerge": false,
       "addLabels": ["major-update"]
+    },
+    {
+      "description": "Hold ESLint at 9.x until eslint-plugin-react (via eslint-config-next) supports ESLint 10",
+      "matchPackageNames": ["eslint"],
+      "allowedVersions": "<10"
     }
   ]
 }
