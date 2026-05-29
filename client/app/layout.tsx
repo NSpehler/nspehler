@@ -13,6 +13,7 @@ import {
 import { executeQuery } from "@/lib/datocms/executeQuery"
 import { generateMetadataFn } from "@/lib/datocms/generateMetadataFn"
 import { graphql } from "@/lib/datocms/graphql"
+import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import PlausibleProvider from "next-plausible"
 import { draftMode } from "next/headers"
@@ -94,6 +95,7 @@ export default async function RootLayout({ children }: Props) {
             content
           )}
         </ThemeProvider>
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
