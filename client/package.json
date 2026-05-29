@@ -21,6 +21,7 @@
     "@datocms/content-link": "^0.3.18",
     "@datocms/rest-client-utils": "^5.2.8",
     "@headlessui/react": "^2.2.10",
+    "@vercel/speed-insights": "^2.0.0",
     "classnames": "^2.5.1",
     "datocms-structured-text-utils": "^5.1.9",
     "gql.tada": "^1.9.0",
