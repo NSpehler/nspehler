@@ -42,7 +42,7 @@ moved {
 resource "cloudflare_dns_record" "vercel" {
   zone_id = cloudflare_zone.nspehler.id
   name    = local.domain
-  content = "781b238b346f34de.vercel-dns-017.com."
+  content = "781b238b346f34de.vercel-dns-017.com"
   type    = "CNAME"
   ttl     = 1
   proxied = false
