@@ -1,6 +1,6 @@
 resource "mongodbatlas_project" "nspehler" {
   name   = local.name
-  org_id = "5e7f114da0f1a505a754b20c"
+  org_id = var.mongodbatlas_org_id
 }
 
 resource "mongodbatlas_project_ip_access_list" "nspehler" {
