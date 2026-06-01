@@ -6,15 +6,6 @@ resource "cloudflare_zone" "nspehler" {
   type = "full"
 }
 
-# Zone settings (v5 replaced cloudflare_zone_settings_override with one
-# cloudflare_zone_setting resource per setting).
-removed {
-  from = cloudflare_zone_settings_override.nspehler
-  lifecycle {
-    destroy = false
-  }
-}
-
 resource "cloudflare_zone_setting" "ssl" {
   zone_id    = cloudflare_zone.nspehler.id
   setting_id = "ssl"
