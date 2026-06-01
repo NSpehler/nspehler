@@ -25,11 +25,6 @@ resource "cloudflare_zone_setting" "automatic_https_rewrites" {
 }
 
 # Vercel
-moved {
-  from = cloudflare_record.vercel
-  to   = cloudflare_dns_record.vercel
-}
-
 resource "cloudflare_dns_record" "vercel" {
   zone_id = cloudflare_zone.nspehler.id
   name    = local.domain
@@ -37,11 +32,6 @@ resource "cloudflare_dns_record" "vercel" {
   type    = "CNAME"
   ttl     = 1
   proxied = false
-}
-
-moved {
-  from = cloudflare_record.vercel_www
-  to   = cloudflare_dns_record.vercel_www
 }
 
 resource "cloudflare_dns_record" "vercel_www" {
@@ -54,11 +44,6 @@ resource "cloudflare_dns_record" "vercel_www" {
 }
 
 # DatoCMS
-moved {
-  from = cloudflare_record.datocms
-  to   = cloudflare_dns_record.datocms
-}
-
 resource "cloudflare_dns_record" "datocms" {
   zone_id = cloudflare_zone.nspehler.id
   name    = "admin.${local.domain}"
@@ -69,11 +54,6 @@ resource "cloudflare_dns_record" "datocms" {
 }
 
 # Cloudflare Email
-moved {
-  from = cloudflare_record.cloudflare_email_mx_1
-  to   = cloudflare_dns_record.cloudflare_email_mx_1
-}
-
 resource "cloudflare_dns_record" "cloudflare_email_mx_1" {
   zone_id  = cloudflare_zone.nspehler.id
   name     = local.domain
@@ -82,11 +62,6 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_1" {
   ttl      = 3600
   proxied  = false
   priority = 95
-}
-
-moved {
-  from = cloudflare_record.cloudflare_email_mx_2
-  to   = cloudflare_dns_record.cloudflare_email_mx_2
 }
 
 resource "cloudflare_dns_record" "cloudflare_email_mx_2" {
@@ -99,11 +74,6 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_2" {
   priority = 34
 }
 
-moved {
-  from = cloudflare_record.cloudflare_email_mx_3
-  to   = cloudflare_dns_record.cloudflare_email_mx_3
-}
-
 resource "cloudflare_dns_record" "cloudflare_email_mx_3" {
   zone_id  = cloudflare_zone.nspehler.id
   name     = local.domain
@@ -112,11 +82,6 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_3" {
   ttl      = 3600
   proxied  = false
   priority = 10
-}
-
-moved {
-  from = cloudflare_record.cloudflare_email_txt
-  to   = cloudflare_dns_record.cloudflare_email_txt
 }
 
 resource "cloudflare_dns_record" "cloudflare_email_txt" {
@@ -129,11 +94,6 @@ resource "cloudflare_dns_record" "cloudflare_email_txt" {
 }
 
 # Google Search Console
-moved {
-  from = cloudflare_record.google_search_console
-  to   = cloudflare_dns_record.google_search_console
-}
-
 resource "cloudflare_dns_record" "google_search_console" {
   zone_id = cloudflare_zone.nspehler.id
   name    = local.domain
