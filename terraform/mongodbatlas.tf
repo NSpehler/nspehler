@@ -19,11 +19,6 @@ resource "mongodbatlas_database_user" "nspehler" {
   }
 }
 
-moved {
-  from = mongodbatlas_cluster.nspehler
-  to   = mongodbatlas_advanced_cluster.nspehler
-}
-
 resource "mongodbatlas_advanced_cluster" "nspehler" {
   project_id             = mongodbatlas_project.nspehler.id
   name                   = "nspehler"
