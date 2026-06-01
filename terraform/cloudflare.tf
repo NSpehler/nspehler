@@ -1,7 +1,8 @@
 resource "cloudflare_zone" "nspehler" {
-  zone = local.domain
-  plan = "free"
-  type = "full"
+  account_id = var.cloudflare_account_id
+  zone       = local.domain
+  plan       = "free"
+  type       = "full"
 }
 
 resource "cloudflare_zone_settings_override" "nspehler" {
