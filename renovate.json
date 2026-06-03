@@ -67,7 +67,8 @@
     {
       "description": "Group Node runtime + @types/node so types don't drift ahead of runtime",
       "matchPackageNames": ["node", "@types/node"],
-      "groupName": "node"
+      "groupName": "node",
+      "allowedVersions": "<25"
     },
     {
       "description": "Major updates need review — never auto-merge",
