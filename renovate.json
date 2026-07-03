@@ -80,6 +80,11 @@
       "description": "Hold ESLint at 9.x until eslint-plugin-react (via eslint-config-next) supports ESLint 10",
       "matchPackageNames": ["eslint"],
       "allowedVersions": "<10"
+    },
+    {
+      "description": "Hold graphql at 16.x until gql.tada / @0no-co/graphql.web support graphql 17 (v17 breaks `gql.tada generate schema` with a dual-instance 'from another module or realm' error)",
+      "matchPackageNames": ["graphql"],
+      "allowedVersions": "<17"
     }
   ]
 }
