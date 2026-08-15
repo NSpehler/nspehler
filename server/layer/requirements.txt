@@ -5,4 +5,4 @@ pymongo==4.17.0
 requests==2.34.2
 retrying==1.4.2
 scrapingbee==2.0.2
-slack-sdk==3.42.0
+slack-sdk==3.43.0
