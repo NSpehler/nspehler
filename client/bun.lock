@@ -6,7 +6,7 @@
       "name": "nspehler",
       "dependencies": {
         "@calcom/embed-react": "^1.5.3",
-        "@datocms/cda-client": "^0.2.10",
+        "@datocms/cda-client": "^0.3.0",
         "@datocms/cma-client": "^5.3.0",
         "@datocms/content-link": "^0.3.18",
         "@datocms/rest-client-utils": "^5.2.8",
@@ -105,7 +105,7 @@
 
     "@corex/deepmerge": ["@corex/deepmerge@4.0.43", "", {}, "sha512-N8uEMrMPL0cu/bdboEWpQYb/0i2K5Qn8eCsxzOmxSggJbbQte7ljMRoXm917AbntqTGOzdTu+vP3KOOzoC70HQ=="],
 
-    "@datocms/cda-client": ["@datocms/cda-client@0.2.10", "", { "dependencies": { "@0no-co/graphql.web": "^1.0.11" } }, "sha512-uj5M4t0ifwlxBRFdgqnt1Sb4A8RNkv1e6sYa6gP6Bh+oGQwhtnGnvyNazA4KpLhqrO2UAw3dbKB5WltcB5JeAg=="],
+    "@datocms/cda-client": ["@datocms/cda-client@0.3.0", "", { "dependencies": { "@0no-co/graphql.web": "^1.0.11" } }, "sha512-+ZgTZa/PcEWZ6o5usIj/zP2e0J1LwCw36Do+Mf3vAcMYRaBQC98mQtSzItb0Afz4kFMkO2ukykKqOD+/CovnuA=="],
 
     "@datocms/cma-client": ["@datocms/cma-client@5.7.0", "", { "dependencies": { "@datocms/rest-client-utils": "^5.7.0", "datocms-structured-text-utils": "^5.1.4", "uuid": "^11.1.1" } }, "sha512-c1Z/L+sFgNkYVLnvoJupfsusvhmirbun3gDdbvvkhyyl5n7yOcCsYXE/MK0+Rlu0kAO7w9oNYyoIwujnPCe14g=="],
 
@@ -1336,6 +1336,8 @@
     "@unrs/resolver-binding-wasm32-wasi/@emnapi/runtime": ["@emnapi/runtime@1.10.0", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-ewvYlk86xUoGI0zQRNq/mC+16R1QeDlKQy21Ki3oSYXNgLb45GV1P6A0M+/s6nyCuNDqe5VpaY84BzXGwVbwFA=="],
 
     "chromium-bidi/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
+
+    "datocms-listen/@datocms/cda-client": ["@datocms/cda-client@0.2.10", "", { "dependencies": { "@0no-co/graphql.web": "^1.0.11" } }, "sha512-uj5M4t0ifwlxBRFdgqnt1Sb4A8RNkv1e6sYa6gP6Bh+oGQwhtnGnvyNazA4KpLhqrO2UAw3dbKB5WltcB5JeAg=="],
 
     "datocms-structured-text-generic-html-renderer/datocms-structured-text-utils": ["datocms-structured-text-utils@5.1.16", "", { "dependencies": { "array-flatten": "^3.0.0" } }, "sha512-BcTB1dLtE5q+59BCb3Yu+IgNW31ivjXe1W6VaZzamtvN6KcACdoUaeCQJbJ7aOI7zz/RAZM2yDr+roN6xfzrKg=="],
 
