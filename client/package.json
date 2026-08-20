@@ -14,6 +14,7 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
+    "knip": "knip",
     "generate-schema": "dotenv -c -- bash -c 'gql.tada generate schema https://graphql.datocms.com --header \"X-Exclude-Invalid: true\" --header \"Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN\" && gql.tada generate output'",
     "prepare": "bun run generate-schema"
   },
@@ -23,7 +24,6 @@
     "@datocms/cma-client": "^5.3.0",
     "@datocms/content-link": "^0.3.18",
     "@datocms/rest-client-utils": "^5.2.8",
-    "@headlessui/react": "^2.2.10",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "classnames": "^2.5.1",
