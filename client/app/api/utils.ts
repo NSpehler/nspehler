@@ -15,14 +15,8 @@ export function withCORS(responseInit?: ResponseInit): ResponseInit {
   }
 }
 
-/**
- * Logs the real error and tells the caller nothing about it.
- *
- * These responses carry `Access-Control-Allow-Origin: *`, so whatever goes in
- * the body is readable by any origin. That ruled out both of the things this
- * used to return: a serialized error carries a stack, and `ApiError.request`
- * carries the outgoing `headers`, which is where the DatoCMS token lives.
- */
+// These responses are CORS-open, so the body must not carry stacks, request
+// headers or anything else internal.
 export function handleUnexpectedError(error: unknown) {
   if (error instanceof ApiError) {
     console.error("DatoCMS API error", {
@@ -77,10 +71,7 @@ export async function makeDraftModeWorkWithinIframes() {
     partitioned: true,
   }
 
-  // `draft.disable()` blanks the cookie rather than dropping it, so an empty
-  // value here means Draft Mode was just turned off. Re-setting it as-is would
-  // leave a live, empty partitioned cookie behind; expiring it is what actually
-  // clears the copy the browser is holding.
+  // `draft.disable()` blanks the cookie rather than dropping it.
   if (!value) {
     store.set({ ...attributes, value: "", maxAge: 0 })
     return
@@ -89,21 +80,10 @@ export async function makeDraftModeWorkWithinIframes() {
   store.set({ ...attributes, value })
 }
 
-/**
- * Base used only to resolve candidate redirect targets. Its host is what a
- * same-origin path must still resolve to, so it has to be a name nothing can
- * legitimately reach.
- */
 const RELATIVE_URL_BASE = "http://relative.invalid"
 
-/**
- * True only when `path` stays on our own origin once a browser resolves it.
- *
- * Rejecting strings that parse as absolute URLs is not enough: `//evil.com`,
- * `/\evil.com` and a leading-whitespace variant all fail to parse on their own
- * yet resolve to another origin, which made this an open redirect. Resolving
- * against a fixed base and comparing the origin is what browsers actually do.
- */
+// Resolve like a browser would: `//evil.com` and `/\evil.com` do not parse as
+// absolute URLs on their own, but they do leave the origin.
 export function isRelativeUrl(path: string): boolean {
   try {
     return new URL(path, RELATIVE_URL_BASE).origin === RELATIVE_URL_BASE
@@ -112,14 +92,7 @@ export function isRelativeUrl(path: string): boolean {
   }
 }
 
-/**
- * Constant-time check of a caller-supplied token against `SECRET_API_TOKEN`.
- *
- * Hashing both sides first keeps the buffers the same length, so the comparison
- * cannot leak the secret's length, and `timingSafeEqual` keeps it from leaking
- * the matching prefix. Fails closed when either side is missing, so an unset
- * secret rejects every caller rather than accepting one.
- */
+// Hashed first because `timingSafeEqual` needs equal-length buffers.
 export function matchesSecretToken(token: string | null | undefined): boolean {
   const secret = process.env.SECRET_API_TOKEN
 
