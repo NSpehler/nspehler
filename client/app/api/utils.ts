@@ -89,17 +89,26 @@ export async function makeDraftModeWorkWithinIframes() {
   store.set({ ...attributes, value })
 }
 
+/**
+ * Base used only to resolve candidate redirect targets. Its host is what a
+ * same-origin path must still resolve to, so it has to be a name nothing can
+ * legitimately reach.
+ */
+const RELATIVE_URL_BASE = "http://relative.invalid"
+
+/**
+ * True only when `path` stays on our own origin once a browser resolves it.
+ *
+ * Rejecting strings that parse as absolute URLs is not enough: `//evil.com`,
+ * `/\evil.com` and a leading-whitespace variant all fail to parse on their own
+ * yet resolve to another origin, which made this an open redirect. Resolving
+ * against a fixed base and comparing the origin is what browsers actually do.
+ */
 export function isRelativeUrl(path: string): boolean {
   try {
-    new URL(path)
-    return false
+    return new URL(path, RELATIVE_URL_BASE).origin === RELATIVE_URL_BASE
   } catch {
-    try {
-      new URL(path, "http://example.com")
-      return true
-    } catch {
-      return false
-    }
+    return false
   }
 }
 
