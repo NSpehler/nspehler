@@ -4,7 +4,6 @@ import type { NextRequest, NextResponse } from "next/server"
 import {
   handleUnexpectedError,
   invalidRequestResponse,
-  matchesSecretToken,
   successfulResponse,
 } from "../utils"
 
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const authorization = request.headers.get("Authorization")
     const token = authorization?.split(" ")[1]
 
-    if (!matchesSecretToken(token)) {
+    if (!token || token !== process.env.SECRET_API_TOKEN) {
       return invalidRequestResponse("Invalid token", 401)
     }
 
