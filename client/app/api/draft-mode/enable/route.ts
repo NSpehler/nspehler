@@ -6,6 +6,7 @@ import {
   invalidRequestResponse,
   isRelativeUrl,
   makeDraftModeWorkWithinIframes,
+  matchesSecretToken,
 } from "../../utils"
 
 export const dynamic = "force-dynamic"
@@ -20,7 +21,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const redirectTo = request.nextUrl.searchParams.get("redirect") || "/"
 
   try {
-    if (token !== process.env.SECRET_API_TOKEN) {
+    if (!matchesSecretToken(token)) {
       return invalidRequestResponse("Invalid token", 401)
     }
 
