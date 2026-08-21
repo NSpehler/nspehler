@@ -37,8 +37,7 @@
     "next-themes": "^0.4.6",
     "react": "^19.2.5",
     "react-datocms": "^8.0.0",
-    "react-dom": "^19.2.5",
-    "serialize-error": "^13.0.1"
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
     "@0no-co/graphqlsp": "^1.15.2",

@@ -4,7 +4,7 @@ import type { NextRequest, NextResponse } from "next/server"
 import {
   handleUnexpectedError,
   invalidRequestResponse,
-  isRelativeUrl,
+  isSafeRedirectUrl,
   makeDraftModeWorkWithinIframes,
 } from "../../utils"
 
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const redirectTo = request.nextUrl.searchParams.get("redirect") || "/"
 
   try {
-    if (!isRelativeUrl(redirectTo)) {
+    if (!isSafeRedirectUrl(redirectTo, new URL(request.url))) {
       return invalidRequestResponse("URL must be relative!", 422)
     }
 

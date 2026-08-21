@@ -1,7 +1,6 @@
 import { ApiError } from "@datocms/cma-client"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
-import { serializeError } from "serialize-error"
 
 export function withCORS(responseInit?: ResponseInit): ResponseInit {
   return {
@@ -15,22 +14,20 @@ export function withCORS(responseInit?: ResponseInit): ResponseInit {
   }
 }
 
+// These responses are CORS-open, so the body must not carry stacks, request
+// headers or anything else internal.
 export function handleUnexpectedError(error: unknown) {
-  console.error(error)
-
   if (error instanceof ApiError) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: error.message,
-        request: error.request,
-        response: error.response,
-      },
-      withCORS({ status: 500 }),
-    )
+    console.error("DatoCMS API error", {
+      message: error.message,
+      status: error.response?.status,
+      url: error.request?.url,
+    })
+  } else {
+    console.error(error)
   }
 
-  return invalidRequestResponse(serializeError(error), 500)
+  return invalidRequestResponse("Internal server error", 500)
 }
 
 export function invalidRequestResponse(error: unknown, status = 422) {
@@ -61,37 +58,45 @@ export function successfulResponse(data?: unknown, status = 200) {
  * https://developers.google.com/privacy-sandbox/3pcd/chips
  */
 export async function makeDraftModeWorkWithinIframes() {
-  const cookie = (await cookies()).get("__prerender_bypass")!
+  const store = await cookies()
+  const value = store.get("__prerender_bypass")?.value
 
-  ;(await cookies()).set({
+  const attributes = {
     name: "__prerender_bypass",
-    value: cookie?.value,
     httpOnly: true,
     path: "/",
     secure: true,
-    sameSite: "none",
+    sameSite: "none" as const,
     partitioned: true,
-  })
+  }
+
+  // `draft.disable()` blanks the cookie rather than dropping it.
+  if (!value) {
+    store.set({ ...attributes, value: "", maxAge: 0 })
+    return
+  }
+
+  store.set({ ...attributes, value })
 }
 
 /**
- * Base used only to resolve candidate redirect targets. Its host is what a
- * same-origin path must still resolve to, so it has to be a name nothing can
- * legitimately reach.
- */
-const RELATIVE_URL_BASE = "http://relative.invalid"
-
-/**
- * True only when `path` stays on our own origin once a browser resolves it.
+ * Determine whether a user-supplied redirect target is safe to follow — i.e. it
+ * points to the same host as the current request.
  *
- * Rejecting strings that parse as absolute URLs is not enough: `//evil.com`,
- * `/\evil.com` and a leading-whitespace variant all fail to parse on their own
- * yet resolve to another origin, which made this an open redirect. Resolving
- * against a fixed base and comparing the origin is what browsers actually do.
+ * This guards against open-redirect attacks. A naive `url.startsWith('http')`
+ * check — and even a plain "is it a relative URL?" check — fails to catch
+ * protocol-relative targets like `//evil.com` or backslash variants like
+ * `/\evil.com`, both of which browsers happily send off-site.
+ *
+ * Instead, we resolve the candidate against the current request URL and require
+ * the resulting hostname to match. Relative paths (`/foo`, `/a?b=1#c`) resolve
+ * to the same host and pass; anything that escapes to another host — or fails to
+ * parse — is rejected. The scheme is irrelevant: we only compare hostnames.
  */
-export function isRelativeUrl(path: string): boolean {
+export function isSafeRedirectUrl(candidate: string, requestUrl: URL): boolean {
   try {
-    return new URL(path, RELATIVE_URL_BASE).origin === RELATIVE_URL_BASE
+    const target = new URL(candidate, requestUrl)
+    return target.hostname === requestUrl.hostname
   } catch {
     return false
   }
