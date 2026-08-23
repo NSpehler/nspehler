@@ -146,13 +146,12 @@ resource "aws_iam_instance_profile" "vpn_proxy" {
 }
 
 data "aws_ami" "ubuntu" {
-  provider    = aws.us-east-1
-  most_recent = true
-  owners      = ["099720109477"]
+  provider = aws.us-east-1
+  owners   = ["099720109477"]
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20260731"]
   }
 }
 
