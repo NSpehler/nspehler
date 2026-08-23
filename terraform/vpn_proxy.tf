@@ -145,8 +145,6 @@ resource "aws_iam_instance_profile" "vpn_proxy" {
   role = aws_iam_role.vpn_proxy.name
 }
 
-# Pinned to an exact image: with most_recent a new Canonical release would
-# replace the instance during an unrelated change. Bump to rebuild on purpose.
 data "aws_ami" "ubuntu" {
   provider = aws.us-east-1
   owners   = ["099720109477"]
