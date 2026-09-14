@@ -83,6 +83,11 @@
       "description": "Hold ESLint at 9.x until eslint-plugin-react (via eslint-config-next) supports ESLint 10",
       "matchPackageNames": ["eslint"],
       "allowedVersions": "<10"
+    },
+    {
+      "description": "Hold Bun at 1.3.x: Bun 1.4 writes version 2 lockfiles, which Bun 1.3.14 cannot read",
+      "matchPackageNames": ["bun"],
+      "allowedVersions": "<1.4.0"
     }
   ]
 }
