@@ -305,6 +305,10 @@
     [data-page] {
       view-transition-name: none !important;
     }
+
+    html[data-navigated] [data-page] {
+      transition: opacity var(--vt-enter) ease-out;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
