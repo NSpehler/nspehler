@@ -10,7 +10,14 @@ type Props = {
   className?: string
 }
 
-const landscape = ({ src }: ShotData) => src.width / src.height > 1.4
+const insets = {
+  wide: "[--inset:80%] [--shot:16/10]",
+  narrow: "[--inset:48.3%] [--shot:309/320]",
+  tall: "[--inset:54.69%] [--shot:350/502]",
+}
+
+const inset = ({ src }: ShotData, tall: boolean) =>
+  insets[tall ? "tall" : src.width / src.height < 1.2 ? "narrow" : "wide"]
 
 const Bleed = ({ shot, size }: { shot: ShotData; size: string }) => (
   <Figure caption={shot.caption}>
@@ -40,21 +47,16 @@ const Half = ({ shot, tall }: { shot: ShotData; tall: boolean }) => (
   <Figure caption={shot.caption}>
     <Mat
       className={cn(
-        "rounded-[14px] [--inset:80%] [--shot:16/10] md:rounded-mat",
+        "rounded-[14px] md:rounded-mat",
         tall ? "aspect-[8/7]" : "aspect-[16/11] md:aspect-[16/10]",
+        inset(shot, tall),
       )}
     >
       <Shot
         shot={shot}
         sizes={sizes.card}
-        className={cn(
-          "rounded-[7px] md:rounded-inset",
-          landscape(shot) ? "w-(--inset)" : tall ? "h-[89.6%]" : "h-[80%]",
-        )}
-        imageClassName={cn(
-          "rounded-[inherit] object-cover object-top shadow-shot-xs md:shadow-shot-md",
-          landscape(shot) ? "aspect-(--shot) w-full" : "h-full w-auto",
-        )}
+        className="w-(--inset) rounded-[7px] md:rounded-inset"
+        imageClassName="aspect-(--shot) w-full rounded-[inherit] object-cover object-top shadow-shot-xs md:shadow-shot-md"
       />
     </Mat>
   </Figure>

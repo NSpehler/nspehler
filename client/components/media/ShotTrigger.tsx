@@ -25,7 +25,7 @@ export const ShotTrigger = ({ shot, sizes, className, children }: Props) => {
       onClick={() => open(index)}
       aria-label={`Open ${inlineText(shot.caption)}`}
       className={cn(
-        "block cursor-zoom-in rounded-[inherit] p-0 text-left outline-offset-4",
+        "block cursor-zoom-in p-0 text-left outline-offset-4",
         className,
       )}
     >
