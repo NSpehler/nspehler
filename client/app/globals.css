@@ -116,8 +116,7 @@
     0 0 0 1px var(--paper-front-ring), 0 2px 4px var(--paper-front-lift),
     0 22px 44px -20px var(--paper-front-shadow);
   --shadow-play: 0 10px 30px -10px var(--play-shadow);
-  --shadow-avatar: 0 0 0 4px var(--avatar-ring);
-  --shadow-halo: 0 0 0 4px var(--accent-halo);
+  --shadow-avatar: 0 0 0 1px var(--avatar-ring);
   --drop-shadow-phone: 0 26px 34px var(--phone-drop);
 }
 
@@ -129,8 +128,7 @@
     --phone-ring: rgb(0 0 0 / 0.08);
     --phone-lift: rgb(0 0 0 / 0.06);
     --phone-drop: rgb(0 0 0 / 0.2);
-    --avatar-ring: rgb(0 0 0 / 0.05);
-    --accent-halo: rgb(31 157 85 / 0.14);
+    --avatar-ring: rgb(0 0 0 / 0.1);
     --paper-ring: rgb(0 0 0 / 0.06);
     --paper-lift: rgb(0 0 0 / 0.03);
     --paper-shadow: rgb(0 0 0 / 0.18);
@@ -169,8 +167,7 @@
     --phone-ring: rgb(255 255 255 / 0.1);
     --phone-lift: rgb(0 0 0 / 0.4);
     --phone-drop: rgb(0 0 0 / 0.55);
-    --avatar-ring: rgb(255 255 255 / 0.08);
-    --accent-halo: rgb(34 197 94 / 0.16);
+    --avatar-ring: rgb(255 255 255 / 0.14);
     --paper-ring: rgb(255 255 255 / 0.1);
     --paper-lift: rgb(0 0 0 / 0.3);
     --paper-shadow: rgb(0 0 0 / 0.55);

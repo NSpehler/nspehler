@@ -16,7 +16,7 @@ export const Figure = ({ caption, className, children }: Props) => (
     <figcaption className="caption">
       <Inline
         text={caption}
-        linkClassName="text-ink underline decoration-separator underline-offset-[3px]"
+        linkClassName="text-ink underline decoration-separator underline-offset-[5px]"
       />
     </figcaption>
   </figure>
