@@ -54,7 +54,7 @@ export const payfit = {
     src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/payfit-brand.mp4",
     poster: {
       src: filmPoster,
-      alt: "The Payfit brand film: All your people, over a man talking at a table",
+      alt: "The Payfit brand film: two men talking at a table in a restaurant",
     },
     title: "the Payfit brand film",
     duration: "2 minutes",

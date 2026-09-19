@@ -50,7 +50,7 @@ export const goalgetr = {
     src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/goalgetr-AFEMBru81QZXu5jfOgLuA3GvrEnFPx.mp4",
     poster: {
       src: filmPoster,
-      alt: "The goalGetr brand film, on its first frame",
+      alt: "The goalGetr brand film: the wordmark over a hiker on a cliff above a fjord",
     },
     title: "the goalGetr brand film",
     duration: "1 minute",
