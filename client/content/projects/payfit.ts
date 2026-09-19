@@ -1,6 +1,7 @@
 import ai from "@/images/projects/payfit/ai.webp"
 import article from "@/images/projects/payfit/article.webp"
 import blog from "@/images/projects/payfit/blog.webp"
+import brandBoard from "@/images/projects/payfit/brand-board.webp"
 import filmPoster from "@/images/projects/payfit/film-poster.webp"
 import home from "@/images/projects/payfit/home.webp"
 import identity from "@/images/projects/payfit/identity.webp"
@@ -50,13 +51,13 @@ export const payfit = {
     "I first worked with Payfit in 2019, leading the Growth Engineering team. For the relaunch, I was part of the team that built the new website with Astro and DatoCMS.",
   ],
   video: {
-    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/payfit-f2Bp6azdcoa9ZK8pG6ZoUyg35xvSvN.mp4",
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/payfit-brand.mp4",
     poster: {
       src: filmPoster,
-      alt: "The Payfit website film, on its first frame",
+      alt: "The Payfit brand film: All your people, over a man talking at a table",
     },
-    title: "the Payfit website film",
-    duration: "37 seconds",
+    title: "the Payfit brand film",
+    duration: "2 minutes",
   },
   blocks: [
     {
@@ -124,7 +125,7 @@ export const payfit = {
       frame: "mat",
       shot: {
         src: pricing,
-        alt: "Pricing: compare the Paie, Paie avancée and RH+ plans, with totals for the team size",
+        alt: "Pricing: compare the Payroll, Advanced payroll and HR+ plans, with totals for the team size",
         caption: "Pricing",
       },
     },
@@ -145,6 +146,15 @@ export const payfit = {
       ],
     },
     {
+      type: "figure",
+      frame: "bleed",
+      shot: {
+        src: brandBoard,
+        alt: "Payfit’s new identity: the Heartbreak Eighties typeface, neutral, yellow, pink and blue colors, team photography and a line illustration",
+        caption: "Type and colors of the new identity",
+      },
+    },
+    {
       type: "ledger",
       rows: [
         { label: "Website", value: "Astro, React" },
@@ -153,7 +163,7 @@ export const payfit = {
         { label: "Languages", value: "English, French and Spanish" },
         { label: "Hosting", value: "AWS Amplify" },
         { label: "Infrastructure", value: "Terraform" },
-        { label: "Continuous integration", value: "CircleCI" },
+        { label: "CI", value: "CircleCI" },
       ],
     },
   ],
