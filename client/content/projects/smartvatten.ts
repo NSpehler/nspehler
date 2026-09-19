@@ -4,7 +4,13 @@ import advisorCurrent from "@/images/projects/smartvatten/advisor-current.webp"
 import advisorData from "@/images/projects/smartvatten/advisor-data.webp"
 import advisorPlans from "@/images/projects/smartvatten/advisor-plans.webp"
 import advisorPropertyTypes from "@/images/projects/smartvatten/advisor-property-types.webp"
+import article from "@/images/projects/smartvatten/article.webp"
 import caseStudies from "@/images/projects/smartvatten/case-studies.webp"
+import cmsArticle from "@/images/projects/smartvatten/cms-article.webp"
+import cmsBlocks from "@/images/projects/smartvatten/cms-blocks.webp"
+import cmsBlog from "@/images/projects/smartvatten/cms-blog.webp"
+import cmsHome from "@/images/projects/smartvatten/cms-home.webp"
+import cmsHub from "@/images/projects/smartvatten/cms-hub.webp"
 import efficiency from "@/images/projects/smartvatten/efficiency.webp"
 import home from "@/images/projects/smartvatten/home.webp"
 import hub from "@/images/projects/smartvatten/hub.webp"
@@ -47,7 +53,7 @@ export const smartvatten = {
   },
   overview: [
     "Smartvatten is a European water intelligence platform for property portfolios and utilities. Its meters, sensors and software show where water goes, so leaks are caught early and consumption comes down.",
-    "In 2025 and 2026, I built two products for their teams: the Solutions Advisor, which turns a first sales meeting into a guided assessment, and a new website their marketers run without a developer.",
+    "In 2025 and 2026, I built two products for their teams: the Solutions Advisor, which turns a first sales meeting into a guided assessment, and the new smartvatten.com, which presents the platform to property owners and utilities in six languages.",
   ],
   blocks: [
     {
@@ -138,8 +144,8 @@ export const smartvatten = {
       type: "chapter",
       number: 5,
       name: "Website",
-      headline: ["A new website,", "the marketing team runs on its own."],
-      body: "In 2026, I rebuilt smartvatten.com on Next.js and DatoCMS, so the marketing team can create and edit pages without waiting on a developer.",
+      headline: ["One website for the whole platform,", "in six languages."],
+      body: "In 2026, I rebuilt smartvatten.com with Next.js and DatoCMS: product pages like the HUB, a page for each solution, case studies filtered by industry and a blog with articles for every audience.",
     },
     {
       type: "figures",
@@ -158,12 +164,28 @@ export const smartvatten = {
       ],
     },
     {
+      type: "figures",
+      frame: "mat",
+      shots: [
+        {
+          src: caseStudies,
+          alt: "Case studies, filtered by industry: investors, logistics, offices, hospitality, retail and more",
+          caption: "Case studies",
+        },
+        {
+          src: article,
+          alt: "Blog article: a sustainability manager’s guide to reducing CO₂ emissions from water use",
+          caption: "Blog article",
+        },
+      ],
+    },
+    {
       type: "cards",
       heading: "What I built",
       columns: 2,
       items: [
         {
-          title: "A library of about 40 sections",
+          title: "A library of about 40 reusable sections",
           body: "Heroes, feature grids, pricing tables, FAQs, testimonials and forms, so the team can build a landing page on its own.",
         },
         {
@@ -184,10 +206,42 @@ export const smartvatten = {
       type: "figure",
       frame: "mat",
       shot: {
-        src: caseStudies,
-        alt: "Case studies, filtered by industry: investors, logistics, offices, hospitality, retail and more",
-        caption: "Case studies",
+        src: cmsBlocks,
+        alt: "The section blocks in DatoCMS, from hero and stats sections to feature tabs, FAQs and calls to action, with the fields of the content section",
+        caption: "The library of sections in DatoCMS",
       },
+    },
+    {
+      type: "figures",
+      frame: "mat",
+      shots: [
+        {
+          src: cmsHome,
+          alt: "The home page in DatoCMS: its sections in order, a tab for each language and the live preview",
+          caption: "The home page, section by section",
+        },
+        {
+          src: cmsHub,
+          alt: "The Smartvatten HUB page in DatoCMS, built from hero, content, accordion, feature grid and callout sections",
+          caption: "The HUB page",
+        },
+      ],
+    },
+    {
+      type: "figures",
+      frame: "mat",
+      shots: [
+        {
+          src: cmsBlog,
+          alt: "The article collection in DatoCMS, with articles in English, Finnish, Norwegian and Swedish",
+          caption: "Articles, in every language",
+        },
+        {
+          src: cmsArticle,
+          alt: "An article in DatoCMS, with its slug, image, category and audience",
+          caption: "An article, with its category and audience",
+        },
+      ],
     },
     {
       type: "ledger",
