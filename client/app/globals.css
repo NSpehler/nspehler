@@ -22,6 +22,9 @@
   --color-selected: #f5f5f5;
   --color-accent: #1f9d55;
   --color-bleed: rgb(0 0 0 / 0.06);
+  --color-frost: rgb(255 255 255 / 0.4);
+
+  --blur-frost: 12px;
 
   --container-page: 90rem;
 
@@ -161,6 +164,8 @@
     --color-selected: #262626;
     --color-accent: #22c55e;
     --color-bleed: rgb(255 255 255 / 0.1);
+    --color-frost: rgb(0 0 0 / 0.75);
+    --blur-frost: 20px;
     --shot-ring: rgb(255 255 255 / 0.1);
     --shot-halo: rgb(255 255 255 / 0.04);
     --shot-shadow: rgb(0 0 0 / 0.65);
