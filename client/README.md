@@ -1,6 +1,6 @@
 # nspehler.com
 
-The source of [nspehler.com](https://nspehler.com), the portfolio of Nicolas Spehler: a home page of selected projects, nine case studies, an about page, a research paper and a contact page.
+The source of [nspehler.com](https://nspehler.com), the portfolio of Nicolas Spehler: a home page of featured projects, nine case studies, an about page, a research paper and a contact page.
 
 ## Stack
 

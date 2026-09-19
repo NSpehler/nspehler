@@ -21,10 +21,10 @@ export default function Page() {
         <Hero />
         <section
           id="projects"
-          aria-label="Selected projects"
+          aria-label="Featured projects"
           className="flex flex-col gap-4 md:gap-6"
         >
-          <Eyebrow>Selected projects</Eyebrow>
+          <Eyebrow>Featured projects</Eyebrow>
           <div className="grid gap-y-12 md:grid-cols-2 md:gap-x-8 md:gap-y-18">
             {home.featured.map((slug, index) => (
               <ProjectCard
