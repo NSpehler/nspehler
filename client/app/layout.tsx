@@ -54,7 +54,11 @@ export default function RootLayout({ children }: Props) {
   const content = (
     <div className="mx-auto flex min-h-dvh w-full max-w-page flex-col px-5 md:px-16">
       <Header />
-      <main id="main" tabIndex={-1} className="flex-1 outline-none">
+      <main
+        id="main"
+        tabIndex={-1}
+        className="flex-1 pb-12 outline-none md:pb-18"
+      >
         {children}
       </main>
       <Footer />

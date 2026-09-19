@@ -87,7 +87,7 @@ export const Header = () => {
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
-            className="truncate text-lg font-medium tracking-[-0.02em] lg:text-[30px]/[1.2] lg:tracking-[-0.025em]"
+            className="truncate text-lg font-medium tracking-[-0.02em] transition-colors duration-150 motion-reduce:transition-none lg:text-[30px]/[1.2] lg:tracking-[-0.025em]"
           >
             {site.name}
           </Link>

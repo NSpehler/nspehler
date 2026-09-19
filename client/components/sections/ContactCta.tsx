@@ -5,7 +5,7 @@ import { site } from "@/content/site"
 
 export const ContactCta = () => (
   <section id="contact" aria-label="Contact" className="ruled">
-    <div className="flex flex-col gap-6 pb-12 md:gap-10 md:pt-2 md:pb-18">
+    <div className="flex flex-col gap-6 md:gap-10 md:pt-2">
       <Headline
         as="p"
         text={site.cta.headline}

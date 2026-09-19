@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <PageTransition>
-      <section className="flex flex-col gap-6 pt-10 pb-24 md:gap-10 md:pt-22 md:pb-40">
+      <section className="flex flex-col gap-6 pt-10 pb-12 md:gap-10 md:pt-22 md:pb-22">
         <Eyebrow>404</Eyebrow>
         <Headline
           as="h1"
