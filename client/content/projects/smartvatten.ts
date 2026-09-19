@@ -206,10 +206,6 @@ export const smartvatten = {
         { label: "Data", value: "MongoDB" },
         { label: "Charts", value: "Recharts, React Flow" },
         { label: "Forms", value: "Salesforce, HubSpot, Cloudflare Turnstile" },
-        {
-          label: "Languages",
-          value: "English, Norwegian, Swedish, Finnish, Dutch and German",
-        },
         { label: "Hosting", value: "Vercel" },
       ],
     },

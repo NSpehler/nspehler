@@ -160,7 +160,6 @@ export const payfit = {
         { label: "Website", value: "Astro, React" },
         { label: "Styling", value: "Tailwind CSS" },
         { label: "Content", value: "DatoCMS, with a shared library of blocks" },
-        { label: "Languages", value: "English, French and Spanish" },
         { label: "Hosting", value: "AWS Amplify" },
         { label: "Infrastructure", value: "Terraform" },
         { label: "CI", value: "CircleCI" },
