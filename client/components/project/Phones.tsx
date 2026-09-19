@@ -22,7 +22,7 @@ export const Phones = ({ block: { shots }, className }: Props) => {
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-4 md:gap-8",
+        "grid gap-8 md:grid-cols-2",
         !pair && "lg:grid-cols-4",
         className,
       )}
