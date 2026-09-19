@@ -1,24 +1,17 @@
-import { stripStega } from "@datocms/content-link"
-import { isEmptyDocument } from "datocms-structured-text-utils"
 import { ArrowUpRightIcon } from "lucide-react"
-import { type CdaStructuredTextValue, StructuredText } from "react-datocms"
 
-type Item = {
-  title: string
-  link: string
-  _createdAt: string
-  content: CdaStructuredTextValue | null
-}
+import { ScreenshotStrip } from "@/components/portfolio"
+import type { Entry } from "@/content/types"
 
 type Props = {
-  item: Item
+  item: Entry
 }
 
 export const ListItem = ({ item }: Props) => (
   <li className="grid gap-2 py-8">
     <div className="flex items-baseline justify-between gap-3">
       <a
-        href={item.link}
+        href={item.url}
         target="_blank"
         rel="noopener noreferrer"
         className="group inline-flex items-center gap-1 text-xl font-medium text-neutral-900 transition-colors hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
@@ -30,15 +23,22 @@ export const ListItem = ({ item }: Props) => (
         />
       </a>
       <span className="shrink-0 text-xl font-medium text-neutral-300 tabular-nums dark:text-neutral-500">
-        {item._createdAt.split("-")[0]}
+        {item.year}
       </span>
     </div>
-    {item.content && !isEmptyDocument(stripStega(item.content)) && (
-      <div
-        className="prose prose-lg dark:prose-invert"
-        data-datocms-content-link-group
-      >
-        <StructuredText data={item.content} />
+    <div className="prose prose-lg dark:prose-invert">
+      <p>{item.description}</p>
+      {item.highlights && (
+        <ul>
+          {item.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+    {item.screenshots && (
+      <div className="mt-4">
+        <ScreenshotStrip title={item.title} shots={item.screenshots} />
       </div>
     )}
   </li>

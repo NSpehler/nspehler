@@ -4,32 +4,25 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
+import { site } from "@/content/site"
 import { formatCoordinates } from "@/lib/coordinates"
-import { HeaderFragment } from "@/lib/datocms/commonFragments"
-import { type FragmentOf, readFragment } from "@/lib/datocms/graphql"
 import { useReducedMotion } from "@/lib/hooks"
-import { linkResolver } from "@/lib/linkResolver"
 import { cn } from "@/lib/utils"
-
-type Props = {
-  data: FragmentOf<typeof HeaderFragment>
-}
 
 type Underline = { left: number; width: number; visible: boolean }
 
 const HIDDEN: Underline = { left: 0, width: 0, visible: false }
 
-export const Header = ({ data }: Props) => {
-  const header = readFragment(HeaderFragment, data)
+const coordinates = formatCoordinates({
+  lat: site.location.latitude,
+  lng: site.location.longitude,
+})
+
+export const Header = () => {
   const pathname = usePathname()
 
-  const coordinates = formatCoordinates({
-    lat: header.location.latitude,
-    lng: header.location.longitude,
-  })
-
-  const isActive = (slug: string | null | undefined) =>
-    (slug && pathname.includes(slug)) || (!slug && pathname === "/")
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href)
 
   const linkRefs = useRef<Array<HTMLAnchorElement | null>>([])
   const [underline, setUnderline] = useState<Underline>(HIDDEN)
@@ -39,9 +32,7 @@ export const Header = ({ data }: Props) => {
   const animateUnderline = animate && !reducedMotion
 
   const measure = () => {
-    const activeIndex = header.links.findIndex((item) =>
-      isActive("slug" in item.link ? item.link.slug : undefined),
-    )
+    const activeIndex = site.navigation.findIndex((item) => isActive(item.href))
     const el = linkRefs.current[activeIndex]
     setUnderline(
       el
@@ -107,7 +98,7 @@ export const Header = ({ data }: Props) => {
                 onClick={() => setMenuOpen(false)}
                 className="block text-2xl font-medium tracking-tight text-neutral-900 md:text-3xl dark:text-white"
               >
-                {header.title}
+                {site.name}
               </Link>
               <span className="block truncate text-2xl font-medium text-neutral-300 tabular-nums md:text-3xl dark:text-neutral-600">
                 {coordinates}
@@ -135,17 +126,15 @@ export const Header = ({ data }: Props) => {
             aria-label="Navigation"
             className="relative hidden border-b border-neutral-200 md:flex md:gap-8 dark:border-neutral-800"
           >
-            {header.links.map((item, index) => {
-              const active = isActive(
-                "slug" in item.link ? item.link.slug : undefined,
-              )
+            {site.navigation.map((item, index) => {
+              const active = isActive(item.href)
               return (
                 <Link
                   ref={(el) => {
                     linkRefs.current[index] = el
                   }}
                   key={item.title}
-                  href={linkResolver(item.link)}
+                  href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "inline-flex items-center pb-5 text-base font-medium transition-colors",
@@ -185,17 +174,15 @@ export const Header = ({ data }: Props) => {
             aria-modal="true"
             aria-label="Navigation"
             aria-hidden={!menuOpen}
-            className="min-h-0 flex-1 overflow-y-auto mask-[linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%-2rem),transparent_100%)] pt-6 pb-12 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
+            className="min-h-0 flex-1 [scrollbar-width:none] overflow-y-auto mask-[linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%-2rem),transparent_100%)] pt-6 pb-12 md:hidden [&::-webkit-scrollbar]:hidden"
           >
             <ul className="flex flex-col gap-6">
-              {header.links.map((item) => {
-                const active = isActive(
-                  "slug" in item.link ? item.link.slug : undefined,
-                )
+              {site.navigation.map((item) => {
+                const active = isActive(item.href)
                 return (
                   <li key={item.title}>
                     <Link
-                      href={linkResolver(item.link)}
+                      href={item.href}
                       onClick={() => setMenuOpen(false)}
                       aria-current={active ? "page" : undefined}
                       className={cn(

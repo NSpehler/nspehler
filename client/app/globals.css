@@ -87,4 +87,9 @@ body {
       overflow: hidden;
     }
   }
+
+  /* Freeze the page behind the screenshot lightbox. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
 }

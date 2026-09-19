@@ -1,76 +1,41 @@
-import {
-  ContentLink,
-  Footer,
-  Header,
-  Layout,
-  ThemeProvider,
-} from "@/components/layout"
-import {
-  FooterFragment,
-  HeaderFragment,
-  TagFragment,
-} from "@/lib/datocms/commonFragments"
-import { executeQuery } from "@/lib/datocms/executeQuery"
-import { generateMetadataFn } from "@/lib/datocms/generateMetadataFn"
-import { graphql } from "@/lib/datocms/graphql"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import type { Metadata } from "next"
 import PlausibleProvider from "next-plausible"
-import { draftMode } from "next/headers"
 import type { ReactNode } from "react"
+
+import { Footer, Header, Layout, ThemeProvider } from "@/components/layout"
+import { about } from "@/content/about"
+import { site } from "@/content/site"
 
 import "./globals.css"
 
-const query = graphql(
-  `
-    query LayoutQuery {
-      _site {
-        faviconMetaTags {
-          ...TagFragment
-        }
-      }
-      header {
-        ...HeaderFragment
-      }
-      footer {
-        ...FooterFragment
-      }
-    }
-  `,
-  [TagFragment, HeaderFragment, FooterFragment],
-)
-
-export const generateMetadata = generateMetadataFn({
-  query,
-  pickSeoMetaTags: (data) => data._site.faviconMetaTags,
-  additionalMetadata: () => ({
-    metadataBase: process.env.NEXT_PUBLIC_APP_URL
-      ? new URL(process.env.NEXT_PUBLIC_APP_URL)
-      : undefined,
-    alternates: { canonical: "./" },
-  }),
-})
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${about.title} | ${site.name}`,
+    template: `%s | ${site.name}`,
+  },
+  description: site.description,
+  alternates: { canonical: "./" },
+  openGraph: { type: "website", siteName: site.name, locale: "en" },
+  twitter: { card: "summary", site: site.twitter },
+}
 
 type Props = {
   children: ReactNode
 }
 
-export default async function RootLayout({ children }: Props) {
-  const { isEnabled: isDraftModeEnabled } = await draftMode()
-  const { header, footer } = await executeQuery(query, {
-    includeDrafts: isDraftModeEnabled,
-  })
-
+export default function RootLayout({ children }: Props) {
   const plausibleSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_SRC
 
   const content = (
     <>
-      {header && <Header data={header} />}
+      <Header />
       <div className="mx-auto max-w-5xl px-5 md:px-8">
         <Layout>{children}</Layout>
-        {footer && <Footer data={footer} />}
+        <Footer />
       </div>
-      {isDraftModeEnabled && <ContentLink />}
     </>
   )
 

@@ -1,15 +1,14 @@
-import { generatePageComponentAndMetadataFn } from "@/lib/datocms/realtime/generatePageComponentAndMetadataFn"
-import dynamic from "next/dynamic"
+import { SelectedWork } from "@/components/portfolio"
+import { StructuredData } from "@/components/utils"
+import { about } from "@/content/about"
 
-import Content from "./Content"
-import { query } from "./common"
-
-const { Page, generateMetadataFn } = generatePageComponentAndMetadataFn({
-  query,
-  pickSeoMetaTags: ({ page }) => page?._seoMetaTags,
-  contentComponent: Content,
-  realtimeComponent: dynamic(() => import("./RealTime")),
-})
-
-export const generateMetadata = generateMetadataFn
-export default Page
+export default function HomePage() {
+  return (
+    <>
+      <StructuredData id="person" data={about.structuredData} />
+      <h1 className="sr-only">{about.title}</h1>
+      <div className="prose prose-xl dark:prose-invert">{about.content}</div>
+      <SelectedWork />
+    </>
+  )
+}

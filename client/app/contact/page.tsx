@@ -1,15 +1,20 @@
-import { generatePageComponentAndMetadataFn } from "@/lib/datocms/realtime/generatePageComponentAndMetadataFn"
-import dynamic from "next/dynamic"
+import { CalEmbed, StructuredData } from "@/components/utils"
+import { contact } from "@/content/contact"
+import { pageMetadata } from "@/lib/metadata"
 
-import Content from "./Content"
-import { query } from "./common"
+export const metadata = pageMetadata(contact)
 
-const { Page, generateMetadataFn } = generatePageComponentAndMetadataFn({
-  query,
-  pickSeoMetaTags: ({ page }) => page?._seoMetaTags,
-  contentComponent: Content,
-  realtimeComponent: dynamic(() => import("./RealTime")),
-})
-
-export const generateMetadata = generateMetadataFn
-export default Page
+export default function ContactPage() {
+  return (
+    <>
+      <StructuredData id="contact" data={contact.structuredData} />
+      <h1 className="sr-only">{contact.title}</h1>
+      <div className="grid gap-8 md:gap-12">
+        <div className="prose prose-xl dark:prose-invert">
+          {contact.content}
+        </div>
+        <CalEmbed calLink={contact.meetingLink} />
+      </div>
+    </>
+  )
+}

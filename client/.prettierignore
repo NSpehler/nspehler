@@ -1,5 +1,2 @@
 # Ignore artifacts:
 .next
-lib/datocms/graphql-env.d.ts
-schema.graphql
-schema.ts

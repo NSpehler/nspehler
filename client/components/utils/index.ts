@@ -1,5 +1,5 @@
 export * from "./CalEmbed"
 export * from "./List"
 export * from "./ListItem"
-export * from "./Social"
+export * from "./SocialLink"
 export * from "./StructuredData"

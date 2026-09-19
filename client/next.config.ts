@@ -9,15 +9,11 @@ const nextConfig: NextConfig = {
     root: import.meta.dirname,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "www.datocms-assets.com",
-      },
-    ],
+    // Screenshots are statically imported and served through the optimizer;
+    // AVIF first, WebP as the fallback. No remote hosts needed.
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 365,
   },
-  // No X-Frame-Options or frame-ancestors: the draft-mode routes have to work
-  // inside the DatoCMS Web Previews iframe. Vercel already sends HSTS.
   async headers() {
     return [
       {
@@ -25,6 +21,7 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "DENY" },
         ],
       },
     ]
