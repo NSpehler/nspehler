@@ -12,14 +12,14 @@ const Item = ({ fact }: { fact: Fact }) => (
       {"value" in fact ? (
         fact.value
       ) : (
-        <span className="flex gap-4">
+        <span className="flex flex-wrap gap-x-4 gap-y-1">
           {fact.links.map((link) => (
             <ArrowLink
               key={link.label}
               link={link}
               icon="up-right"
               iconClassName="size-[13px]"
-              className="gap-1.5"
+              className="gap-1.5 whitespace-nowrap"
             />
           ))}
         </span>
