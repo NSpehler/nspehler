@@ -75,125 +75,132 @@ export const Header = () => {
   }, [menuOpen])
 
   return (
-    <header
-      style={{ viewTransitionName: vt.header }}
-      className={cn(
-        "relative z-50 shrink-0",
-        menuOpen && "fixed inset-0 flex h-dvh flex-col bg-page px-5",
-      )}
-    >
-      <div className="flex h-[72px] shrink-0 items-center justify-between shadow-[inset_0_-1px_0_var(--color-edge)] lg:h-[104px]">
-        <div className="flex min-w-0 flex-col gap-0.5 lg:flex-row lg:items-baseline lg:gap-4">
-          <Link
-            href="/"
-            onClick={() => setMenuOpen(false)}
-            className="truncate text-lg font-medium tracking-[-0.02em] transition-colors duration-150 motion-reduce:transition-none lg:text-[30px]/[1.2] lg:tracking-[-0.025em]"
+    <header className="relative z-50 h-[72px] shrink-0 lg:h-[104px]">
+      <div
+        className={
+          menuOpen
+            ? "fixed inset-0 flex h-dvh flex-col bg-page/40 px-5 backdrop-blur-md md:px-16"
+            : undefined
+        }
+      >
+        <div
+          style={{ viewTransitionName: vt.header }}
+          className="flex h-[72px] shrink-0 items-center justify-between shadow-[inset_0_-1px_0_var(--color-edge)] lg:h-[104px]"
+        >
+          <div className="flex min-w-0 flex-col gap-0.5 lg:flex-row lg:items-baseline lg:gap-4">
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="truncate text-lg font-medium tracking-[-0.02em] transition-colors duration-150 motion-reduce:transition-none lg:text-[30px]/[1.2] lg:tracking-[-0.025em]"
+            >
+              {site.name}
+            </Link>
+            <span className="truncate text-[13px] text-label tabular-nums lg:text-[30px]/[1.2] lg:font-medium lg:text-soft">
+              {coordinates}
+            </span>
+          </div>
+
+          <nav
+            aria-label="Main"
+            className="relative hidden h-full gap-8 text-base/[1.5] font-medium lg:flex"
           >
-            {site.name}
-          </Link>
-          <span className="truncate text-[13px] text-label tabular-nums lg:text-[30px]/[1.2] lg:font-medium lg:text-soft">
-            {coordinates}
-          </span>
-        </div>
-
-        <nav
-          aria-label="Main"
-          className="relative hidden h-full gap-8 text-base/[1.5] font-medium lg:flex"
-        >
-          {site.nav.map((item, index) => {
-            const active = isActive(item.href)
-            return (
-              <Link
-                ref={(el) => {
-                  linkRefs.current[index] = el
-                }}
-                key={item.label}
-                href={item.href}
-                transitionTypes={
-                  item.href === "/" && onProject ? NAV.back : NAV.switch
-                }
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "flex items-center transition-colors duration-150 motion-reduce:transition-none",
-                  active ? "text-ink-strong" : "text-label hover:text-ink",
-                )}
-              >
-                {item.label}
-              </Link>
-            )
-          })}
-          <span
-            aria-hidden="true"
-            className={cn(
-              "pointer-events-none absolute bottom-0 h-px bg-ink-strong",
-              animateUnderline &&
-                "transition-[left,width,opacity] duration-300 ease-out",
-            )}
-            style={{
-              left: underline.left,
-              width: underline.width,
-              opacity: underline.visible ? 1 : 0,
-            }}
-          />
-        </nav>
-
-        <button
-          type="button"
-          onClick={() => setMenuOpen((open) => !open)}
-          data-open={menuOpen ? "" : undefined}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          className="group -mr-2.5 flex size-11 items-center justify-center text-ink lg:hidden"
-        >
-          <span aria-hidden="true" className="relative block h-3 w-[18px]">
-            <span className="absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-[3.25px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:rotate-45 motion-reduce:transition-none" />
-            <span className="absolute inset-x-0 top-1/2 h-[1.5px] translate-y-[3.25px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:-rotate-45 motion-reduce:transition-none" />
-          </span>
-        </button>
-      </div>
-
-      {menuOpen && (
-        <nav
-          id="mobile-menu"
-          data-open=""
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation"
-          className="flex min-h-0 flex-1 flex-col justify-between overflow-y-auto pt-8 pb-8 lg:hidden"
-        >
-          <ul className="flex flex-col gap-5">
-            {site.nav.map((item) => {
+            {site.nav.map((item, index) => {
               const active = isActive(item.href)
               return (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "block text-[32px] font-medium tracking-[-0.03em] transition-colors",
-                      active ? "text-ink-strong" : "text-label hover:text-ink",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
+                <Link
+                  ref={(el) => {
+                    linkRefs.current[index] = el
+                  }}
+                  key={item.label}
+                  href={item.href}
+                  transitionTypes={
+                    item.href === "/" && onProject ? NAV.back : NAV.switch
+                  }
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "flex items-center transition-colors duration-150 motion-reduce:transition-none",
+                    active ? "text-ink-strong" : "text-label hover:text-ink",
+                  )}
+                >
+                  {item.label}
+                </Link>
               )
             })}
-          </ul>
-          <div className="flex items-center justify-between text-sm text-body">
-            <div className="flex gap-5">
-              {site.social.map(({ label, href }) => (
-                <a key={label} href={href} target="_blank" rel="noreferrer">
-                  {label}
-                </a>
-              ))}
+            <span
+              aria-hidden="true"
+              className={cn(
+                "pointer-events-none absolute bottom-0 h-px bg-ink-strong",
+                animateUnderline &&
+                  "transition-[left,width,opacity] duration-300 ease-out",
+              )}
+              style={{
+                left: underline.left,
+                width: underline.width,
+                opacity: underline.visible ? 1 : 0,
+              }}
+            />
+          </nav>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            data-open={menuOpen ? "" : undefined}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="group -mr-2.5 flex size-11 items-center justify-center text-ink lg:hidden"
+          >
+            <span aria-hidden="true" className="relative block h-3 w-[18px]">
+              <span className="absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-[3.25px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:rotate-45 motion-reduce:transition-none" />
+              <span className="absolute inset-x-0 top-1/2 h-[1.5px] translate-y-[3.25px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:-rotate-45 motion-reduce:transition-none" />
+            </span>
+          </button>
+        </div>
+
+        {menuOpen && (
+          <nav
+            id="mobile-menu"
+            data-open=""
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation"
+            className="flex min-h-0 flex-1 flex-col justify-between overflow-y-auto pt-8 pb-8 lg:hidden"
+          >
+            <ul className="flex flex-col gap-5">
+              {site.nav.map((item) => {
+                const active = isActive(item.href)
+                return (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "block text-[32px] font-medium tracking-[-0.03em] transition-colors",
+                        active
+                          ? "text-ink-strong"
+                          : "text-label hover:text-ink",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+            <div className="flex items-center justify-between text-sm text-body">
+              <div className="flex gap-5">
+                {site.social.map(({ label, href }) => (
+                  <a key={label} href={href} target="_blank" rel="noreferrer">
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <ThemeSwitcher />
             </div>
-            <ThemeSwitcher />
-          </div>
-        </nav>
-      )}
+          </nav>
+        )}
+      </div>
     </header>
   )
 }
