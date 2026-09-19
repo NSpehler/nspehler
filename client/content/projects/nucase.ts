@@ -38,9 +38,9 @@ export const nucase = {
     type: "figure",
     frame: "bleed",
     shot: {
-      src: phones,
-      alt: "Nucase on three phones: choosing the areas to renovate, the price estimate by area and the finished report, with the beaver mascots",
-      caption: "Areas, price estimate and report, on mobile",
+      src: screens,
+      alt: "Nucase on three phones: the partner sign-up, the work to add for an area with its price, and the areas of a home",
+      caption: "Partner sign-up, tasks and areas, on mobile",
     },
   },
   overview: [
@@ -49,7 +49,10 @@ export const nucase = {
   ],
   video: {
     src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/nucase-hVXWavgb97nz12jzH11fVk8wn6EYql.mp4",
-    poster: { src: filmPoster, alt: "The Nucase film, on its first frame" },
+    poster: {
+      src: filmPoster,
+      alt: "The Nucase film: the wordmark over a kitchen, surrounded by renovation tasks",
+    },
     title: "the Nucase film",
     duration: "1 minute",
   },
@@ -79,6 +82,15 @@ export const nucase = {
           caption: "Add the work for each area",
         },
       ],
+    },
+    {
+      type: "figure",
+      frame: "bleed",
+      shot: {
+        src: phones,
+        alt: "Nucase on three phones: choosing the areas to renovate, the price estimate by area and the finished report, with the beaver mascots",
+        caption: "Areas, price estimate and report, on mobile",
+      },
     },
     {
       type: "chapter",
