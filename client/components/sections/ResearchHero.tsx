@@ -47,7 +47,8 @@ export const ResearchHero = () => (
       target="_blank"
       rel="noreferrer"
       aria-label="Open the paper"
-      className="mat aspect-[640/470] rounded-mat lg:col-span-6 lg:col-start-7"
+      draggable={false}
+      className="mat aspect-[640/470] rounded-mat select-none lg:col-span-6 lg:col-start-7"
     >
       <span className="relative block aspect-[520/420] w-[81.25%]">
         <span
@@ -60,6 +61,7 @@ export const ResearchHero = () => (
             src={src}
             alt={alt}
             sizes="(min-width: 1024px) 240px, 40vw"
+            draggable={false}
             className={cn(
               "absolute aspect-[12/17] w-[46.15%] rounded-[3px] object-cover",
               pages[index],
