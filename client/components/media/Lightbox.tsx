@@ -210,9 +210,12 @@ export const Lightbox = ({
         tabIndex={-1}
         onClick={close}
         className={cn(
-          "absolute inset-0 cursor-zoom-out bg-page/85 backdrop-blur-2xl outline-none",
-          animate && "transition-opacity duration-[420ms] ease-out",
-          settled ? "opacity-100" : "opacity-0",
+          "absolute inset-0 cursor-zoom-out outline-none",
+          animate &&
+            "transition-[background-color,backdrop-filter] duration-[420ms] ease-out",
+          settled
+            ? "bg-page/85 backdrop-blur-2xl"
+            : "bg-page/0 backdrop-blur-[0px]",
         )}
       />
 
