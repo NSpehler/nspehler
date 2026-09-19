@@ -7,6 +7,7 @@ import { ShotTrigger } from "./ShotTrigger"
 type Props = {
   shot: ShotData
   sizes: string
+  ratio?: number
   preload?: boolean
   eager?: boolean
   className?: string
@@ -16,6 +17,7 @@ type Props = {
 export const Shot = ({
   shot,
   sizes,
+  ratio,
   preload = false,
   eager = false,
   className,
@@ -32,6 +34,7 @@ export const Shot = ({
       loading={eager || preload ? "eager" : undefined}
       decoding={preload ? "sync" : undefined}
       fetchPriority={preload ? "high" : undefined}
+      style={ratio ? { aspectRatio: ratio } : undefined}
       className={imageClassName}
     />
   </ShotTrigger>

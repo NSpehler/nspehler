@@ -19,13 +19,16 @@ const insets = {
 const inset = ({ src }: ShotData, tall: boolean) =>
   insets[tall ? "tall" : src.width / src.height < 1.2 ? "narrow" : "wide"]
 
-const Bleed = ({ shot, size }: { shot: ShotData; size: string }) => (
+type BleedProps = { shot: ShotData; size: string; ratio?: number }
+
+const Bleed = ({ shot, size, ratio }: BleedProps) => (
   <Figure caption={shot.caption}>
     <Shot
       shot={shot}
       sizes={size}
+      ratio={ratio}
       className="w-full rounded-2xl"
-      imageClassName="h-auto w-full rounded-[inherit] ring-1 ring-bleed"
+      imageClassName="h-auto w-full rounded-[inherit] object-cover ring-1 ring-bleed"
     />
   </Figure>
 )
@@ -74,11 +77,19 @@ export const Figures = ({ block, className }: Props) => {
       </div>
     )
   }
+  const ratio = Math.min(
+    ...block.shots.map(({ src }) => src.width / src.height),
+  )
   return (
     <div className={cn("grid gap-8 md:grid-cols-2", className)}>
       {block.shots.map((shot) =>
         block.frame === "bleed" ? (
-          <Bleed key={shot.src.src} shot={shot} size={sizes.half} />
+          <Bleed
+            key={shot.src.src}
+            shot={shot}
+            size={sizes.half}
+            ratio={ratio}
+          />
         ) : (
           <Half key={shot.src.src} shot={shot} tall={block.frame === "tall"} />
         ),

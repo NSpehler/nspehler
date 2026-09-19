@@ -15,9 +15,13 @@ type Props = {
   project: Project
 }
 
+const frames = {
+  web: "[--inset:80%] [--shot:16/10]",
+  phones: "[--inset:82.5%] [--shot:16/9]",
+}
+
 export const NextProject = ({ project }: Props) => {
-  const { slug, name, card } = project
-  const phones = card.frame === "phones"
+  const { slug, name, card, lead } = project
   return (
     <WarmLink
       href={`/projects/${slug}`}
@@ -39,24 +43,43 @@ export const NextProject = ({ project }: Props) => {
         <Mat
           className={cn(
             "aspect-[16/10] w-full rounded-[14px] lg:w-[400px] lg:shrink-0",
-            phones
-              ? "[--inset:82.5%] [--shot:16/9]"
-              : "[--inset:80%] [--shot:16/10]",
+            lead.type === "triptych" ? "gap-[4.27%]" : frames[card.frame],
           )}
         >
-          <Morph name={vt.visual(slug)}>
-            <Image
-              src={card.image.src}
-              alt=""
-              sizes={sizes.thumb}
-              placeholder="blur"
-              quality={85}
-              className={cn(
-                "aspect-(--shot) w-(--inset) rounded-thumb object-cover shadow-shot-xs md:shadow-shot-sm",
-                !phones && "object-top",
-              )}
-            />
-          </Morph>
+          {lead.type === "triptych" ? (
+            lead.shots.map(({ src }, index) => {
+              const device = (
+                <Image
+                  key={src.src}
+                  src={src}
+                  alt=""
+                  sizes={sizes.deviceThumb}
+                  className="h-auto w-[21.65%] drop-shadow-[0_8px_12px_var(--phone-drop)]"
+                />
+              )
+              return index === 1 ? (
+                <Morph key={src.src} name={vt.visual(slug)}>
+                  {device}
+                </Morph>
+              ) : (
+                device
+              )
+            })
+          ) : (
+            <Morph name={vt.visual(slug)}>
+              <Image
+                src={card.image.src}
+                alt=""
+                sizes={sizes.thumb}
+                placeholder="blur"
+                quality={85}
+                className={cn(
+                  "aspect-(--shot) w-(--inset) rounded-thumb object-cover shadow-shot-xs md:shadow-shot-sm",
+                  card.frame === "web" && "object-top",
+                )}
+              />
+            </Morph>
+          )}
         </Mat>
       </Morph>
     </WarmLink>
