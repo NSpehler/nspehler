@@ -115,7 +115,7 @@ export const home = {
         name: "CategoryAPI",
         description:
           "Lead categorization across 5,500 categories, in any language",
-        tag: "API",
+        tag: "SaaS",
       },
       {
         year: 2021,
