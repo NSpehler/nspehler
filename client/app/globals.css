@@ -273,7 +273,7 @@
       var(--vt-morph) var(--ease-morph) both vt-settle;
   }
 
-  html[data-navigated]:not(:where(:active-view-transition)) [data-page] {
+  html[data-navigated] [data-page] {
     transition:
       opacity var(--vt-enter) ease-out,
       translate var(--vt-morph) var(--ease-morph);
@@ -281,6 +281,24 @@
     @starting-style {
       opacity: 0;
       translate: 0 12px;
+    }
+  }
+
+  html[data-navigated]:active-view-transition-type(nav-back) [data-page] {
+    @starting-style {
+      translate: 0 -12px;
+    }
+  }
+
+  @media (pointer: fine) {
+    html:active-view-transition [data-page] {
+      transition: none;
+    }
+  }
+
+  @media (pointer: coarse) {
+    [data-page] {
+      view-transition-name: none !important;
     }
   }
 
