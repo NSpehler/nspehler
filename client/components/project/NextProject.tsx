@@ -27,7 +27,7 @@ export const NextProject = ({ project }: Props) => {
       href={`/projects/${slug}`}
       transitionTypes={NAV.forward}
       warm={leadWarm(project)}
-      className="group ruled flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+      className="group ruled flex flex-col gap-6 transition-colors duration-150 motion-reduce:transition-none lg:flex-row lg:items-end lg:justify-between"
     >
       <span className="flex min-w-0 flex-col gap-3">
         <Eyebrow>Next project</Eyebrow>

@@ -14,7 +14,7 @@ export const ResearchTeaser = () => (
     <Link
       href="/lean-marketing-for-startups"
       transitionTypes={NAV.forward}
-      className="group flex flex-col items-start gap-6 md:flex-row md:items-center md:gap-10"
+      className="group flex flex-col items-start gap-6 transition-colors duration-150 motion-reduce:transition-none md:flex-row md:items-center md:gap-10"
     >
       <span className="mat h-[300px] w-[260px] shrink-0 rounded-mat">
         <Image
