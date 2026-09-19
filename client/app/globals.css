@@ -31,16 +31,16 @@
 
   --ease-morph: cubic-bezier(0.32, 0.72, 0, 1);
 
-  --animate-beacon: beacon 2.4s var(--ease-morph) infinite;
+  --animate-beacon: beacon 1.8s var(--ease-morph) infinite;
 
   @keyframes beacon {
     from {
       scale: 1;
       opacity: 0.5;
     }
-    60%,
+    70%,
     to {
-      scale: 3;
+      scale: 2.2;
       opacity: 0;
     }
   }
