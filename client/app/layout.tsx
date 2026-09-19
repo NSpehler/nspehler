@@ -1,85 +1,80 @@
-import {
-  ContentLink,
-  Footer,
-  Header,
-  Layout,
-  ThemeProvider,
-} from "@/components/layout"
-import {
-  FooterFragment,
-  HeaderFragment,
-  TagFragment,
-} from "@/lib/datocms/commonFragments"
-import { executeQuery } from "@/lib/datocms/executeQuery"
-import { generateMetadataFn } from "@/lib/datocms/generateMetadataFn"
-import { graphql } from "@/lib/datocms/graphql"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import type { Metadata, Viewport } from "next"
 import PlausibleProvider from "next-plausible"
-import { draftMode } from "next/headers"
+import { Geist, Geist_Mono } from "next/font/google"
 import type { ReactNode } from "react"
+
+import { Footer, Header, ThemeProvider } from "@/components/layout"
+import { NavigationFlag } from "@/components/motion/NavigationFlag"
+import { home } from "@/content/home"
+import { site } from "@/content/site"
+import { cn } from "@/lib/utils"
 
 import "./globals.css"
 
-const query = graphql(
-  `
-    query LayoutQuery {
-      _site {
-        faviconMetaTags {
-          ...TagFragment
-        }
-      }
-      header {
-        ...HeaderFragment
-      }
-      footer {
-        ...FooterFragment
-      }
-    }
-  `,
-  [TagFragment, HeaderFragment, FooterFragment],
-)
-
-export const generateMetadata = generateMetadataFn({
-  query,
-  pickSeoMetaTags: (data) => data._site.faviconMetaTags,
-  additionalMetadata: () => ({
-    metadataBase: process.env.NEXT_PUBLIC_APP_URL
-      ? new URL(process.env.NEXT_PUBLIC_APP_URL)
-      : undefined,
-    alternates: { canonical: "./" },
-  }),
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
 })
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+})
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${home.title} | ${site.name}`,
+    template: `%s | ${site.name}`,
+  },
+  description: site.description,
+  alternates: { canonical: "./" },
+  openGraph: { type: "website", siteName: site.name, locale: "en" },
+  twitter: { card: "summary_large_image", site: site.twitter },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+}
 
 type Props = {
   children: ReactNode
 }
 
-export default async function RootLayout({ children }: Props) {
-  const { isEnabled: isDraftModeEnabled } = await draftMode()
-  const { header, footer } = await executeQuery(query, {
-    includeDrafts: isDraftModeEnabled,
-  })
-
+export default function RootLayout({ children }: Props) {
   const plausibleSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_SRC
 
   const content = (
-    <>
-      {header && <Header data={header} />}
-      <div className="mx-auto max-w-5xl px-5 md:px-8">
-        <Layout>{children}</Layout>
-        {footer && <Footer data={footer} />}
-      </div>
-      {isDraftModeEnabled && <ContentLink />}
-    </>
+    <div className="mx-auto flex min-h-dvh w-full max-w-page flex-col px-5 md:px-16">
+      <Header />
+      <main
+        id="main"
+        tabIndex={-1}
+        className="flex-1 pb-12 outline-none md:pb-18"
+      >
+        {children}
+      </main>
+      <Footer />
+    </div>
   )
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-black">
+    <html
+      lang="en"
+      className={cn(geist.variable, geistMono.variable)}
+      suppressHydrationWarning
+    >
+      <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-neutral-900 dark:focus:bg-black dark:focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-sm focus:bg-page focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-ink"
         >
           Skip to content
         </a>
@@ -95,6 +90,7 @@ export default async function RootLayout({ children }: Props) {
             content
           )}
         </ThemeProvider>
+        <NavigationFlag />
         <Analytics />
         <SpeedInsights />
       </body>

@@ -35,12 +35,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# sitemap
-/public/robots.txt
-/public/sitemap*
-
-# gql.tada generated artifacts
-/schema.graphql
-/schema.ts
-/lib/datocms/graphql-env.d.ts

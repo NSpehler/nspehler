@@ -3,21 +3,21 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // Pin Turbopack's workspace root to this directory so it doesn't walk up
-  // and try to resolve modules (like `tailwindcss`) from the repo root.
+  typedRoutes: true,
   turbopack: {
     root: import.meta.dirname,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "www.datocms-assets.com",
-      },
-    ],
+    formats: ["image/avif", "image/webp"],
+    qualities: [75, 85],
+    minimumCacheTTL: 60 * 60 * 24 * 365,
   },
-  // No X-Frame-Options or frame-ancestors: the draft-mode routes have to work
-  // inside the DatoCMS Web Previews iframe. Vercel already sends HSTS.
+  async redirects() {
+    return [
+      { source: "/work", destination: "/", permanent: true },
+      { source: "/projects", destination: "/", permanent: true },
+    ]
+  },
   async headers() {
     return [
       {
@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "DENY" },
         ],
       },
     ]

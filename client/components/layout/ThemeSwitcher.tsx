@@ -1,10 +1,11 @@
 "use client"
 
-import { useReducedMotion } from "@/lib/hooks"
-import { cn } from "@/lib/utils"
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
+
+import { useReducedMotion } from "@/lib/hooks"
+import { cn } from "@/lib/utils"
 
 const themes = [
   { value: "light", label: "Light theme", Icon: SunIcon },
@@ -60,12 +61,12 @@ export const ThemeSwitcher = () => {
     <div
       role="radiogroup"
       aria-label="Theme"
-      className="relative inline-flex items-center rounded-full border border-neutral-200 bg-white p-0.5 dark:border-neutral-800 dark:bg-neutral-900"
+      className="relative inline-flex items-center rounded-full border border-edge bg-track p-0.5"
     >
       <span
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute top-0.5 bottom-0.5 rounded-full bg-neutral-100 dark:bg-neutral-700",
+          "pointer-events-none absolute top-0.5 bottom-0.5 rounded-full bg-selected",
           {
             "transition-[left,width,opacity] duration-300 ease-out":
               animatePill,
@@ -92,11 +93,7 @@ export const ThemeSwitcher = () => {
             onClick={() => setTheme(value)}
             className={cn(
               "relative inline-flex size-7 items-center justify-center rounded-full transition-colors",
-              {
-                "text-neutral-900 dark:text-white": active,
-                "text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300":
-                  !active,
-              },
+              active ? "text-ink-strong" : "text-faint hover:text-label",
             )}
           >
             <Icon className="size-4" aria-hidden="true" />

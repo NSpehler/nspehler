@@ -1,15 +1,38 @@
-import { generatePageComponentAndMetadataFn } from "@/lib/datocms/realtime/generatePageComponentAndMetadataFn"
-import dynamic from "next/dynamic"
+import { PageTransition } from "@/components/motion/PageTransition"
+import { ContactCta } from "@/components/sections/ContactCta"
+import { Framework } from "@/components/sections/Framework"
+import { ResearchHero } from "@/components/sections/ResearchHero"
+import { StructuredData } from "@/components/StructuredData"
+import { research } from "@/content/research"
+import { articleNode, graph } from "@/lib/jsonld"
+import { pageMetadata } from "@/lib/metadata"
 
-import Content from "./Content"
-import { query } from "./common"
+const path = "/lean-marketing-for-startups"
 
-const { Page, generateMetadataFn } = generatePageComponentAndMetadataFn({
-  query,
-  pickSeoMetaTags: ({ page }) => page?._seoMetaTags,
-  contentComponent: Content,
-  realtimeComponent: dynamic(() => import("./RealTime")),
+export const metadata = pageMetadata({
+  title: research.title,
+  description: research.description,
+  path,
+  type: "article",
 })
 
-export const generateMetadata = generateMetadataFn
-export default Page
+export default function Page() {
+  return (
+    <PageTransition>
+      <StructuredData
+        id="research"
+        data={graph(
+          articleNode(
+            path,
+            research.title,
+            research.description,
+            research.published,
+          ),
+        )}
+      />
+      <ResearchHero />
+      <Framework />
+      <ContactCta />
+    </PageTransition>
+  )
+}
