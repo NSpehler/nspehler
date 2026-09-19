@@ -21,7 +21,7 @@ export const paperdrop = {
     "PaperDrop helps UK contractors manage every job, from the schedule to the signed paperwork",
   facts: [
     { label: "Type", value: "Web app and sales tool" },
-    { label: "Tech stack", value: "Next.js, TypeScript" },
+    { label: "Tech stack", value: "Next.js, React, TypeScript" },
     {
       label: "Website",
       links: [{ label: "paperdrop.com", href: "https://paperdrop.com" }],
@@ -36,7 +36,7 @@ export const paperdrop = {
     description:
       "Job management for UK contractors, from scheduling to signed paperwork",
     type: "Web app",
-    stack: ["Next.js", "TypeScript"],
+    stack: ["Next.js", "React", "TypeScript"],
   },
   lead: {
     type: "figure",

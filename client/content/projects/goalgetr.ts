@@ -57,6 +57,12 @@ export const goalgetr = {
   },
   blocks: [
     {
+      type: "quote",
+      text: "“Thanks so much for creating a truly unique training platform. It’s a pleasure to work with people who can bring your ideas to life and even improve them in the process.”",
+      name: "Christian Dahl-Andersen",
+      role: "Founder, goalGetr",
+    },
+    {
       type: "chapter",
       number: 1,
       name: "Coaches",
@@ -132,12 +138,6 @@ export const goalgetr = {
           { label: "SmplCo", href: "https://smpl.as" },
         ],
       },
-    },
-    {
-      type: "quote",
-      text: "“Thanks so much for creating a truly unique training platform. It’s a pleasure to work with people who can bring your ideas to life and even improve them in the process.”",
-      name: "Christian Dahl-Andersen",
-      role: "Founder, goalGetr",
     },
     {
       type: "cards",
