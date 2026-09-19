@@ -1,4 +1,5 @@
 import brand from "@/images/projects/goalgetr/brand.webp"
+import filmPoster from "@/images/projects/goalgetr/film-poster.webp"
 import playerCalendar from "@/images/projects/goalgetr/player-calendar.webp"
 import playerCard from "@/images/projects/goalgetr/player-card.webp"
 import sessionPlanner from "@/images/projects/goalgetr/session-planner.webp"
@@ -45,6 +46,15 @@ export const goalgetr = {
     "goalGetr is a youth ice hockey platform used by Norwegian clubs. Coaches pull a ready-made session from the library, players watch the drills before they get to the rink, and parents follow the same progress from home. It reached thousands of users right after launch.",
     "SmplCo designed the product. I’ve built the platform since 2025, from the web and mobile apps to everything behind them.",
   ],
+  video: {
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/goalgetr-AFEMBru81QZXu5jfOgLuA3GvrEnFPx.mp4",
+    poster: {
+      src: filmPoster,
+      alt: "The goalGetr brand film, on its first frame",
+    },
+    title: "the goalGetr brand film",
+    duration: "1 minute",
+  },
   blocks: [
     {
       type: "chapter",

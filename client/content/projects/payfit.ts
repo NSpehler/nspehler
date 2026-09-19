@@ -1,6 +1,7 @@
 import ai from "@/images/projects/payfit/ai.webp"
 import article from "@/images/projects/payfit/article.webp"
 import blog from "@/images/projects/payfit/blog.webp"
+import filmPoster from "@/images/projects/payfit/film-poster.webp"
 import home from "@/images/projects/payfit/home.webp"
 import identity from "@/images/projects/payfit/identity.webp"
 import pricing from "@/images/projects/payfit/pricing.webp"
@@ -48,6 +49,15 @@ export const payfit = {
     "After ten years, Payfit had grown from payroll software into a full payroll and HR service, used by more than 22,000 businesses in France, Spain and the UK. In 2026 it relaunched with a new identity, and a new website to match.",
     "I first worked with Payfit in 2019, leading the Growth Engineering team. For the relaunch, I was part of the team that built the new website with Astro and DatoCMS.",
   ],
+  video: {
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/payfit-f2Bp6azdcoa9ZK8pG6ZoUyg35xvSvN.mp4",
+    poster: {
+      src: filmPoster,
+      alt: "The Payfit website film, on its first frame",
+    },
+    title: "the Payfit website film",
+    duration: "37 seconds",
+  },
   blocks: [
     {
       type: "figures",

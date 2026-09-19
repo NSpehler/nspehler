@@ -2,6 +2,7 @@ import addTasks from "@/images/projects/nucase/add-tasks.webp"
 import ai from "@/images/projects/nucase/ai.webp"
 import brand from "@/images/projects/nucase/brand.webp"
 import chooseProject from "@/images/projects/nucase/choose-project.webp"
+import filmPoster from "@/images/projects/nucase/film-poster.webp"
 import jobs from "@/images/projects/nucase/jobs.webp"
 import phones from "@/images/projects/nucase/phones.webp"
 import screens from "@/images/projects/nucase/screens.webp"
@@ -46,6 +47,12 @@ export const nucase = {
     "Nucase takes the surprises out of planning a home renovation. Homeowners describe their home and the work they want done, get an instant estimate and a detailed report, and their project goes straight to vetted contractors.",
     "SmplCo designed the product and the brand. I built the platform end to end, from the homeowner flow and the AI assistant to the contractor dashboard and the admin tools.",
   ],
+  video: {
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/nucase-hVXWavgb97nz12jzH11fVk8wn6EYql.mp4",
+    poster: { src: filmPoster, alt: "The Nucase film, on its first frame" },
+    title: "the Nucase film",
+    duration: "1 minute",
+  },
   blocks: [
     {
       type: "chapter",
