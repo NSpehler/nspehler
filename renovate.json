@@ -33,15 +33,6 @@
       "automerge": true
     },
     {
-      "description": "Group DatoCMS packages",
-      "groupName": "datocms",
-      "matchPackageNames": [
-        "/^@datocms//",
-        "/^datocms-/",
-        "/^react-datocms$/"
-      ]
-    },
-    {
       "description": "Group Tailwind packages",
       "groupName": "tailwind",
       "matchPackageNames": [
