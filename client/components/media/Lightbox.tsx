@@ -50,7 +50,7 @@ export const Lightbox = ({
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const swipeStart = useRef<number | null>(null)
+  const swipeStart = useRef<{ x: number; y: number } | null>(null)
 
   const [seenIndex, setSeenIndex] = useState<number | null>(null)
   const [phase, setPhase] = useState<Phase>("closed")
@@ -142,14 +142,19 @@ export const Lightbox = ({
   }
 
   const handlePointerDown = (event: PointerEvent) => {
-    if (event.pointerType === "touch") swipeStart.current = event.clientX
+    if (event.pointerType === "touch")
+      swipeStart.current = { x: event.clientX, y: event.clientY }
   }
 
   const handlePointerUp = (event: PointerEvent) => {
-    if (swipeStart.current === null) return
-    const delta = event.clientX - swipeStart.current
+    const start = swipeStart.current
     swipeStart.current = null
-    if (Math.abs(delta) > 48) go(delta < 0 ? 1 : -1)
+    if (!start) return
+    const dx = event.clientX - start.x
+    const dy = event.clientY - start.y
+    if (dy > 64 && dy > Math.abs(dx)) close()
+    else if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy))
+      go(dx < 0 ? 1 : -1)
   }
 
   const shot = shots[current]
@@ -247,8 +252,11 @@ export const Lightbox = ({
       <figure
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
+        onPointerCancel={() => {
+          swipeStart.current = null
+        }}
         className={cn(
-          "absolute m-0 overflow-hidden select-none",
+          "absolute m-0 touch-pinch-zoom overflow-hidden select-none",
           !device &&
             "bg-mat shadow-[0_24px_80px_-24px_var(--shot-shadow)] ring-1 ring-bleed",
         )}
