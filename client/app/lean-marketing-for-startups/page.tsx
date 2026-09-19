@@ -1,3 +1,7 @@
+import { PageTransition } from "@/components/motion/PageTransition"
+import { ContactCta } from "@/components/sections/ContactCta"
+import { Framework } from "@/components/sections/Framework"
+import { ResearchHero } from "@/components/sections/ResearchHero"
 import { StructuredData } from "@/components/StructuredData"
 import { research } from "@/content/research"
 import { articleNode, graph } from "@/lib/jsonld"
@@ -14,7 +18,7 @@ export const metadata = pageMetadata({
 
 export default function Page() {
   return (
-    <>
+    <PageTransition>
       <StructuredData
         id="research"
         data={graph(
@@ -26,7 +30,9 @@ export default function Page() {
           ),
         )}
       />
-      <h1 className="sr-only">{research.headline}</h1>
-    </>
+      <ResearchHero />
+      <Framework />
+      <ContactCta />
+    </PageTransition>
   )
 }

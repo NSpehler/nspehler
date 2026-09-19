@@ -3,7 +3,7 @@ import type { StaticImageData } from "next/image"
 
 import type { Slug } from "./projects/slugs"
 
-export type Href = Route | `/projects/${Slug}`
+export type Href = Route | `/projects/${Slug}` | `/${string}.pdf`
 export type Link = { label: string; href: Href }
 export type Inline = string | readonly (string | Link)[]
 export type TwoTone = readonly [string, string?]

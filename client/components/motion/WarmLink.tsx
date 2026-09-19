@@ -9,7 +9,7 @@ import type { Href } from "@/content/types"
 export type Warm = { src: string; srcSet?: string; sizes?: string }
 
 type Props = Omit<ComponentProps<typeof Link>, "href"> & {
-  href: Href
+  href: Exclude<Href, `/${string}.pdf`>
   warm?: Warm
 }
 

@@ -6,7 +6,7 @@ type Props = {
 }
 
 export const Ledger = ({ block: { rows } }: Props) => (
-  <Section label="Tech stack" labelAs="h2" wide ariaLabel="Tech stack">
+  <Section label="Tech stack" labelAs="h2" width="wide" ariaLabel="Tech stack">
     <div className="divide-y divide-hairline border-b border-hairline lg:-mt-4">
       {rows.map(({ label, value }) => (
         <div

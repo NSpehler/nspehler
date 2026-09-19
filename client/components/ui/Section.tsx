@@ -8,18 +8,24 @@ type Props = {
   label: ReactNode
   labelAs?: "span" | "h2"
   rule?: boolean
-  wide?: boolean
+  width?: "text" | "wide" | "full"
   id?: string
   ariaLabel?: string
   className?: string
   children: ReactNode
 }
 
+const widths = {
+  text: "lg:col-span-7 lg:col-start-5",
+  wide: "lg:col-span-8 lg:col-start-5",
+  full: "lg:col-span-9 lg:col-start-4",
+}
+
 export const Section = ({
   label,
   labelAs = "span",
   rule = true,
-  wide = false,
+  width = "text",
   id,
   ariaLabel,
   className,
@@ -37,10 +43,6 @@ export const Section = ({
     <Eyebrow as={labelAs} className="lg:col-span-3">
       {label}
     </Eyebrow>
-    <div
-      className={cn("lg:col-start-5", wide ? "lg:col-span-8" : "lg:col-span-7")}
-    >
-      {children}
-    </div>
+    <div className={widths[width]}>{children}</div>
   </section>
 )
