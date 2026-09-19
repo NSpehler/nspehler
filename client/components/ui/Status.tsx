@@ -8,8 +8,10 @@ export const Status = ({ children }: Props) => (
   <span className="flex items-center gap-2.5 text-ink">
     <span
       aria-hidden="true"
-      className="size-2 shrink-0 rounded-full bg-accent shadow-halo"
-    />
+      className="relative size-2 shrink-0 rounded-full bg-accent shadow-halo"
+    >
+      <span className="absolute inset-0 animate-beacon rounded-full bg-accent" />
+    </span>
     {children}
   </span>
 )

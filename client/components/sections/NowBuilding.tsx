@@ -13,7 +13,7 @@ export const NowBuilding = () => {
     <section
       id="now-building"
       aria-label="Now building"
-      className="ruled flex flex-col gap-3.5 md:gap-8"
+      className="@container ruled flex flex-col gap-3.5 md:gap-8"
     >
       <PhoneSlider
         screens={screens}

@@ -133,7 +133,7 @@ export const PhoneSlider = ({ screens, slug, intro }: Props) => {
       </div>
       <div
         ref={viewport}
-        className="-mx-5 snap-x snap-mandatory scroll-pl-5 [scrollbar-width:none] overflow-x-auto overflow-y-hidden overscroll-x-contain pt-[18px] pb-6 pl-5 md:-mr-16 md:-ml-4 md:scroll-pl-4 md:pt-6 md:pb-8 md:pl-4 [&::-webkit-scrollbar]:hidden"
+        className="-mx-(--bleed) snap-x snap-mandatory scroll-px-(--bleed) [scrollbar-width:none] overflow-x-auto overflow-y-hidden overscroll-x-contain px-(--bleed) pt-[18px] pb-6 [--bleed:calc(50vw-50cqw)] md:pt-6 md:pb-8 [&::-webkit-scrollbar]:hidden"
       >
         <div ref={track} className="flex w-max gap-3.5 md:gap-6">
           {screens.map((screen, index) => {
