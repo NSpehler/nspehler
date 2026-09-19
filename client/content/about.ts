@@ -55,14 +55,13 @@ export const about = {
       {
         year: 2024,
         name: "Intigriti",
-        description: "Marketing website and blog, built from the ground up",
+        description: "Modular website, Algolia search, shared web components",
         role: "Freelance full-stack engineer",
       },
       {
         year: 2023,
         name: "Back Market Pro",
-        description:
-          "B2B storefront, custom Stripe checkout, 100+ seller catalog",
+        description: "B2B storefront, custom Stripe checkout, ordering API",
         role: "Freelance full-stack engineer",
       },
       {
@@ -74,7 +73,7 @@ export const about = {
       {
         year: 2021,
         name: "Dolead",
-        description: "Google Ads copy generation with GPT-3",
+        description: "Google Ads copy generation with LLMs",
         role: "Automation & AI",
       },
       {
