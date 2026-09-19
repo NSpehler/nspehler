@@ -1,15 +1,32 @@
-import { StructuredData } from "@/components/utils"
+import { StructuredData } from "@/components/StructuredData"
 import { research } from "@/content/research"
+import { articleNode, graph } from "@/lib/jsonld"
 import { pageMetadata } from "@/lib/metadata"
 
-export const metadata = pageMetadata(research)
+const path = "/lean-marketing-for-startups"
 
-export default function ResearchPage() {
+export const metadata = pageMetadata({
+  title: research.title,
+  description: research.description,
+  path,
+  type: "article",
+})
+
+export default function Page() {
   return (
     <>
-      <StructuredData id="research" data={research.structuredData} />
-      <h1 className="sr-only">{research.title}</h1>
-      <div className="prose prose-xl dark:prose-invert">{research.content}</div>
+      <StructuredData
+        id="research"
+        data={graph(
+          articleNode(
+            path,
+            research.title,
+            research.description,
+            research.published,
+          ),
+        )}
+      />
+      <h1 className="sr-only">{research.headline}</h1>
     </>
   )
 }

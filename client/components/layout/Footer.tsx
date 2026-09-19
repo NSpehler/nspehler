@@ -1,18 +1,22 @@
 import { site } from "@/content/site"
 
-import { SocialLink } from "@/components/utils"
-
 import { ThemeSwitcher } from "./ThemeSwitcher"
 
 export const Footer = () => (
-  <footer className="border-neutral-200 dark:border-neutral-800 border-t">
-    <div className="flex flex-wrap items-center justify-between gap-6 py-8 md:py-12">
-      <div className="flex justify-start gap-6">
-        {site.social.map((item) => (
-          <SocialLink key={item.title} {...item} />
-        ))}
-      </div>
-      <ThemeSwitcher />
+  <footer className="mt-auto flex h-20 shrink-0 items-center justify-between border-t border-hairline text-sm text-body md:h-22">
+    <div className="flex gap-5 md:gap-6">
+      {site.social.map(({ label, href }) => (
+        <a
+          key={label}
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          className="transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
+        >
+          {label}
+        </a>
+      ))}
     </div>
+    <ThemeSwitcher />
   </footer>
 )

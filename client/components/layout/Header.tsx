@@ -32,7 +32,7 @@ export const Header = () => {
   const animateUnderline = animate && !reducedMotion
 
   const measure = () => {
-    const activeIndex = site.navigation.findIndex((item) => isActive(item.href))
+    const activeIndex = site.nav.findIndex((item) => isActive(item.href))
     const el = linkRefs.current[activeIndex]
     setUnderline(
       el
@@ -126,14 +126,14 @@ export const Header = () => {
             aria-label="Navigation"
             className="border-neutral-200 dark:border-neutral-800 relative hidden border-b md:flex md:gap-8"
           >
-            {site.navigation.map((item, index) => {
+            {site.nav.map((item, index) => {
               const active = isActive(item.href)
               return (
                 <Link
                   ref={(el) => {
                     linkRefs.current[index] = el
                   }}
-                  key={item.title}
+                  key={item.label}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
@@ -145,7 +145,7 @@ export const Header = () => {
                     },
                   )}
                 >
-                  {item.title}
+                  {item.label}
                 </Link>
               )
             })}
@@ -177,10 +177,10 @@ export const Header = () => {
             className="min-h-0 flex-1 [scrollbar-width:none] overflow-y-auto mask-[linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%-2rem),transparent_100%)] pt-6 pb-12 md:hidden [&::-webkit-scrollbar]:hidden"
           >
             <ul className="flex flex-col gap-6">
-              {site.navigation.map((item) => {
+              {site.nav.map((item) => {
                 const active = isActive(item.href)
                 return (
-                  <li key={item.title}>
+                  <li key={item.label}>
                     <Link
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
@@ -194,7 +194,7 @@ export const Header = () => {
                         },
                       )}
                     >
-                      {item.title}
+                      {item.label}
                     </Link>
                   </li>
                 )

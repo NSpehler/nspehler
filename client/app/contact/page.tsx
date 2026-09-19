@@ -1,20 +1,31 @@
-import { CalEmbed, StructuredData } from "@/components/utils"
+import { StructuredData } from "@/components/StructuredData"
+import { CalEmbed } from "@/components/utils/CalEmbed"
 import { contact } from "@/content/contact"
+import { graph, pageNode } from "@/lib/jsonld"
 import { pageMetadata } from "@/lib/metadata"
 
-export const metadata = pageMetadata(contact)
+export const metadata = pageMetadata({
+  title: contact.title,
+  description: contact.description,
+  path: "/contact",
+})
 
-export default function ContactPage() {
+export default function Page() {
   return (
     <>
-      <StructuredData id="contact" data={contact.structuredData} />
+      <StructuredData
+        id="contact"
+        data={graph(
+          pageNode(
+            "ContactPage",
+            "/contact",
+            contact.title,
+            contact.description,
+          ),
+        )}
+      />
       <h1 className="sr-only">{contact.title}</h1>
-      <div className="grid gap-8 md:gap-12">
-        <div className="prose prose-xl dark:prose-invert">
-          {contact.content}
-        </div>
-        <CalEmbed calLink={contact.meetingLink} />
-      </div>
+      <CalEmbed calLink={contact.calLink} />
     </>
   )
 }

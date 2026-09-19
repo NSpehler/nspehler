@@ -3,12 +3,18 @@ import type { Metadata } from "next"
 type Page = {
   title: string
   description: string
-  slug?: string
+  path: string
+  type?: "website" | "article"
 }
 
-/** Title, description and canonical for a top-level page. */
-export const pageMetadata = ({ title, description, slug }: Page): Metadata => ({
+export const pageMetadata = ({
   title,
   description,
-  alternates: { canonical: slug ? `/${slug}` : "/" },
+  path,
+  type = "website",
+}: Page): Metadata => ({
+  title,
+  description,
+  alternates: { canonical: path },
+  openGraph: { title, description, url: path, type },
 })

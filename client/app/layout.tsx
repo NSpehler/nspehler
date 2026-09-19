@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import type { ReactNode } from "react"
 
 import { Footer, Header, ThemeProvider } from "@/components/layout"
-import { about } from "@/content/about"
+import { home } from "@/content/home"
 import { site } from "@/content/site"
 import { cn } from "@/lib/utils"
 
@@ -27,7 +27,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${about.title} | ${site.name}`,
+    default: `${home.title} | ${site.name}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
