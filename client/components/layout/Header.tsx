@@ -75,17 +75,19 @@ export const Header = () => {
   }, [menuOpen])
 
   return (
-    <header className="relative z-50 h-[72px] shrink-0 lg:h-[104px]">
-      <div
-        className={
-          menuOpen
-            ? "fixed inset-0 flex h-dvh flex-col bg-page/40 px-5 backdrop-blur-md md:px-16"
-            : undefined
-        }
-      >
+    <header
+      style={{ viewTransitionName: vt.header }}
+      className={cn(
+        "sticky top-0 z-50 flex flex-col bg-page/40 backdrop-blur-md",
+        menuOpen && "h-dvh lg:h-auto",
+      )}
+    >
+      <div className="column flex min-h-0 flex-1 flex-col">
         <div
-          style={{ viewTransitionName: vt.header }}
-          className="flex h-[72px] shrink-0 items-center justify-between shadow-[inset_0_-1px_0_var(--color-edge)] lg:h-[104px]"
+          className={cn(
+            "flex h-[72px] shrink-0 items-center justify-between transition-shadow duration-150 motion-reduce:transition-none lg:h-[104px]",
+            !menuOpen && "shadow-[inset_0_-1px_0_var(--color-edge)]",
+          )}
         >
           <div className="flex min-w-0 flex-col gap-0.5 lg:flex-row lg:items-baseline lg:gap-4">
             <Link

@@ -353,6 +353,10 @@
   @apply flex items-center justify-center bg-mat inset-ring inset-ring-edge;
 }
 
+@utility column {
+  @apply mx-auto w-full max-w-page px-5 md:px-16;
+}
+
 @utility ruled {
   @apply mt-18 border-t border-hairline pt-6 md:mt-30 md:pt-8;
 }

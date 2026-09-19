@@ -52,16 +52,18 @@ export default function RootLayout({ children }: Props) {
   const plausibleSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_SRC
 
   const content = (
-    <div className="mx-auto flex min-h-dvh w-full max-w-page flex-col px-5 md:px-16">
+    <div className="flex min-h-dvh flex-col">
       <Header />
-      <main
-        id="main"
-        tabIndex={-1}
-        className="flex-1 pb-12 outline-none md:pb-18"
-      >
-        {children}
-      </main>
-      <Footer />
+      <div className="column flex flex-1 flex-col">
+        <main
+          id="main"
+          tabIndex={-1}
+          className="flex-1 pb-12 outline-none md:pb-18"
+        >
+          {children}
+        </main>
+        <Footer />
+      </div>
     </div>
   )
 
