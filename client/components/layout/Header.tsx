@@ -10,8 +10,6 @@ import { formatCoordinates } from "@/lib/coordinates"
 import { useReducedMotion } from "@/lib/hooks"
 import { cn } from "@/lib/utils"
 
-import { ThemeSwitcher } from "./ThemeSwitcher"
-
 type Underline = { left: number; width: number; visible: boolean }
 
 const HIDDEN: Underline = { left: 0, width: 0, visible: false }
@@ -89,7 +87,7 @@ export const Header = () => {
             !menuOpen && "shadow-[inset_0_-1px_0_var(--color-edge)]",
           )}
         >
-          <div className="flex min-w-0 flex-col gap-0.5 lg:flex-row lg:items-baseline lg:gap-4">
+          <div className="flex min-w-0 flex-col max-lg:pb-1 lg:flex-row lg:items-baseline lg:gap-4">
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
@@ -166,7 +164,7 @@ export const Header = () => {
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
-            className="flex min-h-0 flex-1 flex-col justify-between overflow-y-auto pt-8 pb-8 lg:hidden"
+            className="min-h-0 flex-1 overflow-y-auto pt-8 pb-8 lg:hidden"
           >
             <ul className="flex flex-col gap-5">
               {site.nav.map((item) => {
@@ -190,16 +188,6 @@ export const Header = () => {
                 )
               })}
             </ul>
-            <div className="flex items-center justify-between text-sm text-body">
-              <div className="flex gap-5">
-                {site.social.map(({ label, href }) => (
-                  <a key={label} href={href} target="_blank" rel="noreferrer">
-                    {label}
-                  </a>
-                ))}
-              </div>
-              <ThemeSwitcher />
-            </div>
           </nav>
         )}
       </div>
