@@ -153,7 +153,7 @@ export const home = {
         year: 2016,
         name: "AboutYou",
         description: "Your own .com and a professional page, set up in minutes",
-        tag: "Site builder",
+        tag: "SaaS",
         href: "https://aboutyou.website",
       },
       {

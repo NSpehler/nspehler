@@ -38,7 +38,7 @@ export const alma = {
     frame: "mat",
     shot: {
       src: home,
-      alt: "almapay.com home page: le paiement en plusieurs fois flexible et garanti",
+      alt: "almapay.com home page: flexible, guaranteed payment in installments",
       caption: "Home page",
     },
   },
