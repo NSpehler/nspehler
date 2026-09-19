@@ -1,32 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# nspehler.com
 
-## Getting Started
+The source of [nspehler.com](https://nspehler.com), the portfolio of Nicolas Spehler: a home page of selected projects, nine case studies, an about page, a research paper and a contact page.
 
-First, run the development server:
+## Stack
 
-```bash
-bun dev
+- [Next.js](https://nextjs.org) App Router with React Server Components, static generation and typed routes
+- [Tailwind CSS](https://tailwindcss.com) v4 with the design tokens declared in `app/globals.css`
+- React `ViewTransition` for the page transitions, `next/image` for every visual, `next/font` for Geist
+- Content as typed TypeScript modules, images as static imports, videos on Vercel Blob
+- Deployed on [Vercel](https://vercel.com)
+
+## Structure
+
+```
+app/          routes, metadata files and the global stylesheet
+components/   layout chrome, ui primitives, media (mats, lightbox, video), motion, case study blocks, page sections
+content/      the site content: site, home, about, research, contact and one module per project
+images/       every image, imported statically so Next.js knows its size and can blur it up
+lib/          small helpers: metadata, JSON-LD, easing, coordinates
 ```
 
-Open [https://nspehler:localhost](https://nspehler:localhost) with your browser to see the result.
+## Content
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Everything on the site lives in `content/`. A project is a `Project` object (`content/types.ts`) with its hero facts, its card on the home page, a lead visual, two overview paragraphs, an optional film and an ordered list of blocks: chapters, figures, phone screenshots, cards, a quote and the tech stack ledger. The block renderer in `components/project/Blocks.tsx` turns that list into the page.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+To add a project:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Create `content/projects/<slug>.ts` and end it with `satisfies Project`.
+2. Add the slug to `content/projects/slugs.ts`, in the order it should appear on the home page.
+3. Register it in `content/projects/index.ts`.
+4. Drop its images in `images/projects/<slug>/`.
 
-## Learn More
+The route, the sitemap, the Open Graph image and the "Next project" link all derive from the slug list.
 
-To learn more about Next.js, take a look at the following resources:
+## Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+bun install
+bun run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`bun run check` runs the linter, the formatter, the type checker and knip. `bun run build` produces the production build.
 
-## Deploy on Vercel
+## Environment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Variable                    | Purpose                                 |
+| --------------------------- | --------------------------------------- |
+| `NEXT_PUBLIC_APP_URL`       | Canonical origin, used for metadata     |
+| `NEXT_PUBLIC_PLAUSIBLE_SRC` | Optional Plausible script for analytics |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+The code is available for reference. The copy, the photos and the client screenshots are not licensed for reuse.
