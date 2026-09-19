@@ -27,7 +27,10 @@ export const analog = {
       label: "Live",
       links: [
         { label: "analogapp.co", href: "https://analogapp.co" },
-        { label: "App Store", href: "https://analogapp.co" },
+        {
+          label: "App Store",
+          href: "https://apps.apple.com/us/app/analog-vinyl-sessions/id6767884568",
+        },
       ],
     },
   ],

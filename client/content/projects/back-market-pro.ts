@@ -16,7 +16,7 @@ export const backMarketPro = {
   name: "Back Market Pro",
   year: "2023–2024",
   subtitle:
-    "Back Market Pro helps businesses equip their teams with refurbished laptops, phones and tablets",
+    "Back Market Pro helps businesses buy refurbished tech at scale, cheaper and greener than new",
   facts: [
     { label: "Type", value: "B2B e-commerce platform" },
     { label: "Tech stack", value: "Shopify Hydrogen, Remix, Stripe, Algolia" },
@@ -63,8 +63,8 @@ export const backMarketPro = {
         },
         {
           src: popularDevices,
-          alt: "Popular devices: tablets, laptops, desktops, MacBooks, iPhone and monitors",
-          caption: "Popular devices",
+          alt: "Product categories: tablets, laptops, desktops, MacBooks, iPhone and monitors",
+          caption: "Product categories",
         },
       ],
     },

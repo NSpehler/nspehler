@@ -11,7 +11,7 @@ export const research = {
   eyebrow: "Research paper · April 2015",
   headline: "Lean Marketing for Startups",
   body: "How startups can apply the principles of lean manufacturing to marketing, in four steps: from cutting waste to growth hacking.",
-  specs: ["32 pages", "PDF, 360 KB", "Nicolas Spehler"],
+  specs: ["32 pages", "PDF", "Nicolas Spehler"],
   pdf: "/lean-marketing-for-startups.pdf",
   published: "2015-04-01",
   covers: [
