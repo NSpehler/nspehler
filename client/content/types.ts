@@ -80,7 +80,6 @@ export type ProjectRow = {
   name: string
   description: string
   tag: string
-  href: Href
 }
 export type ExperienceRow = {
   year: number

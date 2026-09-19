@@ -109,7 +109,6 @@ export const home = {
         description:
           "Sales and lead generation tool matching buildings to water solutions",
         tag: "Lead gen tool",
-        href: "https://advisor.smartvatten.com",
       },
       {
         year: 2022,
@@ -117,7 +116,6 @@ export const home = {
         description:
           "Lead categorization across 5,500 categories, in any language",
         tag: "API",
-        href: "https://categoryapi.com",
       },
       {
         year: 2021,
@@ -125,21 +123,18 @@ export const home = {
         description:
           "Lead automation across real estate portals, for over 250 agencies",
         tag: "SaaS",
-        href: "https://portalmonitor.io",
       },
       {
         year: 2021,
         name: "Real Estate Jobs",
         description: "Jobs and community for real estate agents and agencies",
         tag: "Job board",
-        href: "https://realestatejobs.io",
       },
       {
         year: 2018,
         name: "Moon",
         description: "Influencer marketplace connecting brands and creators",
         tag: "Marketplace",
-        href: "https://moon.xyz",
       },
       {
         year: 2018,
@@ -147,14 +142,12 @@ export const home = {
         description:
           "Finds the Twitter users most likely to engage with your brand",
         tag: "SaaS",
-        href: "https://followed.ai",
       },
       {
         year: 2016,
         name: "AboutYou",
         description: "Your own .com and a professional page, set up in minutes",
-        tag: "SaaS",
-        href: "https://aboutyou.website",
+        tag: "Site builder",
       },
       {
         year: 2014,
@@ -162,7 +155,6 @@ export const home = {
         description:
           "Weekly SEO articles on subscription, sold to Glean.net in 2016",
         tag: "SaaS",
-        href: "https://articly.me",
       },
     ],
   },
