@@ -7,7 +7,7 @@ import { Pill } from "@/components/ui/Pill"
 
 export const metadata: Metadata = {
   title: "Page not found",
-  robots: { index: false, follow: false },
+  alternates: null,
 }
 
 export default function NotFound() {
