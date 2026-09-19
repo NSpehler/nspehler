@@ -43,7 +43,7 @@ export const ArrowLink = ({
     <Anchor
       href={link.href}
       className={cn(
-        "group inline-flex items-center gap-2 font-medium transition-colors duration-150 motion-reduce:transition-none",
+        "group inline-flex items-center font-medium transition-colors duration-150 motion-reduce:transition-none",
         className,
       )}
       {...props}

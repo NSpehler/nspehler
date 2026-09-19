@@ -1,4 +1,11 @@
-import type { Project, Shot } from "@/content/types"
+import type { Project, Screen, Shot } from "@/content/types"
+
+export const screenShot = ({ src, alt, title }: Screen): Shot => ({
+  src,
+  alt,
+  caption: title,
+  kind: "phone",
+})
 
 export const collectShots = ({ lead, blocks }: Project): Shot[] => {
   const first: Shot[] =
