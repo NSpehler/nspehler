@@ -6,11 +6,6 @@ import advisorPlans from "@/images/projects/smartvatten/advisor-plans.webp"
 import advisorPropertyTypes from "@/images/projects/smartvatten/advisor-property-types.webp"
 import article from "@/images/projects/smartvatten/article.webp"
 import caseStudies from "@/images/projects/smartvatten/case-studies.webp"
-import cmsArticle from "@/images/projects/smartvatten/cms-article.webp"
-import cmsBlocks from "@/images/projects/smartvatten/cms-blocks.webp"
-import cmsBlog from "@/images/projects/smartvatten/cms-blog.webp"
-import cmsHome from "@/images/projects/smartvatten/cms-home.webp"
-import cmsHub from "@/images/projects/smartvatten/cms-hub.webp"
 import efficiency from "@/images/projects/smartvatten/efficiency.webp"
 import home from "@/images/projects/smartvatten/home.webp"
 import hub from "@/images/projects/smartvatten/hub.webp"
@@ -199,47 +194,6 @@ export const smartvatten = {
         {
           title: "Forms straight into Salesforce",
           body: "Every form sends its leads to Salesforce, including a step-by-step price request form.",
-        },
-      ],
-    },
-    {
-      type: "figure",
-      frame: "mat",
-      shot: {
-        src: cmsBlocks,
-        alt: "The section blocks in DatoCMS, from hero and stats sections to feature tabs, FAQs and calls to action, with the fields of the content section",
-        caption: "The library of sections in DatoCMS",
-      },
-    },
-    {
-      type: "figures",
-      frame: "mat",
-      shots: [
-        {
-          src: cmsHome,
-          alt: "The home page in DatoCMS: its sections in order, a tab for each language and the live preview",
-          caption: "The home page, section by section",
-        },
-        {
-          src: cmsHub,
-          alt: "The Smartvatten HUB page in DatoCMS, built from hero, content, accordion, feature grid and callout sections",
-          caption: "The HUB page",
-        },
-      ],
-    },
-    {
-      type: "figures",
-      frame: "mat",
-      shots: [
-        {
-          src: cmsBlog,
-          alt: "The article collection in DatoCMS, with articles in English, Finnish, Norwegian and Swedish",
-          caption: "Articles, in every language",
-        },
-        {
-          src: cmsArticle,
-          alt: "An article in DatoCMS, with its slug, image, category and audience",
-          caption: "An article, with its category and audience",
         },
       ],
     },
