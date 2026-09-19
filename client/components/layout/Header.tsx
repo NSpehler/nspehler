@@ -77,7 +77,7 @@ export const Header = () => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 flex flex-col bg-white/40 backdrop-blur-md md:h-auto dark:bg-black/40",
+        "bg-white/40 dark:bg-black/40 sticky top-0 z-50 flex flex-col backdrop-blur-md md:h-auto",
         { "h-dvh": menuOpen },
       )}
     >
@@ -96,11 +96,11 @@ export const Header = () => {
               <Link
                 href="/"
                 onClick={() => setMenuOpen(false)}
-                className="block text-2xl font-medium tracking-tight text-neutral-900 md:text-3xl dark:text-white"
+                className="text-neutral-900 dark:text-white block text-2xl font-medium tracking-tight md:text-3xl"
               >
                 {site.name}
               </Link>
-              <span className="block truncate text-2xl font-medium text-neutral-300 tabular-nums md:text-3xl dark:text-neutral-600">
+              <span className="text-neutral-300 dark:text-neutral-600 block truncate text-2xl font-medium tabular-nums md:text-3xl">
                 {coordinates}
               </span>
             </div>
@@ -112,7 +112,7 @@ export const Header = () => {
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
-                className="group relative -top-1 -right-1 inline-flex size-10 items-center justify-center text-neutral-900 transition-colors hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
+                className="group text-neutral-900 hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300 relative -top-1 -right-1 inline-flex size-10 items-center justify-center transition-colors"
               >
                 <span aria-hidden="true" className="relative block size-4">
                   <span className="absolute inset-x-0 top-1/2 h-px -translate-y-[3px] bg-current transition-transform duration-200 ease-out group-data-open:translate-y-0 group-data-open:rotate-45 motion-reduce:transition-none" />
@@ -124,7 +124,7 @@ export const Header = () => {
 
           <nav
             aria-label="Navigation"
-            className="relative hidden border-b border-neutral-200 md:flex md:gap-8 dark:border-neutral-800"
+            className="border-neutral-200 dark:border-neutral-800 relative hidden border-b md:flex md:gap-8"
           >
             {site.navigation.map((item, index) => {
               const active = isActive(item.href)
@@ -152,7 +152,7 @@ export const Header = () => {
             <span
               aria-hidden="true"
               className={cn(
-                "pointer-events-none absolute -bottom-px h-px bg-neutral-900 dark:bg-white",
+                "bg-neutral-900 dark:bg-white pointer-events-none absolute -bottom-px h-px",
                 {
                   "transition-[left,width,opacity] duration-300 ease-out":
                     animateUnderline,

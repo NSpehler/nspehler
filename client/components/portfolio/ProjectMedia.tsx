@@ -26,7 +26,7 @@ export const ProjectMedia = ({
 }: Props) => (
   <span
     className={cn(
-      "relative block overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900",
+      "bg-neutral-100 dark:bg-neutral-900 relative block overflow-hidden rounded-xl",
       className,
     )}
   >
@@ -45,7 +45,7 @@ export const ProjectMedia = ({
     {/* Hairline drawn above the image so the frame reads on any screenshot. */}
     <span
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-neutral-900/10 ring-inset dark:ring-white/10"
+      className="ring-neutral-900/10 dark:ring-white/10 pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset"
     />
   </span>
 )

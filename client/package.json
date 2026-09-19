@@ -7,13 +7,16 @@
   },
   "scripts": {
     "dev": "portless run next dev",
+    "dev:localhost": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "knip": "knip"
+    "typecheck": "next typegen && tsc --noEmit",
+    "knip": "knip",
+    "check": "bun run lint && bun run format && bun run typecheck && bun run knip"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
@@ -29,7 +32,6 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.1",
-    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^24",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19",
@@ -37,7 +39,6 @@
     "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "^10.1.8",
     "knip": "^6.6.3",
-    "lighthouse": "^13.1.0",
     "portless": "^0.15.0",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",

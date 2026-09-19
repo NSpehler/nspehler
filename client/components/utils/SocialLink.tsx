@@ -44,7 +44,7 @@ export const SocialLink = ({ title, href, icon }: Props) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-neutral-400 transition-colors hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white"
+      className="text-neutral-400 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white transition-colors"
     >
       <span className="sr-only">{title}</span>
       <Icon className="size-6" />

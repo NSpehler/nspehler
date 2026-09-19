@@ -81,7 +81,7 @@ export const ScreenshotStrip = ({ title, shots }: Props) => {
                 label={`${title}: ${shot.caption}`}
                 onOpen={() => lightbox.open(position)}
               />
-              <figcaption className="text-sm text-neutral-500 dark:text-neutral-400">
+              <figcaption className="text-neutral-500 dark:text-neutral-400 text-sm">
                 {shot.caption}
               </figcaption>
             </figure>
@@ -130,7 +130,7 @@ const EdgeFade = ({ side, visible }: EdgeFadeProps) => (
   <span
     aria-hidden="true"
     className={cn(
-      "pointer-events-none absolute inset-y-0 w-14 from-white to-transparent transition-opacity duration-300 ease-out motion-reduce:transition-none md:w-20 dark:from-black",
+      "from-white dark:from-black pointer-events-none absolute inset-y-0 w-14 to-transparent transition-opacity duration-300 ease-out motion-reduce:transition-none md:w-20",
       side === "left" ? "left-0 bg-gradient-to-r" : "right-0 bg-gradient-to-l",
       visible ? "opacity-100" : "opacity-0",
     )}
@@ -162,7 +162,7 @@ const ArrowButton = ({
       }
       style={{ top }}
       className={cn(
-        "absolute hidden size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-neutral-900 shadow-sm ring-1 ring-neutral-900/10 backdrop-blur transition-[opacity,background-color] duration-300 ease-out hover:bg-white motion-reduce:transition-none md:inline-flex dark:bg-black/70 dark:text-white dark:ring-white/15 dark:hover:bg-neutral-900",
+        "bg-white/80 text-neutral-900 ring-neutral-900/10 hover:bg-white dark:bg-black/70 dark:text-white dark:ring-white/15 dark:hover:bg-neutral-900 absolute hidden size-9 -translate-y-1/2 items-center justify-center rounded-full shadow-sm ring-1 backdrop-blur transition-[opacity,background-color] duration-300 ease-out motion-reduce:transition-none md:inline-flex",
         direction === -1 ? "left-3" : "right-3",
         visible
           ? "opacity-0 group-hover/strip:opacity-100 focus-visible:opacity-100"

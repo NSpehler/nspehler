@@ -26,7 +26,7 @@ export const ShotButton = ({
     onClick={onOpen}
     aria-label={`Open ${label}`}
     className={cn(
-      "group/shot block w-full cursor-zoom-in rounded-xl text-left outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-white dark:focus-visible:ring-offset-black",
+      "group/shot focus-visible:ring-neutral-900 focus-visible:ring-offset-white dark:focus-visible:ring-white dark:focus-visible:ring-offset-black block w-full cursor-zoom-in rounded-xl text-left outline-none focus-visible:ring-2 focus-visible:ring-offset-4",
       className,
     )}
   >

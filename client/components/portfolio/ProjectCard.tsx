@@ -26,6 +26,7 @@ export const ProjectCard = ({ project, priority = false }: Props) => {
   const sizes = wide ? WIDE_SIZES : HALF_SIZES
   const lightbox = useLightbox()
   const [cover] = project.screenshots
+  if (!cover) return null
 
   return (
     <article
@@ -46,7 +47,7 @@ export const ProjectCard = ({ project, priority = false }: Props) => {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1 text-xl font-medium text-neutral-900 transition-colors hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
+            className="group text-neutral-900 hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300 inline-flex items-center gap-1 text-xl font-medium transition-colors"
           >
             {project.title}
             <ArrowUpRightIcon
@@ -54,7 +55,7 @@ export const ProjectCard = ({ project, priority = false }: Props) => {
               aria-hidden="true"
             />
           </a>
-          <span className="shrink-0 text-xl font-medium text-neutral-300 tabular-nums dark:text-neutral-500">
+          <span className="text-neutral-300 dark:text-neutral-500 shrink-0 text-xl font-medium tabular-nums">
             {project.year}
           </span>
         </div>
@@ -62,13 +63,13 @@ export const ProjectCard = ({ project, priority = false }: Props) => {
         <div className={cn("grid gap-2.5", { "md:col-span-2": wide })}>
           <p
             className={cn(
-              "leading-snug text-pretty text-neutral-600 dark:text-neutral-400",
+              "text-neutral-600 dark:text-neutral-400 leading-snug text-pretty",
               wide ? "text-lg" : "text-base",
             )}
           >
             {project.headline}
           </p>
-          <ul className="flex flex-wrap items-center gap-x-2 text-sm text-neutral-500">
+          <ul className="text-neutral-500 flex flex-wrap items-center gap-x-2 text-sm">
             <li>{project.kind}</li>
             {project.stack.map((item) => (
               <li key={item} className="flex items-center gap-x-2">

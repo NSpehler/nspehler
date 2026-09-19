@@ -3,16 +3,20 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // Pin Turbopack's workspace root to this directory so it doesn't walk up
-  // and try to resolve modules (like `tailwindcss`) from the repo root.
+  typedRoutes: true,
   turbopack: {
     root: import.meta.dirname,
   },
   images: {
-    // Screenshots are statically imported and served through the optimizer;
-    // AVIF first, WebP as the fallback. No remote hosts needed.
     formats: ["image/avif", "image/webp"],
+    qualities: [75, 85],
     minimumCacheTTL: 60 * 60 * 24 * 365,
+  },
+  async redirects() {
+    return [
+      { source: "/work", destination: "/", permanent: true },
+      { source: "/projects", destination: "/", permanent: true },
+    ]
   },
   async headers() {
     return [

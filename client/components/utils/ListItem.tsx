@@ -14,7 +14,7 @@ export const ListItem = ({ item }: Props) => (
         href={item.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex items-center gap-1 text-xl font-medium text-neutral-900 transition-colors hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
+        className="group text-neutral-900 hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300 inline-flex items-center gap-1 text-xl font-medium transition-colors"
       >
         {item.title}
         <ArrowUpRightIcon
@@ -22,7 +22,7 @@ export const ListItem = ({ item }: Props) => (
           aria-hidden="true"
         />
       </a>
-      <span className="shrink-0 text-xl font-medium text-neutral-300 tabular-nums dark:text-neutral-500">
+      <span className="text-neutral-300 dark:text-neutral-500 shrink-0 text-xl font-medium tabular-nums">
         {item.year}
       </span>
     </div>

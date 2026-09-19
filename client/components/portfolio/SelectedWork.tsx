@@ -12,13 +12,13 @@ import { ProjectCard } from "./ProjectCard"
 export const SelectedWork = () => (
   <section
     aria-labelledby="selected-work"
-    className="mt-12 border-t border-neutral-200 pt-8 md:mt-16 md:pt-12 dark:border-neutral-800"
+    className="border-neutral-200 dark:border-neutral-800 mt-12 border-t pt-8 md:mt-16 md:pt-12"
   >
     <div className="mb-8 flex items-baseline justify-between gap-6 md:mb-10">
       <div className="grid gap-1">
         <h2
           id="selected-work"
-          className="text-xl font-medium text-neutral-900 dark:text-white"
+          className="text-neutral-900 dark:text-white text-xl font-medium"
         >
           Selected work
         </h2>
@@ -29,7 +29,7 @@ export const SelectedWork = () => (
       </div>
       <Link
         href="/work"
-        className="group inline-flex shrink-0 items-center gap-1 text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+        className="group text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white inline-flex shrink-0 items-center gap-1 text-sm font-medium transition-colors"
       >
         All work
         <ArrowRightIcon

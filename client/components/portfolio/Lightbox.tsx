@@ -172,7 +172,8 @@ export const Lightbox = ({
             (delta) => shots[(current + delta + shots.length) % shots.length],
           )
           .filter(
-            (neighbour, position, list) => list.indexOf(neighbour) === position,
+            (neighbour, position, list): neighbour is Screenshot =>
+              neighbour !== undefined && list.indexOf(neighbour) === position,
           )
       : []
 
@@ -207,7 +208,7 @@ export const Lightbox = ({
       ref={dialogRef}
       onCancel={handleCancel}
       aria-label={`${shot.caption}, image ${current + 1} of ${shots.length}`}
-      className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden bg-transparent p-0 text-neutral-900 backdrop:bg-transparent dark:text-white"
+      className="text-neutral-900 dark:text-white fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden bg-transparent p-0 backdrop:bg-transparent"
     >
       <button
         type="button"
@@ -215,7 +216,7 @@ export const Lightbox = ({
         tabIndex={-1}
         onClick={close}
         className={cn(
-          "absolute inset-0 cursor-zoom-out bg-white/85 backdrop-blur-2xl outline-none dark:bg-black/85",
+          "bg-white/85 dark:bg-black/85 absolute inset-0 cursor-zoom-out backdrop-blur-2xl outline-none",
           animate && "transition-opacity duration-[420ms] ease-out",
           settled ? "opacity-100" : "opacity-0",
         )}
@@ -227,9 +228,9 @@ export const Lightbox = ({
           fade,
         )}
       >
-        <p className="text-sm font-medium text-neutral-500 tabular-nums dark:text-neutral-400">
+        <p className="text-neutral-500 dark:text-neutral-400 text-sm font-medium tabular-nums">
           {current + 1}
-          <span className="mx-1 text-neutral-300 dark:text-neutral-600">/</span>
+          <span className="text-neutral-300 dark:text-neutral-600 mx-1">/</span>
           {shots.length}
         </p>
         <button
@@ -249,7 +250,7 @@ export const Lightbox = ({
       <figure
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
-        className="absolute m-0 overflow-hidden bg-neutral-100 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.35)] ring-1 ring-neutral-900/10 select-none dark:bg-neutral-900 dark:shadow-[0_24px_80px_-24px_rgba(0,0,0,0.8)] dark:ring-white/10"
+        className="bg-neutral-100 ring-neutral-900/10 dark:bg-neutral-900 dark:ring-white/10 absolute m-0 overflow-hidden shadow-[0_24px_80px_-24px_rgba(0,0,0,0.35)] ring-1 select-none dark:shadow-[0_24px_80px_-24px_rgba(0,0,0,0.8)]"
         style={frameStyle}
       >
         {/* Thumbnail-resolution copy: same srcset as the card, so it is already cached. */}
@@ -299,7 +300,7 @@ export const Lightbox = ({
       <p
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-x-0 bottom-0 px-5 pb-7 text-center text-sm text-neutral-600 md:pb-8 dark:text-neutral-400",
+          "text-neutral-600 dark:text-neutral-400 pointer-events-none absolute inset-x-0 bottom-0 px-5 pb-7 text-center text-sm md:pb-8",
           fade,
         )}
       >

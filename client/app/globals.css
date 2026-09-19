@@ -1,95 +1,352 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
-/*
- * Dark mode is class-based and driven by `next-themes`, which toggles the
- * `dark` class on <html>. The "system" preference is also resolved by
- * next-themes into the same class so the styling logic stays uniform.
- */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/*
- * Dark mode prose colors are handled by @tailwindcss/typography's built-in
- * `prose-invert` modifier — applied as `dark:prose-invert` on each element.
- * The block below only customizes the link styling (underlined border)
- * which is not part of the plugin's defaults.
- */
-.prose a {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-color: var(--tw-prose-links);
-  padding-bottom: 0.25rem;
-  text-decoration: none;
-  transition:
-    color 150ms ease,
-    border-color 150ms ease;
+@theme {
+  --color-*: initial;
+  --color-page: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-ink-strong: #171717;
+  --color-on-ink: #ffffff;
+  --color-body: #6b6b6b;
+  --color-label: #737373;
+  --color-soft: #8c8c8c;
+  --color-faint: #a3a3a3;
+  --color-separator: #c4c4c4;
+  --color-hairline: #e8e8e8;
+  --color-edge: #e5e5e5;
+  --color-control: #e0e0e0;
+  --color-mat: #f5f5f5;
+  --color-raised: #ffffff;
+  --color-track: #ffffff;
+  --color-selected: #f5f5f5;
+  --color-accent: #1f9d55;
+  --color-bleed: rgb(0 0 0 / 0.06);
+
+  --container-page: 90rem;
+
+  --radius-inset: 10px;
+  --radius-mat: 16px;
+  --radius-thumb: 8px;
+
+  --ease-morph: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --text-display: clamp(44px, 23.92px + 5.149vw, 96px);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.045em;
+  --text-display--font-weight: 500;
+  --text-title-xl: clamp(40px, 27.64px + 3.168vw, 72px);
+  --text-title-xl--line-height: 1;
+  --text-title-xl--letter-spacing: -0.045em;
+  --text-title-xl--font-weight: 500;
+  --text-title-lg: clamp(36px, 25.19px + 2.772vw, 64px);
+  --text-title-lg--line-height: normal;
+  --text-title-lg--letter-spacing: -0.04em;
+  --text-title-lg--font-weight: 500;
+  --text-title: clamp(30px, 19.19px + 2.772vw, 58px);
+  --text-title--line-height: 1.04;
+  --text-title--letter-spacing: -0.035em;
+  --text-title--font-weight: 500;
+  --text-headline: clamp(28px, 23.37px + 1.188vw, 40px);
+  --text-headline--line-height: normal;
+  --text-headline--letter-spacing: -0.03em;
+  --text-headline--font-weight: 500;
+  --text-cta: clamp(26px, 20.59px + 1.386vw, 40px);
+  --text-cta--line-height: 1.12;
+  --text-cta--letter-spacing: -0.03em;
+  --text-cta--font-weight: 500;
+  --text-intro: clamp(24px, 18.59px + 1.386vw, 38px);
+  --text-intro--line-height: 1.3;
+  --text-intro--letter-spacing: -0.028em;
+  --text-intro--font-weight: 500;
+  --text-chapter: clamp(24px, 20.91px + 0.792vw, 32px);
+  --text-chapter--line-height: 1.2;
+  --text-chapter--letter-spacing: -0.025em;
+  --text-chapter--font-weight: 500;
+  --text-subtitle: clamp(20px, 16.91px + 0.792vw, 28px);
+  --text-subtitle--line-height: 1.3;
+  --text-subtitle--letter-spacing: -0.02em;
+  --text-lede: clamp(18px, 15.68px + 0.594vw, 24px);
+  --text-lede--line-height: 1.5;
+  --text-lede--letter-spacing: -0.015em;
 }
 
-.prose a:hover {
-  color: var(--color-neutral-600);
-  border-color: var(--color-neutral-600);
-}
+@theme inline {
+  --font-sans:
+    var(--font-geist), ui-sans-serif, -apple-system, "Helvetica Neue",
+    Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
 
-.prose-invert a:hover {
-  color: var(--color-neutral-300);
-  border-color: var(--color-neutral-300);
-}
-
-/*
- * Tighter prose lists — Tailwind typography's defaults space list items
- * generously at prose-xl / prose-2xl. We pull the rows closer together,
- * reduce the indent, and soften the bullet marker for a Linear/Vercel rhythm.
- */
-.prose :where(ul, ol) {
-  padding-inline-start: 1.25em;
-}
-
-.prose :where(ul, ol) > li {
-  margin-block: 0.5em;
-  padding-inline-start: 0.375em;
-}
-
-.prose :where(li) > :where(p) {
-  margin-block: 0;
-}
-
-.prose :where(li)::marker {
-  color: var(--color-neutral-400);
-}
-
-.prose-invert :where(li)::marker {
-  color: var(--color-neutral-600);
-}
-
-body {
-  @apply antialiased;
-  text-rendering: optimizeLegibility;
+  --shadow-shot-lg:
+    0 0 0 1px var(--shot-ring), 0 0 0 3px var(--shot-halo),
+    0 32px 64px -32px var(--shot-shadow);
+  --shadow-shot-md:
+    0 0 0 1px var(--shot-ring), 0 0 0 3px var(--shot-halo),
+    0 28px 56px -28px var(--shot-shadow);
+  --shadow-shot-sm:
+    0 0 0 1px var(--shot-ring), 0 0 0 3px var(--shot-halo),
+    0 16px 32px -18px var(--shot-shadow);
+  --shadow-shot-xs:
+    0 0 0 1px var(--shot-ring), 0 0 0 2px var(--shot-halo),
+    0 14px 28px -16px var(--shot-shadow);
+  --shadow-slide:
+    0 0 0 1px var(--shot-ring), 0 0 0 3px var(--shot-halo),
+    0 24px 48px -28px var(--shot-shadow);
+  --shadow-phone:
+    0 0 0 1px var(--phone-ring), 0 2px 4px var(--phone-lift),
+    0 24px 48px -24px var(--shot-shadow);
+  --shadow-paper:
+    0 0 0 1px var(--paper-ring), 0 1px 2px var(--paper-lift),
+    0 10px 24px -14px var(--paper-shadow);
+  --shadow-paper-front:
+    0 0 0 1px var(--paper-front-ring), 0 2px 4px var(--paper-front-lift),
+    0 22px 44px -20px var(--paper-front-shadow);
+  --shadow-play: 0 10px 30px -10px var(--play-shadow);
+  --shadow-avatar: 0 0 0 4px var(--avatar-ring);
+  --shadow-halo: 0 0 0 4px var(--accent-halo);
+  --drop-shadow-phone: 0 26px 34px var(--phone-drop);
 }
 
 @layer base {
+  :root {
+    --shot-ring: rgb(0 0 0 / 0.07);
+    --shot-halo: rgb(0 0 0 / 0.03);
+    --shot-shadow: rgb(0 0 0 / 0.35);
+    --phone-ring: rgb(0 0 0 / 0.08);
+    --phone-lift: rgb(0 0 0 / 0.06);
+    --phone-drop: rgb(0 0 0 / 0.2);
+    --avatar-ring: rgb(0 0 0 / 0.05);
+    --accent-halo: rgb(31 157 85 / 0.14);
+    --paper-ring: rgb(0 0 0 / 0.06);
+    --paper-lift: rgb(0 0 0 / 0.03);
+    --paper-shadow: rgb(0 0 0 / 0.18);
+    --paper-front-ring: rgb(0 0 0 / 0.07);
+    --paper-front-lift: rgb(0 0 0 / 0.05);
+    --paper-front-shadow: rgb(0 0 0 / 0.28);
+    --paper-contact: rgb(0 0 0 / 0.09);
+    --play-shadow: rgb(0 0 0 / 0.45);
+    --vt-exit: 160ms;
+    --vt-enter: 280ms;
+    --vt-morph: 420ms;
+  }
+
+  .dark {
+    --color-page: #000000;
+    --color-ink: #ffffff;
+    --color-ink-strong: #ffffff;
+    --color-on-ink: #0a0a0a;
+    --color-body: #a3a3a3;
+    --color-label: #737373;
+    --color-soft: #737373;
+    --color-faint: #525252;
+    --color-separator: #3f3f3f;
+    --color-hairline: #262626;
+    --color-edge: #262626;
+    --color-control: #2e2e2e;
+    --color-mat: #171717;
+    --color-raised: #171717;
+    --color-track: #0a0a0a;
+    --color-selected: #262626;
+    --color-accent: #22c55e;
+    --color-bleed: rgb(255 255 255 / 0.1);
+    --shot-ring: rgb(255 255 255 / 0.1);
+    --shot-halo: rgb(255 255 255 / 0.04);
+    --shot-shadow: rgb(0 0 0 / 0.65);
+    --phone-ring: rgb(255 255 255 / 0.1);
+    --phone-lift: rgb(0 0 0 / 0.4);
+    --phone-drop: rgb(0 0 0 / 0.55);
+    --avatar-ring: rgb(255 255 255 / 0.08);
+    --accent-halo: rgb(34 197 94 / 0.16);
+    --paper-ring: rgb(255 255 255 / 0.1);
+    --paper-lift: rgb(0 0 0 / 0.3);
+    --paper-shadow: rgb(0 0 0 / 0.55);
+    --paper-front-ring: rgb(255 255 255 / 0.12);
+    --paper-front-lift: rgb(0 0 0 / 0.4);
+    --paper-front-shadow: rgb(0 0 0 / 0.7);
+    --paper-contact: rgb(0 0 0 / 0.5);
+    --play-shadow: rgb(0 0 0 / 0.7);
+  }
+
+  html {
+    line-height: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-page);
+    color: var(--color-ink);
+  }
+
+  a:hover {
+    color: var(--color-body);
+  }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
 
   :focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid var(--color-ink);
     outline-offset: 2px;
   }
 
-  /*
-   * Lock page scroll while the mobile menu is open. Scoped to viewports
-   * below the `md` breakpoint, so resizing to desktop automatically
-   * releases the lock without needing JS to track the breakpoint.
-   */
-  @media (width < 48rem) {
-    html:has(#mobile-menu[aria-hidden="false"]) {
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  @media (width < 64rem) {
+    html:has(#mobile-menu[data-open]) {
       overflow: hidden;
     }
   }
 
-  /* Freeze the page behind the screenshot lightbox. */
-  html:has(dialog[open]) {
-    overflow: hidden;
+  ::view-transition {
+    pointer-events: none;
+  }
+
+  ::view-transition-group(.morph) {
+    animation-duration: var(--vt-morph);
+    animation-timing-function: var(--ease-morph);
+  }
+
+  ::view-transition-group(site-header) {
+    animation: none;
+    z-index: 100;
+  }
+
+  ::view-transition-old(site-header) {
+    display: none;
+  }
+
+  ::view-transition-new(site-header) {
+    animation: none;
+  }
+
+  ::view-transition-old(.page-fade),
+  ::view-transition-old(.page-forward),
+  ::view-transition-old(.page-back) {
+    animation: var(--vt-exit) ease-in both vt-fade-out;
+  }
+
+  ::view-transition-new(.page-fade),
+  ::view-transition-new(.page-forward),
+  ::view-transition-new(.page-back) {
+    animation: var(--vt-enter) ease-out 100ms both vt-fade-in;
+  }
+
+  ::view-transition-old(.page-forward) {
+    animation:
+      var(--vt-exit) ease-in both vt-fade-out,
+      var(--vt-exit) ease-in both vt-drift-up;
+  }
+
+  ::view-transition-new(.page-forward) {
+    animation:
+      var(--vt-enter) ease-out 100ms both vt-fade-in,
+      var(--vt-morph) var(--ease-morph) both vt-rise;
+  }
+
+  ::view-transition-old(.page-back) {
+    animation:
+      var(--vt-exit) ease-in both vt-fade-out,
+      var(--vt-exit) ease-in both vt-drift-down;
+  }
+
+  ::view-transition-new(.page-back) {
+    animation:
+      var(--vt-enter) ease-out 100ms both vt-fade-in,
+      var(--vt-morph) var(--ease-morph) both vt-settle;
+  }
+
+  html[data-navigated]:not(:where(:active-view-transition)) [data-page] {
+    transition:
+      opacity var(--vt-enter) ease-out,
+      translate var(--vt-morph) var(--ease-morph);
+
+    @starting-style {
+      opacity: 0;
+      translate: 0 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+
+    html[data-navigated] [data-page] {
+      transition: none;
+    }
+  }
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-rise {
+  from {
+    translate: 0 12px;
+  }
+}
+
+@keyframes vt-settle {
+  from {
+    translate: 0 -12px;
+  }
+}
+
+@keyframes vt-drift-up {
+  to {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes vt-drift-down {
+  to {
+    translate: 0 8px;
+  }
+}
+
+@utility eyebrow {
+  @apply font-mono text-[11px] tracking-[0.02em] text-label uppercase md:text-[12px];
+}
+
+@utility caption {
+  @apply font-mono text-[11px] text-label md:text-[12px];
+}
+
+@utility mat {
+  @apply flex items-center justify-center rounded-[14px] bg-mat inset-ring inset-ring-edge md:rounded-mat;
+}
+
+@utility ruled {
+  @apply mt-18 border-t border-hairline pt-6 md:mt-30 md:pt-8;
+}
+
+@utility two-tone {
+  & span {
+    color: var(--color-soft);
   }
 }
