@@ -36,11 +36,11 @@
   @keyframes beacon {
     from {
       scale: 1;
-      opacity: 0.5;
+      opacity: 0.6;
     }
     70%,
     to {
-      scale: 2.2;
+      scale: 2.6;
       opacity: 0;
     }
   }
