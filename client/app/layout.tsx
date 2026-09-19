@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import type { ReactNode } from "react"
 
 import { Footer, Header, ThemeProvider } from "@/components/layout"
+import { NavigationFlag } from "@/components/motion/NavigationFlag"
 import { home } from "@/content/home"
 import { site } from "@/content/site"
 import { cn } from "@/lib/utils"
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: Props) {
             content
           )}
         </ThemeProvider>
+        <NavigationFlag />
         <Analytics />
         <SpeedInsights />
       </body>

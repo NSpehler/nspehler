@@ -338,7 +338,7 @@
 }
 
 @utility mat {
-  @apply flex items-center justify-center rounded-[14px] bg-mat inset-ring inset-ring-edge md:rounded-mat;
+  @apply flex items-center justify-center bg-mat inset-ring inset-ring-edge;
 }
 
 @utility ruled {
