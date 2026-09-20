@@ -43,7 +43,6 @@ resource "cloudflare_dns_record" "vercel_www" {
   proxied = false
 }
 
-# DatoCMS
 # Cloudflare Email
 resource "cloudflare_dns_record" "cloudflare_email_mx_1" {
   zone_id  = cloudflare_zone.nspehler.id
