@@ -230,7 +230,7 @@ export const Lightbox = ({
           fade,
         )}
       >
-        <p className="text-sm font-medium text-label tabular-nums">
+        <p className="caption tabular-nums">
           {current + 1}
           <span className="mx-1 text-separator">/</span>
           {shots.length}
@@ -309,7 +309,7 @@ export const Lightbox = ({
       <p
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-x-0 bottom-0 px-5 pb-7 text-center text-sm text-body md:pb-8",
+          "pointer-events-none absolute inset-x-0 bottom-0 px-5 pb-7 text-center caption md:pb-8",
           fade,
         )}
       >
