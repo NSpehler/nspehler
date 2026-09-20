@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { Fragment } from "react"
 
 import { ArrowLink } from "@/components/ui/ArrowLink"
 import { Eyebrow } from "@/components/ui/Eyebrow"
@@ -23,9 +24,12 @@ export const ResearchHero = () => (
       <p className="mt-6 text-lg/[1.45] text-pretty text-body md:text-[22px]/[1.45] md:tracking-[-0.01em]">
         {research.body}
       </p>
-      <div className="mt-8 flex gap-6 caption">
-        {research.specs.map((spec) => (
-          <span key={spec}>{spec}</span>
+      <div className="mt-8 flex gap-3 caption">
+        {research.specs.map((spec, index) => (
+          <Fragment key={spec}>
+            {index > 0 && <span className="text-separator">·</span>}
+            <span>{spec}</span>
+          </Fragment>
         ))}
       </div>
       <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">

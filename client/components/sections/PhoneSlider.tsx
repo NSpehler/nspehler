@@ -5,8 +5,6 @@ import { type ReactNode, useEffect, useRef, useState } from "react"
 
 import { Shot } from "@/components/media/Shot"
 import { sizes } from "@/components/media/sizes"
-import { Morph } from "@/components/motion/Morph"
-import { vt } from "@/components/motion/names"
 import type { Screen } from "@/content/types"
 import { screenShot } from "@/lib/collectShots"
 import { morph } from "@/lib/easing"
@@ -15,7 +13,6 @@ import { cn } from "@/lib/utils"
 
 type Props = {
   screens: readonly Screen[]
-  slug: string
   intro: ReactNode
 }
 
@@ -34,7 +31,7 @@ const tilts = [
   "rotate-[0.7deg]",
 ]
 
-export const PhoneSlider = ({ screens, slug, intro }: Props) => {
+export const PhoneSlider = ({ screens, intro }: Props) => {
   const viewport = useRef<HTMLDivElement>(null)
   const track = useRef<HTMLDivElement>(null)
   const animation = useRef<number | null>(null)
@@ -150,11 +147,7 @@ export const PhoneSlider = ({ screens, slug, intro }: Props) => {
                 key={screen.title}
                 className="flex w-44 shrink-0 snap-start flex-col gap-3 md:w-[232px]"
               >
-                {index === 0 ? (
-                  <Morph name={vt.visual(slug)}>{shot}</Morph>
-                ) : (
-                  shot
-                )}
+                {shot}
                 <figcaption className="flex flex-col gap-[3px]">
                   <span className="text-[13px] font-medium md:text-sm">
                     {screen.title}

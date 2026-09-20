@@ -17,7 +17,6 @@ export const NowBuilding = () => {
     >
       <PhoneSlider
         screens={screens}
-        slug={slug}
         intro={
           <>
             <Eyebrow>Now building</Eyebrow>
