@@ -5,6 +5,8 @@ import advisorData from "@/images/projects/smartvatten/advisor-data.webp"
 import advisorPlans from "@/images/projects/smartvatten/advisor-plans.webp"
 import advisorPropertyTypes from "@/images/projects/smartvatten/advisor-property-types.webp"
 import article from "@/images/projects/smartvatten/article.webp"
+import blogSearch from "@/images/projects/smartvatten/blog-search.webp"
+import blog from "@/images/projects/smartvatten/blog.webp"
 import caseStudies from "@/images/projects/smartvatten/case-studies.webp"
 import home from "@/images/projects/smartvatten/home.webp"
 import hub from "@/images/projects/smartvatten/hub.webp"
@@ -152,20 +154,29 @@ export const smartvatten = {
           caption: "Product page",
         },
         {
-          src: priceWizard,
-          alt: "The Price Wizard, opened over the home page: tell us a bit about you so we can tailor a price offer, starting with real estate or utilities",
-          caption: "Price Wizard",
+          src: caseStudies,
+          alt: "Case studies, filtered by industry: investors, logistics, offices, hospitality, retail and more",
+          caption: "Case studies",
         },
       ],
+    },
+    {
+      type: "figure",
+      frame: "mat",
+      shot: {
+        src: priceWizard,
+        alt: "The Price Wizard, opened over the home page: tell us a bit about you so we can tailor a price offer, starting with real estate or utilities",
+        caption: "Price Wizard",
+      },
     },
     {
       type: "figures",
       frame: "mat",
       shots: [
         {
-          src: caseStudies,
-          alt: "Case studies, filtered by industry: investors, logistics, offices, hospitality, retail and more",
-          caption: "Case studies",
+          src: blog,
+          alt: "Blog home page: Articles and insights, with topic filters above the latest articles",
+          caption: "Blog",
         },
         {
           src: article,
@@ -173,6 +184,15 @@ export const smartvatten = {
           caption: "Blog article",
         },
       ],
+    },
+    {
+      type: "figure",
+      frame: "mat",
+      shot: {
+        src: blogSearch,
+        alt: "Blog search: results for water management, each tagged with its topic",
+        caption: "Blog search",
+      },
     },
     {
       type: "cards",
@@ -205,7 +225,7 @@ export const smartvatten = {
         { label: "Content", value: "DatoCMS, with GraphQL" },
         { label: "Data", value: "MongoDB" },
         { label: "Charts", value: "Recharts, React Flow" },
-        { label: "Forms", value: "Salesforce, HubSpot, Cloudflare Turnstile" },
+        { label: "Forms", value: "Salesforce, HubSpot" },
         { label: "Hosting", value: "Vercel" },
       ],
     },
