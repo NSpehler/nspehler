@@ -16,7 +16,7 @@ export const alma = {
     "Alma helps merchants offer installment payments and get paid right away",
   facts: [
     { label: "Type", value: "Website and growth engineering" },
-    { label: "Tech stack", value: "Next.js, DatoCMS, Python, LLMs" },
+    { label: "Tech stack", value: "Next.js, DatoCMS, Python" },
     {
       label: "Website",
       links: [{ label: "almapay.com", href: "https://almapay.com" }],
@@ -133,7 +133,7 @@ export const alma = {
           label: "Website",
           value: "Next.js, React, Tailwind CSS, Framer Motion",
         },
-        { label: "Content", value: "DatoCMS, with a large section library" },
+        { label: "Content", value: "DatoCMS, with GraphQL" },
         { label: "Search", value: "Algolia" },
         {
           label: "Growth tools",
