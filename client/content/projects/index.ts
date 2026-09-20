@@ -1,4 +1,5 @@
 import type { Project } from "../types"
+import { abax } from "./abax"
 import { alma } from "./alma"
 import { analog } from "./analog"
 import { backMarketPro } from "./back-market-pro"
@@ -19,6 +20,7 @@ export const projects = {
   paperdrop,
   nucase,
   intigriti,
+  abax,
   "back-market-pro": backMarketPro,
   alma,
   analog,

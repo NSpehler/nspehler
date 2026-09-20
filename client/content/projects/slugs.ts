@@ -5,6 +5,7 @@ export const slugs = [
   "paperdrop",
   "nucase",
   "intigriti",
+  "abax",
   "back-market-pro",
   "alma",
   "analog",
