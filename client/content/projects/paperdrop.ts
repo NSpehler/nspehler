@@ -71,7 +71,7 @@ export const paperdrop = {
         {
           src: dropFile,
           alt: "A new form in the builder, with a drop zone for its PDF template",
-          caption: "A new form, waiting for its PDF",
+          caption: "A new form and its PDF drop zone",
         },
       ],
     },
