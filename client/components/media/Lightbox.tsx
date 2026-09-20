@@ -44,7 +44,6 @@ const DURATION = 420
 const EASE = "cubic-bezier(0.32, 0.72, 0, 1)"
 const CHROME = { x: 20, top: 72, bottom: 88 }
 const MD_CHROME = { x: 96, top: 80, bottom: 96 }
-const LG_CHROME = { x: 96, top: 104, bottom: 96 }
 const headerHeight = (vw: number) => (vw >= 1024 ? 104 : 72)
 
 export const Lightbox = ({
@@ -260,7 +259,12 @@ export const Lightbox = ({
 
       <div
         className="pointer-events-none absolute inset-0"
-        style={{ clipPath: `inset(${headerHeight(viewport[0])}px 0 0 0)` }}
+        style={{
+          clipPath:
+            phase === "closing"
+              ? `inset(${headerHeight(viewport[0])}px 0 0 0)`
+              : undefined,
+        }}
       >
         <figure
           onPointerDown={handlePointerDown}
@@ -371,7 +375,7 @@ const shrink = (rect: Rect): Rect => ({
 })
 
 const fitRect = (shot: Shot, [vw, vh]: [number, number]): Rect => {
-  const chrome = vw >= 1024 ? LG_CHROME : vw >= 768 ? MD_CHROME : CHROME
+  const chrome = vw >= 768 ? MD_CHROME : CHROME
   const maxWidth = Math.min(1400, vw - chrome.x * 2)
   const maxHeight = vh - chrome.top - chrome.bottom
   const ratio = shot.src.width / shot.src.height
