@@ -20,7 +20,14 @@ import { cn } from "@/lib/utils"
 
 import { sizes } from "./sizes"
 
-export type Thumb = { rect: DOMRect; sizes: string }
+type Rect = { top: number; left: number; width: number; height: number }
+
+export type Thumb = {
+  rect: Rect
+  angle: number
+  radius: number
+  sizes: string
+}
 
 type Props = {
   shots: readonly Shot[]
@@ -30,8 +37,7 @@ type Props = {
   getThumb: (index: number) => Thumb | null
 }
 
-type Rect = { top: number; left: number; width: number; height: number }
-type Origin = { rect: Rect; sizes: string }
+type Origin = Thumb
 type Phase = "closed" | "opening" | "open" | "closing"
 
 const DURATION = 420
@@ -65,7 +71,7 @@ export const Lightbox = ({
       setCurrent(index)
       setViewport([window.innerWidth, window.innerHeight])
       if (phase === "closed" || phase === "closing") {
-        setOrigin(toOrigin(getThumb(index)))
+        setOrigin(getThumb(index))
         setRevealed(false)
         setPhase("opening")
       }
@@ -103,7 +109,7 @@ export const Lightbox = ({
 
   const close = useCallback(() => {
     if (phase !== "open") return
-    setOrigin(toOrigin(getThumb(current)))
+    setOrigin(getThumb(current))
     setPhase("closing")
     closeTimer.current = setTimeout(
       () => {
@@ -185,10 +191,11 @@ export const Lightbox = ({
     left: target.left,
     width: target.width,
     height: target.height,
-    borderRadius: settled ? radius : device ? 0 : 12,
+    borderRadius: settled || !origin ? radius : origin.radius,
+    rotate: settled || !origin ? "0deg" : `${origin.angle}deg`,
     opacity: settled || origin ? 1 : 0,
     transition: animate
-      ? ["top", "left", "width", "height", "border-radius", "opacity"]
+      ? ["top", "left", "width", "height", "border-radius", "rotate", "opacity"]
           .map((property) => `${property} ${DURATION}ms ${EASE}`)
           .join(", ")
       : "none",
@@ -348,19 +355,6 @@ const navClass = cn(
   "absolute top-1/2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full md:inline-flex",
   controlClass,
 )
-
-const toOrigin = (thumb: Thumb | null): Origin | null =>
-  thumb
-    ? {
-        rect: {
-          top: thumb.rect.top,
-          left: thumb.rect.left,
-          width: thumb.rect.width,
-          height: thumb.rect.height,
-        },
-        sizes: thumb.sizes,
-      }
-    : null
 
 const shrink = (rect: Rect): Rect => ({
   top: rect.top + rect.height * 0.04,
