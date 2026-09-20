@@ -44,7 +44,7 @@ export const Video = ({ video }: Props) => {
       type="button"
       onClick={() => setPlaying(true)}
       aria-label={`Play ${video.title}, ${video.duration}`}
-      className="relative block aspect-video w-full overflow-hidden rounded-2xl bg-[#0a0a0a] ring-1 ring-bleed"
+      className="group relative block aspect-video w-full overflow-hidden rounded-2xl bg-[#0a0a0a] ring-1 ring-bleed"
     >
       <Image
         src={video.poster.src}
@@ -55,7 +55,7 @@ export const Video = ({ video }: Props) => {
       />
       <span
         aria-hidden="true"
-        className="absolute inset-0 m-auto flex size-16 items-center justify-center rounded-full bg-[#fff] shadow-play"
+        className="absolute inset-0 m-auto flex size-16 items-center justify-center rounded-full bg-[#fff] shadow-play transition-transform duration-200 ease-out group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none"
       >
         <PlayIcon className="ml-[3px] size-[22px] fill-[#0a0a0a] text-[#0a0a0a]" />
       </span>
