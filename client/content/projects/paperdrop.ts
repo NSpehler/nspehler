@@ -30,7 +30,7 @@ export const paperdrop = {
   card: {
     image: {
       src: fieldSettings,
-      alt: "PaperDrop Form Builder: field settings on a valve test certificate",
+      alt: "PaperDrop Form Builder: field settings on a PDF document",
     },
     frame: "web",
     description:
@@ -43,8 +43,8 @@ export const paperdrop = {
     frame: "mat",
     shot: {
       src: fieldSettings,
-      alt: "Field settings: a dropdown placed on a valve test certificate, with its label and options",
-      caption: "Field settings on a valve test certificate",
+      alt: "Field settings: a dropdown placed on a PDF document, with its label and options",
+      caption: "Field settings on a PDF document",
     },
   },
   overview: [
@@ -93,7 +93,7 @@ export const paperdrop = {
         },
         {
           src: placingFields,
-          alt: "Placing fields on a valve test certificate, with alignment guides and the fields panel",
+          alt: "Placing fields on a PDF document, with alignment guides and the fields panel",
           caption: "Placing fields with guides",
         },
       ],
@@ -110,7 +110,7 @@ export const paperdrop = {
       frame: "mat",
       shot: {
         src: mobilePreview,
-        alt: "Mobile preview of the Valve Test Certificate form, with a signature field, before publishing",
+        alt: "Mobile preview of the form, with a signature field, before publishing",
         caption: "The form as engineers see it on their phone",
       },
     },
