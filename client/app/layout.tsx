@@ -7,6 +7,7 @@ import type { ReactNode } from "react"
 
 import { Footer, Header, ThemeProvider } from "@/components/layout"
 import { NavigationFlag } from "@/components/motion/NavigationFlag"
+import { ScrollMemory } from "@/components/motion/ScrollMemory"
 import { home } from "@/content/home"
 import { site } from "@/content/site"
 import { cn } from "@/lib/utils"
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: Props) {
           )}
         </ThemeProvider>
         <NavigationFlag />
+        <ScrollMemory />
         <Analytics />
         <SpeedInsights />
       </body>

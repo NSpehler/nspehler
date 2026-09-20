@@ -1,13 +1,17 @@
+"use client"
+
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
 
 import { NAV } from "@/components/motion/names"
+import { restoreScroll } from "@/components/motion/ScrollMemory"
 
 export const Breadcrumb = () => (
   <div className="flex justify-between pt-6 eyebrow md:pt-8">
     <Link
       href="/"
       transitionTypes={NAV.back}
+      onClick={restoreScroll}
       className="group flex items-center gap-2 text-label transition-colors duration-150 hover:text-ink motion-reduce:transition-none"
     >
       <ArrowLeftIcon

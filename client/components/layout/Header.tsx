@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
 import { NAV, vt } from "@/components/motion/names"
+import { restoreScroll } from "@/components/motion/ScrollMemory"
 import { site } from "@/content/site"
 import { formatCoordinates } from "@/lib/coordinates"
 import { useReducedMotion } from "@/lib/hooks"
@@ -108,6 +109,9 @@ export const Header = () => {
                     href={item.href}
                     transitionTypes={
                       item.href === "/" && onProject ? NAV.back : NAV.switch
+                    }
+                    onClick={
+                      item.href === "/" && onProject ? restoreScroll : undefined
                     }
                     aria-current={active ? "page" : undefined}
                     className={cn(
