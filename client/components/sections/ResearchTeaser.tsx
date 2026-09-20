@@ -1,8 +1,11 @@
 import { ArrowUpRightIcon } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 
-import { NAV } from "@/components/motion/names"
+import { sizes } from "@/components/media/sizes"
+import { Morph } from "@/components/motion/Morph"
+import { NAV, vt } from "@/components/motion/names"
+import { warm } from "@/components/motion/warm"
+import { WarmLink } from "@/components/motion/WarmLink"
 import { Section } from "@/components/ui/Section"
 import { about } from "@/content/about"
 import { research } from "@/content/research"
@@ -11,19 +14,24 @@ const [, , cover] = research.covers
 
 export const ResearchTeaser = () => (
   <Section label="Research" width="full" id="research" ariaLabel="Research">
-    <Link
+    <WarmLink
       href="/lean-marketing-for-startups"
       transitionTypes={NAV.forward}
+      warm={warm(cover.src, sizes.paper)}
       className="group flex flex-col items-start gap-6 transition-colors duration-150 motion-reduce:transition-none md:flex-row md:items-center md:gap-10"
     >
-      <span className="mat h-[300px] w-[260px] shrink-0 rounded-mat">
-        <Image
-          src={cover.src}
-          alt={cover.alt}
-          sizes="168px"
-          className="h-[238px] w-[168px] rounded-sm object-cover shadow-shot-sm"
-        />
-      </span>
+      <Morph name={vt.paper.frame}>
+        <span className="mat h-[300px] w-[260px] shrink-0 rounded-mat">
+          <Morph name={vt.paper.cover}>
+            <Image
+              src={cover.src}
+              alt={cover.alt}
+              sizes="168px"
+              className="h-[238px] w-[168px] rounded-sm object-cover shadow-shot-sm"
+            />
+          </Morph>
+        </span>
+      </Morph>
       <span className="flex flex-col gap-3 md:max-w-[520px]">
         <span className="caption">{about.research.eyebrow}</span>
         <span className="text-subtitle leading-[normal] font-medium">
@@ -40,6 +48,6 @@ export const ResearchTeaser = () => (
           />
         </span>
       </span>
-    </Link>
+    </WarmLink>
   </Section>
 )

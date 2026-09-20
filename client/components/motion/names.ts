@@ -4,6 +4,7 @@ export const vt = {
   frame: (slug: string) => `project-${slug}-frame`,
   visual: (slug: string) => `project-${slug}-visual`,
   header: "site-header",
+  paper: { frame: "paper-frame", cover: "paper-cover" },
 }
 
 export const NAV = {

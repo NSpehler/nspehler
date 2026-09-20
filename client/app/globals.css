@@ -295,6 +295,24 @@
     }
   }
 
+  .paper-back {
+    rotate: var(--tilt);
+  }
+
+  html[data-navigated] .paper-back {
+    --settle: calc(var(--vt-morph) + var(--stagger, 0ms));
+    transition:
+      opacity 240ms ease-out var(--settle),
+      translate 720ms var(--ease-morph) var(--settle),
+      rotate 720ms var(--ease-morph) var(--settle);
+
+    @starting-style {
+      opacity: 0;
+      translate: var(--from);
+      rotate: 0deg;
+    }
+  }
+
   @media (pointer: fine) {
     html:active-view-transition [data-page] {
       transition: none;
@@ -326,7 +344,8 @@
       animation: none !important;
     }
 
-    html[data-navigated] [data-page] {
+    html[data-navigated] [data-page],
+    html[data-navigated] .paper-back {
       transition: none;
     }
   }

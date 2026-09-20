@@ -1,6 +1,9 @@
 import Image from "next/image"
 import { Fragment } from "react"
 
+import { sizes } from "@/components/media/sizes"
+import { Morph } from "@/components/motion/Morph"
+import { vt } from "@/components/motion/names"
 import { ArrowLink } from "@/components/ui/ArrowLink"
 import { Eyebrow } from "@/components/ui/Eyebrow"
 import { Pill } from "@/components/ui/Pill"
@@ -8,8 +11,8 @@ import { research } from "@/content/research"
 import { cn } from "@/lib/utils"
 
 const pages = [
-  "left-[12.3%] top-[6.67%] -rotate-[8deg] shadow-paper",
-  "left-[41.15%] top-[4.29%] rotate-[5deg] shadow-paper",
+  "paper-back left-[12.3%] top-[6.67%] shadow-paper [--tilt:-8deg] [--from:31.67%_3.53%]",
+  "paper-back left-[41.15%] top-[4.29%] shadow-paper [--tilt:5deg] [--from:-30.83%_6.47%] [--stagger:90ms]",
   "left-[26.9%] top-[9.5%] shadow-paper-front",
 ]
 
@@ -46,33 +49,44 @@ export const ResearchHero = () => (
         />
       </div>
     </div>
-    <a
-      href={research.pdf}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Open the paper"
-      draggable={false}
-      className="mat aspect-[640/470] rounded-mat select-none lg:col-span-6 lg:col-start-7"
-    >
-      <span className="relative block aspect-[520/420] w-[81.25%]">
-        <span
-          aria-hidden="true"
-          className="absolute right-[9.6%] bottom-0 left-[17.3%] h-[8.1%] rounded-full bg-[radial-gradient(closest-side,var(--paper-contact),transparent)] blur-[10px]"
-        />
-        {research.covers.map(({ src, alt }, index) => (
-          <Image
-            key={src.src}
-            src={src}
-            alt={alt}
-            sizes="(min-width: 1024px) 240px, 40vw"
-            draggable={false}
-            className={cn(
-              "absolute aspect-[12/17] w-[46.15%] rounded-[3px] object-cover",
-              pages[index],
-            )}
+    <Morph name={vt.paper.frame}>
+      <a
+        href={research.pdf}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Open the paper"
+        draggable={false}
+        className="mat aspect-[640/470] rounded-mat select-none lg:col-span-6 lg:col-start-7"
+      >
+        <span className="relative block aspect-[520/420] w-[81.25%]">
+          <span
+            aria-hidden="true"
+            className="absolute right-[9.6%] bottom-0 left-[17.3%] h-[8.1%] rounded-full bg-[radial-gradient(closest-side,var(--paper-contact),transparent)] blur-[10px]"
           />
-        ))}
-      </span>
-    </a>
+          {research.covers.map(({ src, alt }, index) => {
+            const page = (
+              <Image
+                key={src.src}
+                src={src}
+                alt={alt}
+                sizes={sizes.paper}
+                draggable={false}
+                className={cn(
+                  "absolute aspect-[12/17] w-[46.15%] rounded-[3px] object-cover",
+                  pages[index],
+                )}
+              />
+            )
+            return index === research.covers.length - 1 ? (
+              <Morph key={src.src} name={vt.paper.cover}>
+                {page}
+              </Morph>
+            ) : (
+              page
+            )
+          })}
+        </span>
+      </a>
+    </Morph>
   </section>
 )

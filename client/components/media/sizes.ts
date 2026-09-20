@@ -6,6 +6,7 @@ export const sizes = {
     "(min-width: 1440px) 1312px, (min-width: 768px) calc(100vw - 128px), calc(100vw - 40px)",
   half: "(min-width: 1440px) 640px, (min-width: 768px) calc(50vw - 80px), calc(100vw - 40px)",
   phone: "(min-width: 1024px) 240px, 40vw",
+  paper: "(min-width: 1024px) 240px, 40vw",
   device: "(min-width: 1024px) 284px, 28vw",
   deviceThumb: "(min-width: 1024px) 87px, 22vw",
   thumb: "(min-width: 1024px) 320px, 80vw",
