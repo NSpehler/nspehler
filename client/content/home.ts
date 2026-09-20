@@ -55,8 +55,8 @@ export const home = {
       },
       {
         src: vibe,
-        alt: "Analog app: The vibe",
-        title: "The vibe",
+        alt: "Analog app: Choose a vibe",
+        title: "Choose a vibe",
         subtitle: "Tap a mood or describe it in your own words",
       },
       {
