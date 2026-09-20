@@ -35,7 +35,8 @@ export const FeaturedProject = ({ project }: Props) => {
                 sizes={sizes.featured}
                 placeholder="blur"
                 quality={85}
-                loading="eager"
+                preload
+                fetchPriority="high"
                 className="aspect-(--shot) w-(--inset) rounded-[7px] object-cover object-top shadow-shot-xs md:rounded-inset md:shadow-shot-md"
               />
             </Morph>

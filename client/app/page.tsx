@@ -28,12 +28,8 @@ export default function Page() {
           <Eyebrow>Featured projects</Eyebrow>
           <FeaturedProject project={projects[home.featured.project]} />
           <div className="mt-8 grid gap-y-12 md:mt-12 md:grid-cols-2 md:gap-x-8 md:gap-y-18">
-            {home.featured.grid.map((slug, index) => (
-              <ProjectCard
-                key={slug}
-                project={projects[slug]}
-                eager={index < 2}
-              />
+            {home.featured.grid.map((slug) => (
+              <ProjectCard key={slug} project={projects[slug]} />
             ))}
           </div>
         </section>

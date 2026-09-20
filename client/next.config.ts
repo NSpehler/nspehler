@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   typedRoutes: true,
+  experimental: { inlineCss: true },
   turbopack: {
     root: import.meta.dirname,
   },
