@@ -16,8 +16,10 @@ const insets = {
   tall: "[--inset:54.69%] [--shot:350/502]",
 }
 
-const inset = ({ src }: ShotData, tall: boolean) =>
-  insets[tall ? "tall" : src.width / src.height < 1.2 ? "narrow" : "wide"]
+const inset = ({ src }: ShotData, tall: boolean) => {
+  if (src.width / src.height >= 1.2) return insets.wide
+  return insets[tall ? "tall" : "narrow"]
+}
 
 type BleedProps = { shot: ShotData; size: string; ratio?: number }
 
@@ -33,18 +35,28 @@ const Bleed = ({ shot, size, ratio }: BleedProps) => (
   </Figure>
 )
 
-const Wide = ({ shot }: { shot: ShotData }) => (
-  <Figure caption={shot.caption}>
-    <Mat className="aspect-[16/11] rounded-[14px] [--inset:80%] [--shot:16/10] md:aspect-[1312/760] md:rounded-mat md:[--inset:73.17%]">
-      <Shot
-        shot={shot}
-        sizes={sizes.lead}
-        className="w-(--inset) rounded-[7px] md:rounded-inset"
-        imageClassName="aspect-(--shot) w-full rounded-[inherit] object-cover object-top shadow-shot-xs md:shadow-shot-lg"
-      />
-    </Mat>
-  </Figure>
-)
+const Wide = ({ shot }: { shot: ShotData }) => {
+  const upright = shot.src.width / shot.src.height < 1.2
+  return (
+    <Figure caption={shot.caption}>
+      <Mat
+        className={cn(
+          "rounded-[14px] md:aspect-[1312/760] md:rounded-mat",
+          upright
+            ? "aspect-[4/5] [--inset:71%] [--shot:800/1132] md:[--inset:32.8%]"
+            : "aspect-[16/11] [--inset:80%] [--shot:16/10] md:[--inset:73.17%]",
+        )}
+      >
+        <Shot
+          shot={shot}
+          sizes={upright ? sizes.card : sizes.lead}
+          className="w-(--inset) rounded-[7px] md:rounded-inset"
+          imageClassName="aspect-(--shot) w-full rounded-[inherit] object-cover object-top shadow-shot-xs md:shadow-shot-lg"
+        />
+      </Mat>
+    </Figure>
+  )
+}
 
 const Half = ({ shot, tall }: { shot: ShotData; tall: boolean }) => (
   <Figure caption={shot.caption}>
