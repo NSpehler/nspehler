@@ -166,7 +166,7 @@ export const goalgetr = {
         { label: "Styling", value: "Tailwind CSS, Motion" },
         { label: "Content", value: "DatoCMS, with GraphQL" },
         {
-          label: "Accounts",
+          label: "Auth",
           value: "Clerk, with organizations for clubs and teams",
         },
         { label: "Data and files", value: "MongoDB, Vercel Blob" },

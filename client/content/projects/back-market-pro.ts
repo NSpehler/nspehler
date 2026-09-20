@@ -34,7 +34,7 @@ export const backMarketPro = {
     },
     frame: "web",
     description:
-      "Back Market’s store for businesses, selling refurbished tech from over 100 sellers",
+      "Back Market’s store for businesses, buying refurbished laptops, phones and tablets in bulk",
     type: "B2B e-commerce",
     stack: ["Hydrogen", "Remix", "Stripe", "Algolia"],
   },
