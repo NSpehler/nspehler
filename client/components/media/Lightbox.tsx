@@ -44,6 +44,8 @@ const DURATION = 420
 const EASE = "cubic-bezier(0.32, 0.72, 0, 1)"
 const CHROME = { x: 20, top: 72, bottom: 88 }
 const MD_CHROME = { x: 96, top: 80, bottom: 96 }
+const LG_CHROME = { x: 96, top: 104, bottom: 96 }
+const headerHeight = (vw: number) => (vw >= 1024 ? 104 : 72)
 
 export const Lightbox = ({
   shots,
@@ -256,62 +258,67 @@ export const Lightbox = ({
         </button>
       </div>
 
-      <figure
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={() => {
-          swipeStart.current = null
-        }}
-        className={cn(
-          "absolute m-0 touch-pinch-zoom overflow-hidden select-none",
-          !device &&
-            "bg-mat shadow-[0_24px_80px_-24px_var(--shot-shadow)] ring-1 ring-bleed",
-        )}
-        style={frameStyle}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ clipPath: `inset(${headerHeight(viewport[0])}px 0 0 0)` }}
       >
-        <Image
-          key={`${shot.src.src}-thumb`}
-          src={shot.src}
-          alt=""
-          aria-hidden="true"
-          sizes={origin?.sizes ?? sizes.card}
-          placeholder="blur"
-          quality={85}
-          draggable={false}
-          className={cn("absolute inset-0 size-full", fit)}
-        />
-        <Image
-          key={shot.src.src}
-          src={shot.src}
-          alt={shot.alt}
-          sizes={sizes.lightbox}
-          quality={85}
-          loading="eager"
-          fetchPriority="high"
-          draggable={false}
-          onLoad={() => setRevealed(true)}
+        <figure
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={() => {
+            swipeStart.current = null
+          }}
           className={cn(
-            "absolute inset-0 size-full",
-            fit,
-            animate && "transition-opacity duration-300 ease-out",
-            revealed ? "opacity-100" : "opacity-0",
+            "pointer-events-auto absolute m-0 touch-pinch-zoom overflow-hidden select-none",
+            !device &&
+              "bg-mat shadow-[0_24px_80px_-24px_var(--shot-shadow)] ring-1 ring-bleed",
           )}
-        />
-        <figcaption className="sr-only">{caption}</figcaption>
-        {settled &&
-          neighbours.map((neighbour) => (
-            <Image
-              key={`${neighbour.src.src}-preload`}
-              src={neighbour.src}
-              alt=""
-              aria-hidden="true"
-              sizes={sizes.lightbox}
-              quality={85}
-              loading="eager"
-              className="pointer-events-none absolute inset-0 size-full opacity-0"
-            />
-          ))}
-      </figure>
+          style={frameStyle}
+        >
+          <Image
+            key={`${shot.src.src}-thumb`}
+            src={shot.src}
+            alt=""
+            aria-hidden="true"
+            sizes={origin?.sizes ?? sizes.card}
+            placeholder="blur"
+            quality={85}
+            draggable={false}
+            className={cn("absolute inset-0 size-full", fit)}
+          />
+          <Image
+            key={shot.src.src}
+            src={shot.src}
+            alt={shot.alt}
+            sizes={sizes.lightbox}
+            quality={85}
+            loading="eager"
+            fetchPriority="high"
+            draggable={false}
+            onLoad={() => setRevealed(true)}
+            className={cn(
+              "absolute inset-0 size-full",
+              fit,
+              animate && "transition-opacity duration-300 ease-out",
+              revealed ? "opacity-100" : "opacity-0",
+            )}
+          />
+          <figcaption className="sr-only">{caption}</figcaption>
+          {settled &&
+            neighbours.map((neighbour) => (
+              <Image
+                key={`${neighbour.src.src}-preload`}
+                src={neighbour.src}
+                alt=""
+                aria-hidden="true"
+                sizes={sizes.lightbox}
+                quality={85}
+                loading="eager"
+                className="pointer-events-none absolute inset-0 size-full opacity-0"
+              />
+            ))}
+        </figure>
+      </div>
 
       <p
         aria-hidden="true"
@@ -364,7 +371,7 @@ const shrink = (rect: Rect): Rect => ({
 })
 
 const fitRect = (shot: Shot, [vw, vh]: [number, number]): Rect => {
-  const chrome = vw >= 768 ? MD_CHROME : CHROME
+  const chrome = vw >= 1024 ? LG_CHROME : vw >= 768 ? MD_CHROME : CHROME
   const maxWidth = Math.min(1400, vw - chrome.x * 2)
   const maxHeight = vh - chrome.top - chrome.bottom
   const ratio = shot.src.width / shot.src.height
