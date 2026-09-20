@@ -107,7 +107,7 @@ export type HomeContent = {
   title: string
   description: string
   hero: { headline: TwoTone; previously: string }
-  featured: readonly Slug[]
+  featured: { project: Slug; grid: readonly Slug[] }
   nowBuilding: {
     slug: Slug
     body: string

@@ -23,16 +23,19 @@ export const home = {
     previously:
       "Previously led Growth Engineering at Payfit, Back Market and Alma.",
   },
-  featured: [
-    "payfit",
-    "smartvatten",
-    "goalgetr",
-    "paperdrop",
-    "nucase",
-    "intigriti",
-    "back-market-pro",
-    "alma",
-  ],
+  featured: {
+    project: "payfit",
+    grid: [
+      "smartvatten",
+      "goalgetr",
+      "paperdrop",
+      "nucase",
+      "intigriti",
+      "abax",
+      "back-market-pro",
+      "alma",
+    ],
+  },
   nowBuilding: {
     slug: "analog",
     body: "An iPhone app for vinyl collectors. It identifies what’s playing on your turntable and turns your record shelf into curated listening sessions.",

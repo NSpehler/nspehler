@@ -2,6 +2,7 @@ import { LightboxProvider } from "@/components/media/LightboxProvider"
 import { PageTransition } from "@/components/motion/PageTransition"
 import { AboutTeaser } from "@/components/sections/AboutTeaser"
 import { ContactCta } from "@/components/sections/ContactCta"
+import { FeaturedProject } from "@/components/sections/FeaturedProject"
 import { Hero } from "@/components/sections/Hero"
 import { NowBuilding } from "@/components/sections/NowBuilding"
 import { ProjectCard } from "@/components/sections/ProjectCard"
@@ -25,8 +26,9 @@ export default function Page() {
           className="flex flex-col gap-4 md:gap-6"
         >
           <Eyebrow>Featured projects</Eyebrow>
-          <div className="grid gap-y-12 md:grid-cols-2 md:gap-x-8 md:gap-y-18">
-            {home.featured.map((slug, index) => (
+          <FeaturedProject project={projects[home.featured.project]} />
+          <div className="mt-8 grid gap-y-12 md:mt-12 md:grid-cols-2 md:gap-x-8 md:gap-y-18">
+            {home.featured.grid.map((slug, index) => (
               <ProjectCard
                 key={slug}
                 project={projects[slug]}
