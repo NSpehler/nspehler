@@ -6,9 +6,9 @@ import advisorPlans from "@/images/projects/smartvatten/advisor-plans.webp"
 import advisorPropertyTypes from "@/images/projects/smartvatten/advisor-property-types.webp"
 import article from "@/images/projects/smartvatten/article.webp"
 import caseStudies from "@/images/projects/smartvatten/case-studies.webp"
-import efficiency from "@/images/projects/smartvatten/efficiency.webp"
 import home from "@/images/projects/smartvatten/home.webp"
 import hub from "@/images/projects/smartvatten/hub.webp"
+import priceWizard from "@/images/projects/smartvatten/price-wizard.webp"
 
 import type { Project } from "../types"
 
@@ -149,12 +149,12 @@ export const smartvatten = {
         {
           src: hub,
           alt: "Smartvatten HUB: Where water data becomes intelligence",
-          caption: "Smartvatten HUB",
+          caption: "Product page",
         },
         {
-          src: efficiency,
-          alt: "Improve water efficiency: reduce water waste and lower operating costs",
-          caption: "Water efficiency",
+          src: priceWizard,
+          alt: "The Price Wizard, opened over the home page: tell us a bit about you so we can tailor a price offer, starting with real estate or utilities",
+          caption: "Price Wizard",
         },
       ],
     },
@@ -180,7 +180,7 @@ export const smartvatten = {
       columns: 2,
       items: [
         {
-          title: "A library of about 40 reusable sections",
+          title: "A library of 40+ reusable sections",
           body: "Heroes, feature grids, pricing tables, FAQs, testimonials and forms, so the team can build a landing page on its own.",
         },
         {
