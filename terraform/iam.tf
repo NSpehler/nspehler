@@ -14,8 +14,3 @@ resource "aws_iam_user_policy_attachment" "administrator_access" {
 resource "aws_iam_account_alias" "nspehler" {
   account_alias = "nspehler"
 }
-
-import {
-  to = aws_iam_account_alias.nspehler
-  id = "nspehler"
-}
