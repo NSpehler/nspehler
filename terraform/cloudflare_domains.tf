@@ -54,9 +54,9 @@ resource "cloudflare_dns_record" "portalmonitor_email_mx_1" {
   name     = "portalmonitor.io"
   content  = "amir.mx.cloudflare.net"
   type     = "MX"
-  ttl      = 3600
+  ttl      = 1
   proxied  = false
-  priority = 10
+  priority = 51
 }
 
 resource "cloudflare_dns_record" "portalmonitor_email_mx_2" {
@@ -64,9 +64,9 @@ resource "cloudflare_dns_record" "portalmonitor_email_mx_2" {
   name     = "portalmonitor.io"
   content  = "linda.mx.cloudflare.net"
   type     = "MX"
-  ttl      = 3600
+  ttl      = 1
   proxied  = false
-  priority = 34
+  priority = 64
 }
 
 resource "cloudflare_dns_record" "portalmonitor_email_mx_3" {
@@ -74,9 +74,9 @@ resource "cloudflare_dns_record" "portalmonitor_email_mx_3" {
   name     = "portalmonitor.io"
   content  = "isaac.mx.cloudflare.net"
   type     = "MX"
-  ttl      = 3600
+  ttl      = 1
   proxied  = false
-  priority = 95
+  priority = 47
 }
 
 resource "cloudflare_dns_record" "portalmonitor_email_spf" {

@@ -49,7 +49,7 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_1" {
   name     = local.domain
   content  = "isaac.mx.cloudflare.net"
   type     = "MX"
-  ttl      = 3600
+  ttl      = 1
   proxied  = false
   priority = 95
 }
@@ -59,7 +59,7 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_2" {
   name     = local.domain
   content  = "linda.mx.cloudflare.net"
   type     = "MX"
-  ttl      = 3600
+  ttl      = 1
   proxied  = false
   priority = 34
 }
@@ -69,7 +69,7 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_3" {
   name     = local.domain
   content  = "amir.mx.cloudflare.net"
   type     = "MX"
-  ttl      = 3600
+  ttl      = 1
   proxied  = false
   priority = 10
 }
