@@ -22,7 +22,7 @@ resource "cloudflare_zone" "portalmonitor" {
   type = "full"
 }
 
-# Email Routing (portalmonitor.io): every address forwards to the main mailbox
+# Cloudflare Email
 resource "cloudflare_email_routing_rule" "portalmonitor_nicolas" {
   zone_id = cloudflare_zone.portalmonitor.id
   name    = "nicolas@portalmonitor.io"
