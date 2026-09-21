@@ -118,21 +118,6 @@ resource "cloudflare_email_routing_catch_all" "nspehler" {
   }]
 }
 
-import {
-  to = cloudflare_dns_record.cloudflare_email_dkim
-  id = "20ec2030590d760e2ffce41463303521/f6c7e4144fabc6b6392db27dfb915f2f"
-}
-
-import {
-  to = cloudflare_email_routing_rule.nicolas
-  id = "20ec2030590d760e2ffce41463303521/100034625f6040daaa59e05a76a26746"
-}
-
-import {
-  to = cloudflare_email_routing_catch_all.nspehler
-  id = "20ec2030590d760e2ffce41463303521"
-}
-
 # Google Search Console
 resource "cloudflare_dns_record" "google_search_console" {
   zone_id = cloudflare_zone.nspehler.id
