@@ -2,7 +2,7 @@ import article from "@/images/projects/alma/article.webp"
 import blog from "@/images/projects/alma/blog.webp"
 import consumer from "@/images/projects/alma/consumer.webp"
 import demo from "@/images/projects/alma/demo.webp"
-import home from "@/images/projects/alma/home.webp"
+import pricing from "@/images/projects/alma/pricing.webp"
 import product from "@/images/projects/alma/product.webp"
 import steps from "@/images/projects/alma/steps.webp"
 
@@ -24,8 +24,8 @@ export const alma = {
   ],
   card: {
     image: {
-      src: home,
-      alt: "almapay.com home page: flexible, guaranteed payment in installments",
+      src: product,
+      alt: "almapay.com product page: Boost your sales with payment in installments",
     },
     frame: "web",
     description:
@@ -37,9 +37,9 @@ export const alma = {
     type: "figure",
     frame: "mat",
     shot: {
-      src: home,
-      alt: "almapay.com home page: flexible, guaranteed payment in installments",
-      caption: "Home page",
+      src: product,
+      alt: "almapay.com product page: Boost your sales with payment in installments",
+      caption: "Product page",
     },
   },
   overview: [
@@ -52,9 +52,9 @@ export const alma = {
       frame: "mat",
       shots: [
         {
-          src: product,
-          alt: "Product page: Boost your sales with payment in installments",
-          caption: "Product page",
+          src: pricing,
+          alt: "Pricing page: rates for each payment solution, with a slider to share the fees with customers",
+          caption: "Pricing page",
         },
         {
           src: steps,
