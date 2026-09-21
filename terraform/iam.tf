@@ -10,3 +10,12 @@ resource "aws_iam_user_policy_attachment" "administrator_access" {
   user       = aws_iam_user.nicolas.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
+
+resource "aws_iam_account_alias" "nspehler" {
+  account_alias = "nspehler"
+}
+
+import {
+  to = aws_iam_account_alias.nspehler
+  id = "nspehler"
+}
