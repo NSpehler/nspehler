@@ -337,6 +337,84 @@ resource "cloudflare_dns_record" "nicolasspehler_www" {
   proxied = true
 }
 
+resource "cloudflare_page_rule" "endless_engineer_redirect" {
+  zone_id  = cloudflare_zone.endless_engineer.id
+  target   = "endless.engineer/*"
+  priority = 1
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com"
+      status_code = 302
+    }
+  }
+}
+
+resource "cloudflare_page_rule" "endless_engineer_redirect_subdomains" {
+  zone_id  = cloudflare_zone.endless_engineer.id
+  target   = "*.endless.engineer/*"
+  priority = 2
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com"
+      status_code = 302
+    }
+  }
+}
+
+resource "cloudflare_page_rule" "leanmarketingforstartups_redirect" {
+  zone_id  = cloudflare_zone.leanmarketingforstartups.id
+  target   = "leanmarketingforstartups.com/*"
+  priority = 1
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com/lean-marketing-for-startups"
+      status_code = 301
+    }
+  }
+}
+
+resource "cloudflare_page_rule" "leanmarketingforstartups_redirect_subdomains" {
+  zone_id  = cloudflare_zone.leanmarketingforstartups.id
+  target   = "*.leanmarketingforstartups.com/*"
+  priority = 2
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com/lean-marketing-for-startups"
+      status_code = 301
+    }
+  }
+}
+
+resource "cloudflare_page_rule" "nicolasspehler_redirect" {
+  zone_id  = cloudflare_zone.nicolasspehler.id
+  target   = "nicolasspehler.com/*"
+  priority = 2
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com"
+      status_code = 301
+    }
+  }
+}
+
+resource "cloudflare_page_rule" "nicolasspehler_redirect_subdomains" {
+  zone_id  = cloudflare_zone.nicolasspehler.id
+  target   = "*.nicolasspehler.com/*"
+  priority = 1
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com"
+      status_code = 301
+    }
+  }
+}
+
 # Google Search Console
 resource "cloudflare_dns_record" "leanmarketingforstartups_google_search_console" {
   zone_id = cloudflare_zone.leanmarketingforstartups.id
@@ -357,51 +435,31 @@ resource "cloudflare_dns_record" "nicolasspehler_google_search_console" {
 }
 
 import {
-  to = cloudflare_zone.nicolasspehler
-  id = "cdd84d7a0ad8da5ae170f11d96d184db"
+  to = cloudflare_page_rule.endless_engineer_redirect
+  id = "1c280fd8b5e404575a2e83d9e522811a/02107afca88a3a4bfd081b2485330d9d"
 }
 
 import {
-  to = cloudflare_zone.leanmarketingforstartups
-  id = "0dd210718e6bec1373f9eb35a934a310"
+  to = cloudflare_page_rule.endless_engineer_redirect_subdomains
+  id = "1c280fd8b5e404575a2e83d9e522811a/c864ce9e474c2fbaaaf862611bc67e83"
 }
 
 import {
-  to = cloudflare_zone.endless_engineer
-  id = "1c280fd8b5e404575a2e83d9e522811a"
+  to = cloudflare_page_rule.leanmarketingforstartups_redirect
+  id = "0dd210718e6bec1373f9eb35a934a310/6141967b55f587ac88b8387a717607dc"
 }
 
 import {
-  to = cloudflare_dns_record.endless_engineer_apex
-  id = "1c280fd8b5e404575a2e83d9e522811a/87ed006b419076d97f3bb9bab14dc1d2"
+  to = cloudflare_page_rule.leanmarketingforstartups_redirect_subdomains
+  id = "0dd210718e6bec1373f9eb35a934a310/07e403fe3427747c72c83cb56afe7eb9"
 }
 
 import {
-  to = cloudflare_dns_record.leanmarketingforstartups_apex
-  id = "0dd210718e6bec1373f9eb35a934a310/2b95290af7fd680a126430268713a04d"
+  to = cloudflare_page_rule.nicolasspehler_redirect
+  id = "cdd84d7a0ad8da5ae170f11d96d184db/05f2fd25729a8174c7458dc996c3de37"
 }
 
 import {
-  to = cloudflare_dns_record.leanmarketingforstartups_www
-  id = "0dd210718e6bec1373f9eb35a934a310/8bbacb136b3d574a2d20a8d31029760a"
-}
-
-import {
-  to = cloudflare_dns_record.leanmarketingforstartups_google_search_console
-  id = "0dd210718e6bec1373f9eb35a934a310/1d93ed27d57b1c4fcc417ae0a520a343"
-}
-
-import {
-  to = cloudflare_dns_record.nicolasspehler_apex
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/d66ff9fdc2ba82e4912a9f0ef407ab88"
-}
-
-import {
-  to = cloudflare_dns_record.nicolasspehler_www
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/773cb8df1a567fe3bea390432be341f5"
-}
-
-import {
-  to = cloudflare_dns_record.nicolasspehler_google_search_console
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/75da008d13e952e3158dc2bb64c49d4a"
+  to = cloudflare_page_rule.nicolasspehler_redirect_subdomains
+  id = "cdd84d7a0ad8da5ae170f11d96d184db/f4a87cd1954b131188817c3fc2dda5bf"
 }
