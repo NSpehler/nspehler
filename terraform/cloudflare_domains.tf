@@ -46,6 +46,16 @@ resource "cloudflare_zone" "nicolasspehler" {
   type = "full"
 }
 
+resource "cloudflare_zone_dnssec" "portalmonitor" {
+  zone_id = cloudflare_zone.portalmonitor.id
+  status  = "active"
+}
+
+resource "cloudflare_zone_dnssec" "endless_engineer" {
+  zone_id = cloudflare_zone.endless_engineer.id
+  status  = "active"
+}
+
 resource "cloudflare_zone_dnssec" "categoryapi" {
   zone_id = cloudflare_zone.categoryapi.id
   status  = "active"
