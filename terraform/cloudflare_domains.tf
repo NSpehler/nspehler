@@ -34,7 +34,7 @@ resource "cloudflare_email_routing_rule" "portalmonitor_nicolas" {
   }]
   actions = [{
     type  = "forward"
-    value = ["nicolas@spehler.com"]
+    value = [cloudflare_email_routing_address.nicolas.email]
   }]
 }
 
@@ -45,7 +45,7 @@ resource "cloudflare_email_routing_catch_all" "portalmonitor" {
   matchers = [{ type = "all" }]
   actions = [{
     type  = "forward"
-    value = ["nicolas@spehler.com"]
+    value = [cloudflare_email_routing_address.nicolas.email]
   }]
 }
 
@@ -91,6 +91,72 @@ resource "cloudflare_dns_record" "portalmonitor_email_spf" {
 resource "cloudflare_dns_record" "portalmonitor_email_dkim" {
   zone_id = cloudflare_zone.portalmonitor.id
   name    = "cf2024-1._domainkey.portalmonitor.io"
+  content = local.cloudflare_email_dkim
+  type    = "TXT"
+  ttl     = 1
+  proxied = false
+}
+
+resource "cloudflare_email_routing_rule" "categoryapi_nicolas" {
+  zone_id = cloudflare_zone.categoryapi.id
+  name    = "nicolas@categoryapi.com"
+  enabled = true
+  matchers = [{
+    type  = "literal"
+    field = "to"
+    value = "nicolas@categoryapi.com"
+  }]
+  actions = [{
+    type  = "forward"
+    value = [cloudflare_email_routing_address.nicolas.email]
+  }]
+}
+
+resource "cloudflare_dns_record" "categoryapi_email_spf" {
+  zone_id = cloudflare_zone.categoryapi.id
+  name    = "categoryapi.com"
+  content = "v=spf1 include:_spf.mx.cloudflare.net ~all"
+  type    = "TXT"
+  ttl     = 1
+  proxied = false
+}
+
+resource "cloudflare_dns_record" "categoryapi_email_dkim" {
+  zone_id = cloudflare_zone.categoryapi.id
+  name    = "cf2024-1._domainkey.categoryapi.com"
+  content = local.cloudflare_email_dkim
+  type    = "TXT"
+  ttl     = 1
+  proxied = false
+}
+
+resource "cloudflare_email_routing_rule" "realestatejobs_nicolas" {
+  zone_id = cloudflare_zone.realestatejobs.id
+  name    = "nicolas@realestatejobs.io"
+  enabled = true
+  matchers = [{
+    type  = "literal"
+    field = "to"
+    value = "nicolas@realestatejobs.io"
+  }]
+  actions = [{
+    type  = "forward"
+    value = [cloudflare_email_routing_address.nicolas.email]
+  }]
+}
+
+resource "cloudflare_dns_record" "realestatejobs_email_spf" {
+  zone_id = cloudflare_zone.realestatejobs.id
+  name    = "realestatejobs.io"
+  content = "v=spf1 include:_spf.mx.cloudflare.net ~all"
+  type    = "TXT"
+  ttl     = 1
+  proxied = false
+}
+
+resource "cloudflare_dns_record" "realestatejobs_email_dkim" {
+  zone_id = cloudflare_zone.realestatejobs.id
+  name    = "cf2024-1._domainkey.realestatejobs.io"
   content = local.cloudflare_email_dkim
   type    = "TXT"
   ttl     = 1
