@@ -156,12 +156,27 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "vpn_proxy" {
-  provider               = aws.us-east-1
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t3.nano"
-  subnet_id              = aws_subnet.vpn_proxy.id
-  vpc_security_group_ids = [aws_security_group.vpn_proxy.id]
-  iam_instance_profile   = aws_iam_instance_profile.vpn_proxy.name
+  provider                = aws.us-east-1
+  ami                     = data.aws_ami.ubuntu.id
+  instance_type           = "t3.small"
+  subnet_id               = aws_subnet.vpn_proxy.id
+  vpc_security_group_ids  = [aws_security_group.vpn_proxy.id]
+  iam_instance_profile    = aws_iam_instance_profile.vpn_proxy.name
+  disable_api_termination = true
+
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 1
+    instance_metadata_tags      = "disabled"
+  }
+
+  root_block_device {
+    volume_size           = 16
+    volume_type           = "gp3"
+    encrypted             = false
+    delete_on_termination = true
+  }
 
   user_data = templatefile("${path.module}/vpn_proxy_userdata.sh.tftpl", {
     secret_id = aws_secretsmanager_secret.vpn_proxy.name
