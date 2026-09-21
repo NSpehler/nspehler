@@ -273,6 +273,36 @@ resource "cloudflare_email_routing_catch_all" "nicolasspehler" {
   }]
 }
 
+resource "cloudflare_dns_record" "nicolasspehler_email_mx_1" {
+  zone_id  = cloudflare_zone.nicolasspehler.id
+  name     = "nicolasspehler.com"
+  content  = "route1.mx.cloudflare.net"
+  type     = "MX"
+  ttl      = 1
+  proxied  = false
+  priority = 32
+}
+
+resource "cloudflare_dns_record" "nicolasspehler_email_mx_2" {
+  zone_id  = cloudflare_zone.nicolasspehler.id
+  name     = "nicolasspehler.com"
+  content  = "route2.mx.cloudflare.net"
+  type     = "MX"
+  ttl      = 1
+  proxied  = false
+  priority = 63
+}
+
+resource "cloudflare_dns_record" "nicolasspehler_email_mx_3" {
+  zone_id  = cloudflare_zone.nicolasspehler.id
+  name     = "nicolasspehler.com"
+  content  = "route3.mx.cloudflare.net"
+  type     = "MX"
+  ttl      = 1
+  proxied  = false
+  priority = 39
+}
+
 resource "cloudflare_dns_record" "nicolasspehler_email_spf" {
   zone_id = cloudflare_zone.nicolasspehler.id
   name    = "nicolasspehler.com"
@@ -435,31 +465,16 @@ resource "cloudflare_dns_record" "nicolasspehler_google_search_console" {
 }
 
 import {
-  to = cloudflare_page_rule.endless_engineer_redirect
-  id = "1c280fd8b5e404575a2e83d9e522811a/02107afca88a3a4bfd081b2485330d9d"
+  to = cloudflare_dns_record.nicolasspehler_email_mx_1
+  id = "cdd84d7a0ad8da5ae170f11d96d184db/84d2d42bf874a09128ff76b42268662f"
 }
 
 import {
-  to = cloudflare_page_rule.endless_engineer_redirect_subdomains
-  id = "1c280fd8b5e404575a2e83d9e522811a/c864ce9e474c2fbaaaf862611bc67e83"
+  to = cloudflare_dns_record.nicolasspehler_email_mx_2
+  id = "cdd84d7a0ad8da5ae170f11d96d184db/3302973af6b186480a05bacf02ee19eb"
 }
 
 import {
-  to = cloudflare_page_rule.leanmarketingforstartups_redirect
-  id = "0dd210718e6bec1373f9eb35a934a310/6141967b55f587ac88b8387a717607dc"
-}
-
-import {
-  to = cloudflare_page_rule.leanmarketingforstartups_redirect_subdomains
-  id = "0dd210718e6bec1373f9eb35a934a310/07e403fe3427747c72c83cb56afe7eb9"
-}
-
-import {
-  to = cloudflare_page_rule.nicolasspehler_redirect
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/05f2fd25729a8174c7458dc996c3de37"
-}
-
-import {
-  to = cloudflare_page_rule.nicolasspehler_redirect_subdomains
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/f4a87cd1954b131188817c3fc2dda5bf"
+  to = cloudflare_dns_record.nicolasspehler_email_mx_3
+  id = "cdd84d7a0ad8da5ae170f11d96d184db/306376cbf6d5cde3967dccdb9aded162"
 }
