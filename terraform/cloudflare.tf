@@ -24,6 +24,11 @@ resource "cloudflare_zone_setting" "automatic_https_rewrites" {
   value      = "on"
 }
 
+resource "cloudflare_zone_dnssec" "nspehler" {
+  zone_id = cloudflare_zone.nspehler.id
+  status  = "active"
+}
+
 # Vercel
 resource "cloudflare_dns_record" "vercel" {
   zone_id = cloudflare_zone.nspehler.id

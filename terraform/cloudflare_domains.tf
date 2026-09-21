@@ -46,6 +46,26 @@ resource "cloudflare_zone" "nicolasspehler" {
   type = "full"
 }
 
+resource "cloudflare_zone_dnssec" "categoryapi" {
+  zone_id = cloudflare_zone.categoryapi.id
+  status  = "active"
+}
+
+resource "cloudflare_zone_dnssec" "realestatejobs" {
+  zone_id = cloudflare_zone.realestatejobs.id
+  status  = "active"
+}
+
+resource "cloudflare_zone_dnssec" "leanmarketingforstartups" {
+  zone_id = cloudflare_zone.leanmarketingforstartups.id
+  status  = "active"
+}
+
+resource "cloudflare_zone_dnssec" "nicolasspehler" {
+  zone_id = cloudflare_zone.nicolasspehler.id
+  status  = "active"
+}
+
 # Cloudflare Email
 resource "cloudflare_email_routing_rule" "portalmonitor_nicolas" {
   zone_id = cloudflare_zone.portalmonitor.id
@@ -464,17 +484,30 @@ resource "cloudflare_dns_record" "nicolasspehler_google_search_console" {
   proxied = false
 }
 
+
+
+
 import {
-  to = cloudflare_dns_record.nicolasspehler_email_mx_1
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/84d2d42bf874a09128ff76b42268662f"
+  to = cloudflare_zone_dnssec.nspehler
+  id = "20ec2030590d760e2ffce41463303521"
 }
 
 import {
-  to = cloudflare_dns_record.nicolasspehler_email_mx_2
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/3302973af6b186480a05bacf02ee19eb"
+  to = cloudflare_zone_dnssec.categoryapi
+  id = "d88ab701190361b800e0514e40c4e229"
 }
 
 import {
-  to = cloudflare_dns_record.nicolasspehler_email_mx_3
-  id = "cdd84d7a0ad8da5ae170f11d96d184db/306376cbf6d5cde3967dccdb9aded162"
+  to = cloudflare_zone_dnssec.realestatejobs
+  id = "e8be78c2590bf12e15694d9257aaebdc"
+}
+
+import {
+  to = cloudflare_zone_dnssec.leanmarketingforstartups
+  id = "0dd210718e6bec1373f9eb35a934a310"
+}
+
+import {
+  to = cloudflare_zone_dnssec.nicolasspehler
+  id = "cdd84d7a0ad8da5ae170f11d96d184db"
 }
