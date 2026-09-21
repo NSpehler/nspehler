@@ -24,8 +24,8 @@ export const alma = {
   ],
   card: {
     image: {
-      src: product,
-      alt: "almapay.com product page: Boost your sales with payment in installments",
+      src: home,
+      alt: "almapay.com home page: flexible, guaranteed payment in installments",
     },
     frame: "web",
     description:
