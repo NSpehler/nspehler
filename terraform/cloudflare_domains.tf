@@ -42,6 +42,7 @@ resource "cloudflare_email_routing_rule" "portalmonitor_nicolas" {
 
 resource "cloudflare_email_routing_catch_all" "portalmonitor" {
   zone_id  = cloudflare_zone.portalmonitor.id
+  name     = "Catch-all"
   enabled  = true
   matchers = [{ type = "all" }]
   actions = [{
