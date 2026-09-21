@@ -22,7 +22,7 @@ resource "cloudflare_zone" "portalmonitor" {
   type = "full"
 }
 
-resource "cloudflare_zone" "endless" {
+resource "cloudflare_zone" "endless_engineer" {
   name = "endless.engineer"
   account = {
     id = var.cloudflare_account_id
@@ -292,8 +292,8 @@ resource "cloudflare_dns_record" "nicolasspehler_email_dkim" {
 }
 
 # Redirects
-resource "cloudflare_dns_record" "endless_apex" {
-  zone_id = cloudflare_zone.endless.id
+resource "cloudflare_dns_record" "endless_engineer_apex" {
+  zone_id = cloudflare_zone.endless_engineer.id
   name    = "endless.engineer"
   content = "192.0.2.0"
   type    = "A"
@@ -367,12 +367,12 @@ import {
 }
 
 import {
-  to = cloudflare_zone.endless
+  to = cloudflare_zone.endless_engineer
   id = "1c280fd8b5e404575a2e83d9e522811a"
 }
 
 import {
-  to = cloudflare_dns_record.endless_apex
+  to = cloudflare_dns_record.endless_engineer_apex
   id = "1c280fd8b5e404575a2e83d9e522811a/87ed006b419076d97f3bb9bab14dc1d2"
 }
 
