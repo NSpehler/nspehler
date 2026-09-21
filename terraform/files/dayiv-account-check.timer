@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Day IV account-check every 15 minutes
+
+[Timer]
+OnBootSec=2min
+OnCalendar=*:0/15
+Persistent=true
+Unit=dayiv-account-check.service
+
+[Install]
+WantedBy=timers.target

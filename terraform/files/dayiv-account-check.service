@@ -1,0 +1,19 @@
+[Unit]
+Description=Day IV MCB Pro account check
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Environment=HOME=/root
+Environment=PATH=/root/.bun/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=AWS_DEFAULT_REGION=us-east-1
+Environment=MCB_PRO_SECRET_ID=dayiv/mcb-pro
+Environment=MCB_PRO_PROXY=nord
+Environment=DAYIV_SLACK_SECRET_ID=dayiv/slack
+WorkingDirectory=/opt/dayiv
+ExecStart=/root/.bun/bin/bun run account:check
+Nice=10
+StandardOutput=append:/var/log/dayiv-account-check.log
+StandardError=append:/var/log/dayiv-account-check.log
