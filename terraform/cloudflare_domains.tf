@@ -24,104 +24,81 @@ resource "cloudflare_zone" "portalmonitor" {
   type = "full"
 }
 
-# Fastmail (portalmonitor.io)
-resource "cloudflare_dns_record" "portalmonitor_fastmail_mx_1" {
+# Email Routing (portalmonitor.io): every address forwards to the main mailbox
+resource "cloudflare_email_routing_rule" "portalmonitor_nicolas" {
+  zone_id = cloudflare_zone.portalmonitor.id
+  name    = "nicolas@portalmonitor.io"
+  enabled = true
+  matchers = [{
+    type  = "literal"
+    field = "to"
+    value = "nicolas@portalmonitor.io"
+  }]
+  actions = [{
+    type  = "forward"
+    value = ["nicolas@spehler.com"]
+  }]
+}
+
+resource "cloudflare_email_routing_catch_all" "portalmonitor" {
+  zone_id  = cloudflare_zone.portalmonitor.id
+  enabled  = true
+  matchers = [{ type = "all" }]
+  actions = [{
+    type  = "forward"
+    value = ["nicolas@spehler.com"]
+  }]
+}
+
+resource "cloudflare_dns_record" "portalmonitor_email_mx_1" {
   zone_id  = cloudflare_zone.portalmonitor.id
   name     = "portalmonitor.io"
-  content  = "in1-smtp.messagingengine.com"
+  content  = "amir.mx.cloudflare.net"
   type     = "MX"
   ttl      = 3600
   proxied  = false
   priority = 10
 }
 
-resource "cloudflare_dns_record" "portalmonitor_fastmail_mx_2" {
+resource "cloudflare_dns_record" "portalmonitor_email_mx_2" {
   zone_id  = cloudflare_zone.portalmonitor.id
   name     = "portalmonitor.io"
-  content  = "in2-smtp.messagingengine.com"
+  content  = "linda.mx.cloudflare.net"
   type     = "MX"
   ttl      = 3600
   proxied  = false
-  priority = 20
+  priority = 34
 }
 
-resource "cloudflare_dns_record" "portalmonitor_fastmail_dkim_1" {
-  zone_id = cloudflare_zone.portalmonitor.id
-  name    = "fm1._domainkey.portalmonitor.io"
-  content = "fm1.portalmonitor.io.dkim.fmhosted.com"
-  type    = "CNAME"
-  ttl     = 3600
-  proxied = false
+resource "cloudflare_dns_record" "portalmonitor_email_mx_3" {
+  zone_id  = cloudflare_zone.portalmonitor.id
+  name     = "portalmonitor.io"
+  content  = "isaac.mx.cloudflare.net"
+  type     = "MX"
+  ttl      = 3600
+  proxied  = false
+  priority = 95
 }
 
-resource "cloudflare_dns_record" "portalmonitor_fastmail_dkim_2" {
-  zone_id = cloudflare_zone.portalmonitor.id
-  name    = "fm2._domainkey.portalmonitor.io"
-  content = "fm2.portalmonitor.io.dkim.fmhosted.com"
-  type    = "CNAME"
-  ttl     = 3600
-  proxied = false
-}
-
-resource "cloudflare_dns_record" "portalmonitor_fastmail_dkim_3" {
-  zone_id = cloudflare_zone.portalmonitor.id
-  name    = "fm3._domainkey.portalmonitor.io"
-  content = "fm3.portalmonitor.io.dkim.fmhosted.com"
-  type    = "CNAME"
-  ttl     = 3600
-  proxied = false
-}
-
-resource "cloudflare_dns_record" "portalmonitor_fastmail_spf" {
+resource "cloudflare_dns_record" "portalmonitor_email_spf" {
   zone_id = cloudflare_zone.portalmonitor.id
   name    = "portalmonitor.io"
-  content = "v=spf1 include:spf.messagingengine.com ?all"
+  content = "v=spf1 include:_spf.mx.cloudflare.net ~all"
   type    = "TXT"
-  ttl     = 3600
+  ttl     = 1
+  proxied = false
+}
+
+resource "cloudflare_dns_record" "portalmonitor_email_dkim" {
+  zone_id = cloudflare_zone.portalmonitor.id
+  name    = "cf2024-1._domainkey.portalmonitor.io"
+  content = "\"v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiweykoi+o48IOGuP7GR3X0MOExCUDY/BCRHoWBnh3rChl7WhdyCxW3jgq1daEjPPqoi7sJvdg5hEQVsgVRQP4DcnQDVjGMbASQtrY4WmB1VebF+RPJB2ECPsEDTpeiI5ZyUAwJaVX7r6bznU67g7LvFq35yIo4sdlmtZGV+i0H4cpYH9+3JJ78k\" \"m4KXwaf9xUJCWF6nxeD+qG6Fyruw1Qlbds2r85U9dkNDVAS3gioCvELryh1TxKGiVTkg4wqHTyHfWsp7KD3WQHYJn0RyfJJu6YEmL77zonn7p2SRMvTMP3ZEXibnC9gz3nnhR6wcYL8Q7zXypKTMD58bTixDSJwIDAQAB\""
+  type    = "TXT"
+  ttl     = 1
   proxied = false
 }
 
 import {
-  to = cloudflare_zone.categoryapi
-  id = "d88ab701190361b800e0514e40c4e229"
-}
-
-import {
-  to = cloudflare_zone.realestatejobs
-  id = "e8be78c2590bf12e15694d9257aaebdc"
-}
-
-import {
-  to = cloudflare_zone.portalmonitor
-  id = "a3eba1d56c022932b355e6ae64b672ed"
-}
-
-import {
-  to = cloudflare_dns_record.portalmonitor_fastmail_mx_1
-  id = "a3eba1d56c022932b355e6ae64b672ed/16533395df42ce6a523e69834ef8680e"
-}
-
-import {
-  to = cloudflare_dns_record.portalmonitor_fastmail_mx_2
-  id = "a3eba1d56c022932b355e6ae64b672ed/eab06f2d2cd3f52c6771040ee598c6bc"
-}
-
-import {
-  to = cloudflare_dns_record.portalmonitor_fastmail_dkim_1
-  id = "a3eba1d56c022932b355e6ae64b672ed/42adc04db8b1fe5f1a2b943dd680f5b5"
-}
-
-import {
-  to = cloudflare_dns_record.portalmonitor_fastmail_dkim_2
-  id = "a3eba1d56c022932b355e6ae64b672ed/36b3b7abcafad81db7167af05c4b6ed0"
-}
-
-import {
-  to = cloudflare_dns_record.portalmonitor_fastmail_dkim_3
-  id = "a3eba1d56c022932b355e6ae64b672ed/7fdcc65491532c65181175b78c815479"
-}
-
-import {
-  to = cloudflare_dns_record.portalmonitor_fastmail_spf
-  id = "a3eba1d56c022932b355e6ae64b672ed/599509d4ee09b00a5561303afb686093"
+  to = cloudflare_dns_record.portalmonitor_email_dkim
+  id = "a3eba1d56c022932b355e6ae64b672ed/1c4b32f30d9cc85e40d3eb56ec877dcc"
 }
