@@ -8,16 +8,3 @@ resource "aws_s3_bucket_public_access_block" "nspehler" {
   block_public_acls   = false
   block_public_policy = false
 }
-
-resource "aws_s3_bucket" "nspehler_layers" {
-  bucket = "nspehler-layers"
-}
-
-resource "aws_s3_bucket_public_access_block" "nspehler_layers" {
-  bucket = aws_s3_bucket.nspehler_layers.id
-
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
