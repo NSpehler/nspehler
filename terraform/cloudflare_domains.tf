@@ -493,31 +493,3 @@ resource "cloudflare_dns_record" "nicolasspehler_google_search_console" {
   ttl     = 1
   proxied = false
 }
-
-
-
-
-import {
-  to = cloudflare_zone_dnssec.nspehler
-  id = "20ec2030590d760e2ffce41463303521"
-}
-
-import {
-  to = cloudflare_zone_dnssec.categoryapi
-  id = "d88ab701190361b800e0514e40c4e229"
-}
-
-import {
-  to = cloudflare_zone_dnssec.realestatejobs
-  id = "e8be78c2590bf12e15694d9257aaebdc"
-}
-
-import {
-  to = cloudflare_zone_dnssec.leanmarketingforstartups
-  id = "0dd210718e6bec1373f9eb35a934a310"
-}
-
-import {
-  to = cloudflare_zone_dnssec.nicolasspehler
-  id = "cdd84d7a0ad8da5ae170f11d96d184db"
-}
