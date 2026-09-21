@@ -126,6 +126,11 @@ resource "aws_iam_role_policy_attachment" "vpn_proxy_ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+data "aws_secretsmanager_secret" "mcb_pro" {
+  provider = aws.us-east-1
+  name     = "dayiv/mcb-pro"
+}
+
 resource "aws_iam_role_policy" "vpn_proxy_secrets" {
   name = "read-nordvpn-secret"
   role = aws_iam_role.vpn_proxy.id
@@ -133,9 +138,12 @@ resource "aws_iam_role_policy" "vpn_proxy_secrets" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect   = "Allow"
-      Action   = "secretsmanager:GetSecretValue"
-      Resource = aws_secretsmanager_secret.vpn_proxy.arn
+      Effect = "Allow"
+      Action = "secretsmanager:GetSecretValue"
+      Resource = [
+        aws_secretsmanager_secret.vpn_proxy.arn,
+        data.aws_secretsmanager_secret.mcb_pro.arn,
+      ]
     }]
   })
 }
