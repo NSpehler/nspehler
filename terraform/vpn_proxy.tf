@@ -143,6 +143,29 @@ resource "aws_iam_role_policy" "vpn_proxy_secrets" {
   })
 }
 
+resource "aws_iam_role_policy" "vpn_proxy_discogs" {
+  name = "discogs-session"
+  role = aws_iam_role.vpn_proxy.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "secretsmanager:GetSecretValue"
+        Resource = [
+          aws_secretsmanager_secret.discogs_login.arn,
+          aws_secretsmanager_secret.discogs_session.arn,
+        ]
+      },
+      {
+        Effect   = "Allow"
+        Action   = "secretsmanager:PutSecretValue"
+        Resource = aws_secretsmanager_secret.discogs_session.arn
+      },
+    ]
+  })
+}
+
 resource "aws_iam_instance_profile" "vpn_proxy" {
   name = "vpn-proxy"
   role = aws_iam_role.vpn_proxy.name
