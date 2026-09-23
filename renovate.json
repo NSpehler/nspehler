@@ -26,8 +26,8 @@
       "automerge": true
     },
     {
-      "description": "Auto-merge devDependency minors (npm)",
-      "matchManagers": ["npm"],
+      "description": "Auto-merge devDependency minors",
+      "matchManagers": ["bun"],
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["minor"],
       "automerge": true
