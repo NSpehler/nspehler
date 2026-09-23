@@ -3,7 +3,7 @@ import type { AboutContent } from "./types"
 export const about = {
   title: "About",
   description:
-    "Full-stack developer with 15 years of experience, from leading Growth Engineering teams at Payfit and Alma to building products for Back Market, Intigriti, goalGetr, Nucase and PaperDrop.",
+    "Full-stack developer, 15 years in: led Growth Engineering at Payfit and Alma, then built products for Back Market, Intigriti, goalGetr, Nucase and PaperDrop.",
   intro: {
     headline:
       "Hey! I’m Nicolas, a full-stack developer building modern web and mobile applications, with a focus on automation and AI.",
