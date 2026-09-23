@@ -70,6 +70,8 @@ export const ResearchHero = () => (
                 src={src}
                 alt={alt}
                 sizes={sizes.paper}
+                preload
+                fetchPriority="high"
                 draggable={false}
                 className={cn(
                   "absolute aspect-[12/17] w-[46.15%] rounded-[3px] object-cover",
