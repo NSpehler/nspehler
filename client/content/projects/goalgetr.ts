@@ -47,7 +47,7 @@ export const goalgetr = {
     "SmplCo designed the product. I’ve built the platform since 2025, from the web and mobile apps to everything behind them.",
   ],
   video: {
-    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/goalgetr-AFEMBru81QZXu5jfOgLuA3GvrEnFPx.mp4",
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/goalgetr-AFEMBru81QZXu5jfOgLuA3GvrEnFPx.mp4",
     poster: {
       src: filmPoster,
       alt: "The goalGetr brand film: the wordmark over a hiker on a cliff above a fjord",

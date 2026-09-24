@@ -48,7 +48,7 @@ export const nucase = {
     "SmplCo designed the product and the brand. I built the platform end to end, from the homeowner flow and the AI assistant to the contractor dashboard and the admin tools.",
   ],
   video: {
-    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/nucase-hVXWavgb97nz12jzH11fVk8wn6EYql.mp4",
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/nucase-hVXWavgb97nz12jzH11fVk8wn6EYql.mp4",
     poster: {
       src: filmPoster,
       alt: "The Nucase film: the wordmark over a kitchen, surrounded by renovation tasks",

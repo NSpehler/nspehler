@@ -51,7 +51,7 @@ export const payfit = {
     "I first worked with Payfit in 2019, leading the Growth Engineering team. For the relaunch, I was part of the team that built the new website with Astro and DatoCMS.",
   ],
   video: {
-    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/films/payfit-brand.mp4",
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/payfit-brand.mp4",
     poster: {
       src: filmPoster,
       alt: "The Payfit brand film: two men talking at a table in a restaurant",
