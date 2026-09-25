@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export HOME=/root
+export AWS_DEFAULT_REGION=us-east-1
+
+if [ ! -x /root/.bun/bin/bun ]; then
+  curl -fsSL https://bun.sh/install | bash -s "bun-v${bun_version}"
+fi
+
+install -d -m 700 /root/.ssh
+umask 077
+aws secretsmanager get-secret-value --secret-id "${deploy_key_secret}" --query SecretString --output text > /root/.ssh/dayiv_deploy_key
+echo "${github_host_key}" > /root/.ssh/known_hosts_github
+umask 022
+
+cat > /usr/local/bin/dayiv-sync <<'SYNC'
+${sync_script}
+SYNC
+chmod 755 /usr/local/bin/dayiv-sync
+
+cat > /etc/systemd/system/dayiv-account-check.service <<'UNIT'
+${service_unit}
+UNIT
+
+cat > /etc/systemd/system/dayiv-account-check.timer <<'UNIT'
+${timer_unit}
+UNIT
+
+systemctl daemon-reload
+systemctl enable --now dayiv-account-check.timer
+/usr/local/bin/dayiv-sync || echo "dayiv-sync failed; the timer keeps the current /opt/dayiv and retries every run"

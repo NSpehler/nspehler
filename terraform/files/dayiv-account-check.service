@@ -12,8 +12,9 @@ Environment=AWS_DEFAULT_REGION=us-east-1
 Environment=MCB_PRO_SECRET_ID=dayiv/mcb-pro
 Environment=MCB_PRO_PROXY=nord
 Environment=DAYIV_SLACK_SECRET_ID=dayiv/slack
+Environment=DAYIV_ALERT_ON_FAILURE=1
 WorkingDirectory=/opt/dayiv
+ExecStartPre=-/usr/local/bin/dayiv-sync
 ExecStart=/root/.bun/bin/bun run account:check
 Nice=10
-StandardOutput=append:/var/log/dayiv-account-check.log
-StandardError=append:/var/log/dayiv-account-check.log
+TimeoutStartSec=10min
