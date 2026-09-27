@@ -66,7 +66,7 @@ export const analog = {
     src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/analog-launch.mp4",
     poster: {
       src: videoPoster,
-      alt: "The Analog launch video: the app icon and wordmark over “Your vinyl collection, made smarter.”",
+      alt: "The Analog launch video: “Drop the needle. Analog listens.” beside a spinning Analog record",
     },
     title: "the Analog launch video",
     duration: "30 seconds",
