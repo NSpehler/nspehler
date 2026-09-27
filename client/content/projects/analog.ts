@@ -11,6 +11,7 @@ import session from "@/images/analog/session.webp"
 import settings from "@/images/analog/settings.webp"
 import sides from "@/images/analog/sides.webp"
 import vibe from "@/images/analog/vibe.webp"
+import videoPoster from "@/images/analog/video-poster.webp"
 
 import type { Project } from "../types"
 
@@ -61,6 +62,15 @@ export const analog = {
     "Analog brings your Discogs collection to your iPhone, recognizes the record on your turntable, keeps what’s playing on your Lock Screen, and builds listening sessions from the records you already own.",
     "It’s made for physical records: Analog helps you enjoy your collection, but the music still comes from your turntable.",
   ],
+  video: {
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/analog-launch.mp4",
+    poster: {
+      src: videoPoster,
+      alt: "The Analog launch video: the app icon and wordmark over “Your vinyl collection, made smarter.”",
+    },
+    title: "the Analog launch video",
+    duration: "30 seconds",
+  },
   blocks: [
     {
       type: "chapter",
