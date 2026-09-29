@@ -111,6 +111,10 @@ resource "cloudflare_dns_record" "portalmonitor_email_mx_1" {
   ttl      = 1
   proxied  = false
   priority = 51
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "portalmonitor_email_mx_2" {
@@ -121,6 +125,10 @@ resource "cloudflare_dns_record" "portalmonitor_email_mx_2" {
   ttl      = 1
   proxied  = false
   priority = 64
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "portalmonitor_email_mx_3" {
@@ -131,6 +139,10 @@ resource "cloudflare_dns_record" "portalmonitor_email_mx_3" {
   ttl      = 1
   proxied  = false
   priority = 47
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "portalmonitor_email_spf" {
@@ -149,6 +161,10 @@ resource "cloudflare_dns_record" "portalmonitor_email_dkim" {
   type    = "TXT"
   ttl     = 1
   proxied = false
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_email_routing_rule" "categoryapi_nicolas" {
@@ -174,6 +190,10 @@ resource "cloudflare_dns_record" "categoryapi_email_mx_1" {
   ttl      = 1
   proxied  = false
   priority = 52
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "categoryapi_email_mx_2" {
@@ -184,6 +204,10 @@ resource "cloudflare_dns_record" "categoryapi_email_mx_2" {
   ttl      = 1
   proxied  = false
   priority = 91
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "categoryapi_email_mx_3" {
@@ -194,6 +218,10 @@ resource "cloudflare_dns_record" "categoryapi_email_mx_3" {
   ttl      = 1
   proxied  = false
   priority = 12
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "categoryapi_email_spf" {
@@ -212,6 +240,10 @@ resource "cloudflare_dns_record" "categoryapi_email_dkim" {
   type    = "TXT"
   ttl     = 1
   proxied = false
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_email_routing_rule" "realestatejobs_nicolas" {
@@ -237,6 +269,10 @@ resource "cloudflare_dns_record" "realestatejobs_email_mx_1" {
   ttl      = 1
   proxied  = false
   priority = 7
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "realestatejobs_email_mx_2" {
@@ -247,6 +283,10 @@ resource "cloudflare_dns_record" "realestatejobs_email_mx_2" {
   ttl      = 1
   proxied  = false
   priority = 36
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "realestatejobs_email_mx_3" {
@@ -257,6 +297,10 @@ resource "cloudflare_dns_record" "realestatejobs_email_mx_3" {
   ttl      = 1
   proxied  = false
   priority = 33
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "realestatejobs_email_spf" {
@@ -275,6 +319,10 @@ resource "cloudflare_dns_record" "realestatejobs_email_dkim" {
   type    = "TXT"
   ttl     = 1
   proxied = false
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_email_routing_rule" "nicolasspehler_nicolas" {
@@ -311,6 +359,10 @@ resource "cloudflare_dns_record" "nicolasspehler_email_mx_1" {
   ttl      = 1
   proxied  = false
   priority = 32
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "nicolasspehler_email_mx_2" {
@@ -321,6 +373,10 @@ resource "cloudflare_dns_record" "nicolasspehler_email_mx_2" {
   ttl      = 1
   proxied  = false
   priority = 63
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "nicolasspehler_email_mx_3" {
@@ -331,6 +387,10 @@ resource "cloudflare_dns_record" "nicolasspehler_email_mx_3" {
   ttl      = 1
   proxied  = false
   priority = 39
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "nicolasspehler_email_spf" {
@@ -349,6 +409,10 @@ resource "cloudflare_dns_record" "nicolasspehler_email_dkim" {
   type    = "TXT"
   ttl     = 1
   proxied = false
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 # Redirects

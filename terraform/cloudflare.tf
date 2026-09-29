@@ -57,6 +57,10 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_1" {
   ttl      = 1
   proxied  = false
   priority = 95
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "cloudflare_email_mx_2" {
@@ -67,6 +71,10 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_2" {
   ttl      = 1
   proxied  = false
   priority = 34
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "cloudflare_email_mx_3" {
@@ -77,6 +85,10 @@ resource "cloudflare_dns_record" "cloudflare_email_mx_3" {
   ttl      = 1
   proxied  = false
   priority = 10
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_dns_record" "cloudflare_email_txt" {
@@ -95,6 +107,10 @@ resource "cloudflare_dns_record" "cloudflare_email_dkim" {
   type    = "TXT"
   ttl     = 1
   proxied = false
+
+  lifecycle {
+    ignore_changes = [include_shadow_metadata]
+  }
 }
 
 resource "cloudflare_email_routing_address" "nicolas" {
