@@ -186,7 +186,13 @@ export const Lightbox = ({
   const settled = phase === "open"
   const target: Rect = settled ? fitted : (origin?.rect ?? shrink(fitted))
   const animate = !reducedMotion
-  const radius = device ? 0 : shot.kind === "phone" ? target.width * 0.12 : 10
+  const radius = device
+    ? 0
+    : shot.kind === "phone"
+      ? target.width * 0.12
+      : shot.kind === "tablet"
+        ? target.width * 0.022
+        : 10
   const frameStyle: CSSProperties = {
     top: target.top,
     left: target.left,

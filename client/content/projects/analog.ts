@@ -3,6 +3,9 @@ import deviceCollection from "@/images/analog/device-collection.webp"
 import deviceNowPlaying from "@/images/analog/device-now-playing.webp"
 import deviceStudio from "@/images/analog/device-studio.webp"
 import drafting from "@/images/analog/drafting.webp"
+import ipadCollection from "@/images/analog/ipad-collection.webp"
+import ipadNowPlaying from "@/images/analog/ipad-now-playing.webp"
+import ipadPlaylists from "@/images/analog/ipad-playlists.webp"
 import nowPlaying from "@/images/analog/now-playing.webp"
 import playlists from "@/images/analog/playlists.webp"
 import review from "@/images/analog/review.webp"
@@ -20,10 +23,10 @@ export const analog = {
   name: "Analog",
   year: "2026",
   subtitle:
-    "An iPhone app for vinyl collectors: it recognizes what’s spinning and builds sessions from the records you own",
+    "An iPhone and iPad app for vinyl collectors: it recognizes what’s spinning and builds sessions from the records you own",
   facts: [
-    { label: "Type", value: "iPhone app" },
-    { label: "Platform", value: "iPhone, Lock Screen, Dynamic Island" },
+    { label: "Type", value: "iPhone and iPad app" },
+    { label: "Tech stack", value: "Swift, SwiftUI" },
     {
       label: "Live",
       links: [
@@ -39,8 +42,8 @@ export const analog = {
     image: { src: nowPlaying, alt: "Analog app: Now playing" },
     frame: "phones",
     description:
-      "An iPhone app for vinyl collectors: it recognizes what’s spinning and builds sessions from the records you own",
-    type: "iPhone app",
+      "An iPhone and iPad app for vinyl collectors: it recognizes what’s spinning and builds sessions from the records you own",
+    type: "iPhone and iPad app",
     stack: ["iOS"],
   },
   lead: {
@@ -59,7 +62,7 @@ export const analog = {
     caption: "Collection, Now playing and Analog Studio on iPhone",
   },
   overview: [
-    "Analog brings your Discogs collection to your iPhone, recognizes the record on your turntable, keeps what’s playing on your Lock Screen, and builds listening sessions from the records you already own.",
+    "Analog brings your Discogs collection to your iPhone and iPad, recognizes the record on your turntable, keeps what’s playing on your Lock Screen, and builds listening sessions from the records you already own.",
     "It’s made for physical records: Analog helps you enjoy your collection, but the music still comes from your turntable.",
   ],
   video: {
@@ -171,6 +174,38 @@ export const analog = {
       ],
     },
     {
+      type: "chapter",
+      number: 5,
+      name: "iPad",
+      headline: ["Now on iPad,", "right by the turntable."],
+      body: "Analog 2.0 brings the app to iPad. Prop it up beside your turntable to follow the side that’s playing and what’s up next, browse your whole collection at a glance, and plan your next session on the bigger screen. One download covers both, with your playlists and favorites synced through iCloud.",
+    },
+    {
+      type: "tablets",
+      shots: [
+        {
+          src: ipadNowPlaying,
+          alt: "Analog on iPad: Channel Orange by Frank Ocean now playing, the cover beside the tracklist and Play Next",
+          caption: "Now playing on iPad",
+        },
+      ],
+    },
+    {
+      type: "tablets",
+      shots: [
+        {
+          src: ipadCollection,
+          alt: "Analog on iPad: your favorite records in a grid of covers, eight across",
+          caption: "Your collection",
+        },
+        {
+          src: ipadPlaylists,
+          alt: "Analog on iPad: your saved playlists, each fanned like a pile of sleeves",
+          caption: "Your playlists",
+        },
+      ],
+    },
+    {
       type: "cards",
       heading: "Principles",
       columns: 3,
@@ -181,7 +216,7 @@ export const analog = {
         },
         {
           title: "Private by design",
-          body: "Analog only listens while it’s identifying a record, and your audio never leaves your iPhone.",
+          body: "Analog only listens while it’s identifying a record, and your audio never leaves your device.",
         },
         {
           title: "Free to start",

@@ -9,7 +9,7 @@ export type Inline = string | readonly (string | Link)[]
 export type TwoTone = readonly [string, string?]
 export type Pair = { label: string; value: string }
 export type Picture = { src: StaticImageData; alt: string }
-export type ShotKind = "shot" | "phone" | "device"
+export type ShotKind = "shot" | "phone" | "tablet" | "device"
 export type Shot = Picture & { caption: Inline; kind?: ShotKind }
 export type Fact = Pair | { label: string; links: readonly Link[] }
 export type CardItem = { title: string; body: string }
@@ -36,6 +36,7 @@ export type Block =
       type: "phones"
       shots: readonly [Shot, Shot] | readonly [Shot, Shot, Shot, Shot]
     }
+  | { type: "tablets"; shots: readonly [Shot] | readonly [Shot, Shot] }
   | {
       type: "cards"
       heading: string
