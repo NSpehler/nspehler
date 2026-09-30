@@ -26,10 +26,7 @@ export const analog = {
     "An iPhone and iPad app for vinyl collectors: it recognizes what’s spinning and builds sessions from the records you own",
   facts: [
     { label: "Type", value: "iPhone and iPad app" },
-    {
-      label: "Platform",
-      value: "iPhone, iPad, Lock Screen, Dynamic Island",
-    },
+    { label: "Platform", value: "iPhone and iPad" },
     {
       label: "Live",
       links: [
