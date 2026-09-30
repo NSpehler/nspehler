@@ -19,7 +19,7 @@ I build production-grade web applications, marketing websites, internal tools an
 
 A few iOS and web applications I’ve built end-to-end as a freelance engineer:
 
-- **[Analog](https://nspehler.com/projects/analog)** — An iPhone app for vinyl collectors that identifies what’s playing on your turntable and turns your record collection into curated listening sessions. Built with real-time audio recognition and Analog Studio, an AI-powered playlist builder for records you already own — [analogapp.co](https://analogapp.co).
+- **[Analog](https://nspehler.com/projects/analog)** — An iPhone and iPad app for vinyl collectors that identifies what’s playing on your turntable and turns your record collection into curated listening sessions. Built with real-time audio recognition and Analog Studio, an AI-powered playlist builder for records you already own — [analogapp.co](https://analogapp.co).
 - **[goalGetr](https://nspehler.com/projects/goalgetr)** — An ice hockey training platform helping players track their progress, follow structured drills and level up their game — [goalgetr.co](https://goalgetr.co).
 - **[Nucase](https://nspehler.com/projects/nucase)** — A home renovation platform for the Norwegian market, connecting homeowners with contractors and streamlining the renovation process from quote to completion — [app.nucase.no](https://app.nucase.no).
 - **[PaperDrop](https://nspehler.com/projects/paperdrop)** — A fully-featured form builder for PaperDrop’s job management platform, helping UK contractors run their business without paperwork by turning any PDF template into an interactive form completed from the field — [paperdrop.com](https://paperdrop.com).

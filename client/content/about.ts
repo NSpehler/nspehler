@@ -24,7 +24,7 @@ export const about = {
       { label: "PaperDrop", href: "/projects/paperdrop" },
       ". I’m also building ",
       { label: "Analog", href: "/projects/analog" },
-      ", an iPhone app for vinyl collectors.",
+      ", an iPhone and iPad app for vinyl collectors.",
     ],
   },
   services: [
@@ -35,7 +35,7 @@ export const about = {
     },
     {
       title: "Mobile apps",
-      body: "iPhone apps from idea to App Store, with over a dozen published and 400,000+ downloads.",
+      body: "iPhone and iPad apps from idea to App Store, with over a dozen published and 400,000+ downloads.",
       examples: "Analog, goalGetr, L&S",
     },
     {

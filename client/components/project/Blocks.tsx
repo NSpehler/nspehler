@@ -6,6 +6,7 @@ import { Figures } from "./Figures"
 import { Ledger } from "./Ledger"
 import { Phones } from "./Phones"
 import { Quote } from "./Quote"
+import { Tablets } from "./Tablets"
 
 type Props = {
   blocks: readonly Block[]
@@ -14,7 +15,8 @@ type Props = {
 const isVisual = (block: Block | undefined) =>
   block?.type === "figure" ||
   block?.type === "figures" ||
-  block?.type === "phones"
+  block?.type === "phones" ||
+  block?.type === "tablets"
 
 const spacing = (previous: Block | undefined) => {
   if (isVisual(previous)) return "mt-6 md:mt-8"
@@ -33,6 +35,8 @@ export const Blocks = ({ blocks }: Props) =>
         return <Figures key={index} block={block} className={className} />
       case "phones":
         return <Phones key={index} block={block} className={className} />
+      case "tablets":
+        return <Tablets key={index} block={block} className={className} />
       case "cards":
         return <Cards key={index} block={block} />
       case "quote":

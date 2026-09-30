@@ -38,7 +38,7 @@ export const home = {
   },
   nowBuilding: {
     slug: "analog",
-    body: "An iPhone app for vinyl collectors. It identifies what’s playing on your turntable and turns your record shelf into curated listening sessions.",
+    body: "An iPhone and iPad app for vinyl collectors. It identifies what’s playing on your turntable and turns your record shelf into curated listening sessions.",
     website: { label: "analogapp.co", href: "https://analogapp.co" },
     screens: [
       {
