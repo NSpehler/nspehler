@@ -180,8 +180,8 @@ export const analog = {
       type: "chapter",
       number: 5,
       name: "iPad",
-      headline: ["Now on iPad,", "at every size."],
-      body: "Analog 2.0 brings the whole app to iPad, in every orientation and window size. The cover sits beside the tracklist, your collection spreads across up to eight records a row, playlists fan out like piles of sleeves, and keyboard shortcuts and the pointer make it feel at home. One download covers both, with your playlists and favorites synced through iCloud.",
+      headline: ["Now on iPad,", "right by the turntable."],
+      body: "Analog 2.0 brings the app to iPad. Prop it up beside your turntable to follow the side that’s playing and what’s up next, browse your whole collection at a glance, and plan your next session on the bigger screen. One download covers both, with your playlists and favorites synced through iCloud.",
     },
     {
       type: "tablets",
