@@ -189,7 +189,7 @@ export const analog = {
         {
           src: ipadNowPlaying,
           alt: "Analog on iPad: Channel Orange by Frank Ocean now playing, the cover beside the tracklist and Play Next",
-          caption: "Now playing on iPad, the cover beside the tracklist",
+          caption: "Now playing on iPad",
         },
       ],
     },
@@ -199,12 +199,12 @@ export const analog = {
         {
           src: ipadCollection,
           alt: "Analog on iPad: your favorite records in a grid of covers, eight across",
-          caption: "Your collection, eight records a row",
+          caption: "Your collection",
         },
         {
           src: ipadPlaylists,
           alt: "Analog on iPad: your saved playlists, each fanned like a pile of sleeves",
-          caption: "Your playlists, fanned like piles of sleeves",
+          caption: "Your playlists",
         },
       ],
     },
