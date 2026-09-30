@@ -26,10 +26,7 @@ export const analog = {
     "An iPhone and iPad app for vinyl collectors: it recognizes what’s spinning and builds sessions from the records you own",
   facts: [
     { label: "Type", value: "Native app" },
-    {
-      label: "Tech stack",
-      value: "SwiftUI, ShazamKit, Cloudflare Workers, Claude",
-    },
+    { label: "Platform", value: "iPhone and iPad" },
     {
       label: "Live",
       links: [
