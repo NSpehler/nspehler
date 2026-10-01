@@ -22,14 +22,6 @@ resource "cloudflare_zone" "portalmonitor" {
   type = "full"
 }
 
-resource "cloudflare_zone" "endless_engineer" {
-  name = "endless.engineer"
-  account = {
-    id = var.cloudflare_account_id
-  }
-  type = "full"
-}
-
 resource "cloudflare_zone" "leanmarketingforstartups" {
   name = "leanmarketingforstartups.com"
   account = {
@@ -48,11 +40,6 @@ resource "cloudflare_zone" "nicolasspehler" {
 
 resource "cloudflare_zone_dnssec" "portalmonitor" {
   zone_id = cloudflare_zone.portalmonitor.id
-  status  = "active"
-}
-
-resource "cloudflare_zone_dnssec" "endless_engineer" {
-  zone_id = cloudflare_zone.endless_engineer.id
   status  = "active"
 }
 
@@ -352,15 +339,6 @@ resource "cloudflare_dns_record" "nicolasspehler_email_dkim" {
 }
 
 # Redirects
-resource "cloudflare_dns_record" "endless_engineer_apex" {
-  zone_id = cloudflare_zone.endless_engineer.id
-  name    = "endless.engineer"
-  content = "192.0.2.0"
-  type    = "A"
-  ttl     = 1
-  proxied = true
-}
-
 resource "cloudflare_dns_record" "leanmarketingforstartups_apex" {
   zone_id = cloudflare_zone.leanmarketingforstartups.id
   name    = "leanmarketingforstartups.com"
@@ -395,32 +373,6 @@ resource "cloudflare_dns_record" "nicolasspehler_www" {
   type    = "CNAME"
   ttl     = 1
   proxied = true
-}
-
-resource "cloudflare_page_rule" "endless_engineer_redirect" {
-  zone_id  = cloudflare_zone.endless_engineer.id
-  target   = "endless.engineer/*"
-  priority = 1
-  status   = "active"
-  actions = {
-    forwarding_url = {
-      url         = "https://nspehler.com"
-      status_code = 302
-    }
-  }
-}
-
-resource "cloudflare_page_rule" "endless_engineer_redirect_subdomains" {
-  zone_id  = cloudflare_zone.endless_engineer.id
-  target   = "*.endless.engineer/*"
-  priority = 2
-  status   = "active"
-  actions = {
-    forwarding_url = {
-      url         = "https://nspehler.com"
-      status_code = 302
-    }
-  }
 }
 
 resource "cloudflare_page_rule" "leanmarketingforstartups_redirect" {
