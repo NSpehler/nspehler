@@ -3,7 +3,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata, Viewport } from "next"
 import PlausibleProvider from "next-plausible"
 import { Geist, Geist_Mono } from "next/font/google"
-import type { ReactNode } from "react"
 
 import { Footer, Header, ThemeProvider } from "@/components/layout"
 import { NavigationFlag } from "@/components/motion/NavigationFlag"
@@ -45,11 +44,7 @@ export const viewport: Viewport = {
   ],
 }
 
-type Props = {
-  children: ReactNode
-}
-
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   const plausibleSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_SRC
 
   const content = (
