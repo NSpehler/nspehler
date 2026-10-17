@@ -38,11 +38,6 @@ resource "cloudflare_zone" "nicolasspehler" {
   type = "full"
 }
 
-import {
-  to = cloudflare_zone.spehler_co
-  id = "ad10eddd0d4cf1cbff1a07a0b44f3a7a"
-}
-
 resource "cloudflare_zone" "spehler_co" {
   name = "spehler.co"
   account = {
