@@ -38,6 +38,19 @@ resource "cloudflare_zone" "nicolasspehler" {
   type = "full"
 }
 
+import {
+  to = cloudflare_zone.spehler_co
+  id = "ad10eddd0d4cf1cbff1a07a0b44f3a7a"
+}
+
+resource "cloudflare_zone" "spehler_co" {
+  name = "spehler.co"
+  account = {
+    id = var.cloudflare_account_id
+  }
+  type = "full"
+}
+
 resource "cloudflare_zone_dnssec" "portalmonitor" {
   zone_id = cloudflare_zone.portalmonitor.id
   status  = "active"
@@ -60,6 +73,11 @@ resource "cloudflare_zone_dnssec" "leanmarketingforstartups" {
 
 resource "cloudflare_zone_dnssec" "nicolasspehler" {
   zone_id = cloudflare_zone.nicolasspehler.id
+  status  = "active"
+}
+
+resource "cloudflare_zone_dnssec" "spehler_co" {
+  zone_id = cloudflare_zone.spehler_co.id
   status  = "active"
 }
 
@@ -417,6 +435,50 @@ resource "cloudflare_page_rule" "nicolasspehler_redirect" {
 resource "cloudflare_page_rule" "nicolasspehler_redirect_subdomains" {
   zone_id  = cloudflare_zone.nicolasspehler.id
   target   = "*.nicolasspehler.com/*"
+  priority = 1
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com"
+      status_code = 301
+    }
+  }
+}
+
+resource "cloudflare_dns_record" "spehler_co_apex" {
+  zone_id = cloudflare_zone.spehler_co.id
+  name    = "spehler.co"
+  content = "192.0.2.1"
+  type    = "A"
+  ttl     = 1
+  proxied = true
+}
+
+resource "cloudflare_dns_record" "spehler_co_www" {
+  zone_id = cloudflare_zone.spehler_co.id
+  name    = "www.spehler.co"
+  content = "spehler.co"
+  type    = "CNAME"
+  ttl     = 1
+  proxied = true
+}
+
+resource "cloudflare_page_rule" "spehler_co_redirect" {
+  zone_id  = cloudflare_zone.spehler_co.id
+  target   = "spehler.co/*"
+  priority = 2
+  status   = "active"
+  actions = {
+    forwarding_url = {
+      url         = "https://nspehler.com"
+      status_code = 301
+    }
+  }
+}
+
+resource "cloudflare_page_rule" "spehler_co_redirect_subdomains" {
+  zone_id  = cloudflare_zone.spehler_co.id
+  target   = "*.spehler.co/*"
   priority = 1
   status   = "active"
   actions = {
