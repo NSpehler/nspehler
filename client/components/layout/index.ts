@@ -1,4 +1,4 @@
 export * from "./Footer"
-export * from "./Header"
+export * from "./Shell"
 export * from "./ThemeProvider"
 export * from "./ThemeSwitcher"

@@ -15,7 +15,18 @@ const leavingFor = (event: MouseEvent) => {
   const link =
     event.target instanceof Element ? event.target.closest("a[href]") : null
   if (!(link instanceof HTMLAnchorElement)) return
-  if (link.pathname !== location.pathname) leaving = true
+  const modified =
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  const elsewhere =
+    link.origin !== location.origin ||
+    (link.target !== "" && link.target !== "_self") ||
+    link.hasAttribute("download")
+  if (!modified && !elsewhere && link.pathname !== location.pathname)
+    leaving = true
 }
 
 export const ScrollMemory = () => {

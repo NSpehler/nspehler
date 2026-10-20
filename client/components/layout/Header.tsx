@@ -13,6 +13,11 @@ import { cn } from "@/lib/utils"
 
 type Underline = { left: number; width: number; visible: boolean }
 
+type Props = {
+  menuOpen: boolean
+  onMenuOpenChange: (open: boolean) => void
+}
+
 const HIDDEN: Underline = { left: 0, width: 0, visible: false }
 
 const coordinates = formatCoordinates({
@@ -20,58 +25,71 @@ const coordinates = formatCoordinates({
   lng: site.location.longitude,
 })
 
-export const Header = () => {
+export const Header = ({ menuOpen, onMenuOpenChange }: Props) => {
   const pathname = usePathname()
   const onProject = pathname.startsWith("/projects")
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" || onProject : pathname.startsWith(href)
 
+  const activeIndex = site.nav.findIndex((item) => isActive(item.href))
+
+  const navRef = useRef<HTMLElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
   const linkRefs = useRef<Array<HTMLAnchorElement | null>>([])
   const [underline, setUnderline] = useState<Underline>(HIDDEN)
   const [animate, setAnimate] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
   const reducedMotion = useReducedMotion()
   const animateUnderline = animate && !reducedMotion
 
-  const measure = () => {
-    const activeIndex = site.nav.findIndex((item) => isActive(item.href))
-    const el = linkRefs.current[activeIndex]
-    setUnderline(
-      el
-        ? { left: el.offsetLeft, width: el.offsetWidth, visible: true }
-        : HIDDEN,
-    )
+  const closeMenu = () => onMenuOpenChange(false)
+
+  const linkProps = (href: string) => {
+    const back = href === "/" && onProject
+    return {
+      transitionTypes: back ? NAV.back : NAV.switch,
+      onClick: () => {
+        if (back) restoreScroll()
+        closeMenu()
+      },
+    }
   }
 
   useLayoutEffect(() => {
+    const measure = () => {
+      const el = linkRefs.current[activeIndex]
+      setUnderline(
+        el
+          ? { left: el.offsetLeft, width: el.offsetWidth, visible: true }
+          : HIDDEN,
+      )
+    }
     measure()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+    const observer = new ResizeObserver(measure)
+    if (navRef.current) observer.observe(navRef.current)
+    return () => observer.disconnect()
+  }, [activeIndex])
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setAnimate(true))
-    window.addEventListener("resize", measure)
-    return () => {
-      cancelAnimationFrame(id)
-      window.removeEventListener("resize", measure)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => cancelAnimationFrame(id)
   }, [])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMenuOpen(false)
+    onMenuOpenChange(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   useEffect(() => {
     if (!menuOpen) return
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false)
+      if (event.key !== "Escape") return
+      onMenuOpenChange(false)
+      toggleRef.current?.focus()
     }
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
-  }, [menuOpen])
+  }, [menuOpen, onMenuOpenChange])
 
   return (
     <>
@@ -84,7 +102,7 @@ export const Header = () => {
             <div className="flex min-w-0 flex-col max-lg:pb-1 lg:flex-row lg:items-baseline lg:gap-4">
               <Link
                 href="/"
-                onClick={() => setMenuOpen(false)}
+                {...linkProps("/")}
                 className="w-fit max-w-full truncate text-lg font-medium tracking-[-0.02em] transition-colors duration-150 motion-reduce:transition-none lg:text-[30px]/[1.2] lg:tracking-[-0.025em]"
               >
                 {site.name}
@@ -95,11 +113,12 @@ export const Header = () => {
             </div>
 
             <nav
+              ref={navRef}
               aria-label="Main"
               className="relative hidden h-full gap-8 text-base/[1.5] font-medium lg:flex"
             >
               {site.nav.map((item, index) => {
-                const active = isActive(item.href)
+                const active = index === activeIndex
                 return (
                   <Link
                     ref={(el) => {
@@ -107,12 +126,7 @@ export const Header = () => {
                     }}
                     key={item.label}
                     href={item.href}
-                    transitionTypes={
-                      item.href === "/" && onProject ? NAV.back : NAV.switch
-                    }
-                    onClick={
-                      item.href === "/" && onProject ? restoreScroll : undefined
-                    }
+                    {...linkProps(item.href)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "flex items-center transition-colors duration-150 motion-reduce:transition-none",
@@ -139,8 +153,9 @@ export const Header = () => {
             </nav>
 
             <button
+              ref={toggleRef}
               type="button"
-              onClick={() => setMenuOpen((open) => !open)}
+              onClick={() => onMenuOpenChange(!menuOpen)}
               data-open={menuOpen ? "" : undefined}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -168,7 +183,7 @@ export const Header = () => {
       >
         <ul className="column flex flex-col gap-5 pt-8 pb-8">
           {site.nav.map((item, index) => {
-            const active = isActive(item.href)
+            const active = index === activeIndex
             return (
               <li
                 key={item.label}
@@ -184,7 +199,7 @@ export const Header = () => {
               >
                 <Link
                   href={item.href}
-                  onClick={() => setMenuOpen(false)}
+                  {...linkProps(item.href)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "block text-[32px] font-medium tracking-[-0.03em] transition-colors",

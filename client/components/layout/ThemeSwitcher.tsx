@@ -20,45 +20,42 @@ const HIDDEN: Pill = { left: 0, width: 0, visible: false }
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const groupRef = useRef<HTMLDivElement>(null)
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([])
   const [pill, setPill] = useState<Pill>(HIDDEN)
   const [animate, setAnimate] = useState(false)
   const reducedMotion = useReducedMotion()
   const animatePill = animate && !reducedMotion
+  const activeIndex = themes.findIndex(({ value }) => value === theme)
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true)
   }, [])
 
-  const measure = () => {
-    const activeIndex = themes.findIndex(({ value }) => value === theme)
-    const el = buttonRefs.current[activeIndex]
-    setPill(
-      el
-        ? { left: el.offsetLeft, width: el.offsetWidth, visible: true }
-        : HIDDEN,
-    )
-  }
-
   useEffect(() => {
-    if (!mounted) return
+    const measure = () => {
+      const el = buttonRefs.current[activeIndex]
+      setPill(
+        el
+          ? { left: el.offsetLeft, width: el.offsetWidth, visible: true }
+          : HIDDEN,
+      )
+    }
     measure()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [theme, mounted])
+    const observer = new ResizeObserver(measure)
+    if (groupRef.current) observer.observe(groupRef.current)
+    return () => observer.disconnect()
+  }, [activeIndex])
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setAnimate(true))
-    window.addEventListener("resize", measure)
-    return () => {
-      cancelAnimationFrame(id)
-      window.removeEventListener("resize", measure)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => cancelAnimationFrame(id)
   }, [])
 
   return (
     <div
+      ref={groupRef}
       role="radiogroup"
       aria-label="Theme"
       className="relative inline-flex items-center rounded-full border border-edge bg-track p-0.5"
@@ -79,7 +76,7 @@ export const ThemeSwitcher = () => {
         }}
       />
       {themes.map(({ value, label, Icon }, index) => {
-        const active = mounted && theme === value
+        const active = mounted && index === activeIndex
         return (
           <button
             key={value}

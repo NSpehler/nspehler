@@ -4,7 +4,7 @@ import type { Metadata, Viewport } from "next"
 import PlausibleProvider from "next-plausible"
 import { Geist, Geist_Mono } from "next/font/google"
 
-import { Footer, Header, ThemeProvider } from "@/components/layout"
+import { Footer, Shell, ThemeProvider } from "@/components/layout"
 import { NavigationFlag } from "@/components/motion/NavigationFlag"
 import { ScrollMemory } from "@/components/motion/ScrollMemory"
 import { home } from "@/content/home"
@@ -48,19 +48,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   const plausibleSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_SRC
 
   const content = (
-    <div className="flex min-h-dvh flex-col">
-      <Header />
-      <div className="column flex flex-1 flex-col">
-        <main
-          id="main"
-          tabIndex={-1}
-          className="flex-1 pb-12 outline-none md:pb-18"
-        >
-          {children}
-        </main>
-        <Footer />
-      </div>
-    </div>
+    <Shell>
+      <main
+        id="main"
+        tabIndex={-1}
+        className="flex-1 pb-12 outline-none md:pb-18"
+      >
+        {children}
+      </main>
+      <Footer />
+    </Shell>
   )
 
   return (
