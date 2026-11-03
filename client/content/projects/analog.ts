@@ -75,7 +75,7 @@ export const analog = {
     src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/analog-launch-2026-11-03.mp4",
     poster: {
       src: videoPoster,
-      alt: "The Analog launch video: “Knows the record. And the side.” beside Now Playing on iPhone, side A of Channel Orange with its tracklist",
+      alt: "The Analog launch video: “Drop the needle. Analog listens.” beside a spinning Analog record",
     },
     title: "the Analog launch video",
     duration: "30 seconds",
