@@ -192,7 +192,9 @@ export const Lightbox = ({
       ? target.width * 0.12
       : shot.kind === "tablet"
         ? target.width * 0.022
-        : 10
+        : shot.kind === "watch"
+          ? target.width * 0.26
+          : 10
   const frameStyle: CSSProperties = {
     top: target.top,
     left: target.left,
