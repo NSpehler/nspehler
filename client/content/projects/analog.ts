@@ -109,23 +109,6 @@ export const analog = {
     {
       type: "chapter",
       number: 2,
-      name: "Play Next",
-      headline: ["What to play next,", "from your own shelf."],
-      body: "Under the record that’s playing, Analog suggests three records from your collection to follow it, and says why its top pick fits. Switch between Balanced, Favorites, Rotation and Surprise, or tap Pick for me when you can’t choose. The suggestions are made on your device with Apple Intelligence.",
-    },
-    {
-      type: "tablets",
-      shots: [
-        {
-          src: ipadPlayNext,
-          alt: "Analog on iPad: Channel Orange playing, with In Colour by Jamie xx as the top pick to play next",
-          caption: "Play Next on iPad",
-        },
-      ],
-    },
-    {
-      type: "chapter",
-      number: 3,
       name: "Analog Studio",
       headline: ["Set the mood.", "Analog curates it."],
       body: "Pick an occasion, a mood and genres from your own shelf, or describe the moment in your own words. Set how long you want to listen, and Analog Studio lines up the albums, sides and order for your next session.",
@@ -152,6 +135,23 @@ export const analog = {
           src: session,
           alt: "Analog app: a Golden Hour session in progress, with the records up next",
           caption: "4. Play the session",
+        },
+      ],
+    },
+    {
+      type: "chapter",
+      number: 3,
+      name: "Play Next",
+      headline: ["What to play next,", "from your own shelf."],
+      body: "Under the record that’s playing, Analog suggests three records from your collection to follow it, and says why its top pick fits. Switch between Balanced, Favorites, Rotation and Surprise, or tap Pick for me when you can’t choose. The suggestions are made on your device with Apple Intelligence.",
+    },
+    {
+      type: "tablets",
+      shots: [
+        {
+          src: ipadPlayNext,
+          alt: "Analog on iPad: Channel Orange playing, with In Colour by Jamie xx as the top pick to play next",
+          caption: "Play Next on iPad",
         },
       ],
     },
@@ -263,12 +263,12 @@ export const analog = {
           body: "Analog identifies the track from a few seconds of sound, then maps it to the right record and side in your Discogs collection and follows the side by its track lengths.",
         },
         {
-          title: "Play Next",
-          body: "Apple Intelligence picks the suggestions on the device, from your own collection, so Play Next works without a server.",
-        },
-        {
           title: "Analog Studio",
           body: "Claude drafts each session in four passes on the server. The app proves itself with App Attest, so no API key ever ships in it.",
+        },
+        {
+          title: "Play Next",
+          body: "Apple Intelligence picks the suggestions on the device, from your own collection, so Play Next works without a server.",
         },
         {
           title: "One app, every screen",
