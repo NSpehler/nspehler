@@ -20,6 +20,9 @@ type Props = {
 
 const HIDDEN: Underline = { left: 0, width: 0, visible: false }
 
+// Tailwind's `lg`, where the mobile menu and its toggle hide.
+const DESKTOP = "(width >= 64rem)"
+
 const coordinates = formatCoordinates({
   lat: site.location.latitude,
   lng: site.location.longitude,
@@ -87,8 +90,16 @@ export const Header = ({ menuOpen, onMenuOpenChange }: Props) => {
       onMenuOpenChange(false)
       toggleRef.current?.focus()
     }
+    const desktop = window.matchMedia(DESKTOP)
+    const handleDesktop = () => {
+      if (desktop.matches) onMenuOpenChange(false)
+    }
     window.addEventListener("keydown", handleKey)
-    return () => window.removeEventListener("keydown", handleKey)
+    desktop.addEventListener("change", handleDesktop)
+    return () => {
+      window.removeEventListener("keydown", handleKey)
+      desktop.removeEventListener("change", handleDesktop)
+    }
   }, [menuOpen, onMenuOpenChange])
 
   return (
