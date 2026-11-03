@@ -14,12 +14,12 @@ export const Watches = ({ block: { shots }, className }: Props) => (
   <div className={cn("grid gap-8 md:grid-cols-3", className)}>
     {shots.map((shot) => (
       <Figure key={shot.src.src} caption={shot.caption}>
-        <Mat className="aspect-[5/4] rounded-[14px] [--inset:40%] md:aspect-[4/5] md:rounded-mat md:[--inset:62%]">
+        <Mat className="aspect-square rounded-[14px] [--inset:46%] md:aspect-[4/5] md:rounded-mat md:[--inset:56%]">
           <Shot
-            shot={{ ...shot, kind: "watch" }}
+            shot={{ ...shot, kind: "device" }}
             sizes={sizes.watch}
-            className="w-(--inset) rounded-[26%/21.3%]"
-            imageClassName="aspect-[422/514] w-full rounded-[inherit] object-cover shadow-phone"
+            className="w-(--inset)"
+            imageClassName="h-auto w-full drop-shadow-phone"
           />
         </Mat>
       </Figure>
