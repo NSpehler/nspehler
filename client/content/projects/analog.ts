@@ -2,11 +2,8 @@ import deviceNowPlaying from "@/images/analog/device-now-playing.webp"
 import deviceSession from "@/images/analog/device-session.webp"
 import deviceStudio from "@/images/analog/device-studio.webp"
 import drafting from "@/images/analog/drafting.webp"
-import duoCollection from "@/images/analog/duo-collection.webp"
-import duoNowPlaying from "@/images/analog/duo-now-playing.webp"
 import historyShare from "@/images/analog/history-share.webp"
 import history from "@/images/analog/history.webp"
-import ipadCollection from "@/images/analog/ipad-collection.webp"
 import ipadPlayNext from "@/images/analog/ipad-play-next.webp"
 import lockScreen from "@/images/analog/lock-screen.webp"
 import macNowPlaying from "@/images/analog/mac-now-playing.webp"
@@ -89,7 +86,7 @@ export const analog = {
       number: 1,
       name: "Now playing",
       headline: ["Drop the needle.", "Analog listens along."],
-      body: "Analog recognizes the record and the side from your own collection as soon as the music starts. It shows the tracklist, counts down the track that’s playing and tells you when it’s time to flip. The side and the time left stay on your Lock Screen and in the Dynamic Island, without unlocking your iPhone.",
+      body: "Analog recognizes the record and the side from your Discogs collection as soon as the music starts. It follows the side track by track and tells you when it’s time to flip. The side and the time left stay on your Lock Screen and in the Dynamic Island, on your Apple Watch and in your Mac’s menu bar.",
     },
     {
       type: "phones",
@@ -97,14 +94,23 @@ export const analog = {
         {
           src: nowPlaying,
           alt: "Analog app: Now playing: Channel Orange, side A and its tracklist",
-          caption: "Now playing: the record, the side and the tracklist",
+          caption: "The record, the side and the tracklist",
         },
         {
           src: lockScreen,
           alt: "Analog on the Lock Screen: side A of Channel Orange and the time left",
-          caption: "The side and the time left on your Lock Screen",
+          caption: "The time left, without unlocking",
         },
       ],
+    },
+    {
+      type: "figure",
+      frame: "mat",
+      shot: {
+        src: macNowPlaying,
+        alt: "Analog on Mac: Channel Orange playing, the cover beside all four sides",
+        caption: "The same record on your Mac, every side in view",
+      },
     },
     {
       type: "chapter",
@@ -143,7 +149,7 @@ export const analog = {
       number: 3,
       name: "Play Next",
       headline: ["What to play next,", "from your own shelf."],
-      body: "Under the record that’s playing, Analog suggests three records from your collection to follow it, and says why its top pick fits. Switch between Balanced, Favorites, Rotation and Surprise, or tap Pick for me when you can’t choose. The suggestions are made on your device with Apple Intelligence.",
+      body: "Under the record that’s playing, Analog suggests three records from your collection to follow it, and says why its top pick fits. Switch between Balanced, Favorites, Rotation and Surprise, or tap Pick for me when you can’t choose. The suggestions are made on your device with Apple Intelligence, and on Apple Watch they sit a swipe away from the record and its tracklist.",
     },
     {
       type: "tablets",
@@ -151,54 +157,9 @@ export const analog = {
         {
           src: ipadPlayNext,
           alt: "Analog on iPad: Channel Orange playing, with In Colour by Jamie xx as the top pick to play next",
-          caption: "Play Next on iPad",
+          caption: "The top pick, and why it fits",
         },
       ],
-    },
-    {
-      type: "chapter",
-      number: 4,
-      name: "History",
-      headline: ["Every evening", "adds up."],
-      body: "History keeps every record you play: your time at the turntable this month, this year or since your first record, your most played records and each day’s listening. Share your month as a card made from your most played records, or save it to Photos.",
-    },
-    {
-      type: "phones",
-      shots: [
-        {
-          src: history,
-          alt: "Analog app: History: 26 hours at the turntable this month, and the most played records",
-          caption: "Your time at the turntable",
-        },
-        {
-          src: historyShare,
-          alt: "Analog app: your month as a card to share",
-          caption: "Share your month as a card",
-        },
-      ],
-    },
-    {
-      type: "chapter",
-      number: 5,
-      name: "Mac",
-      headline: ["Now on Mac,", "right in the menu bar."],
-      body: "Analog 3.0 brought the app to the Mac. It keeps following the record while you work in other apps, with what’s playing in the menu bar. Your collection, playlists and history come with you through iCloud, and one Analog Studio subscription covers Mac, iPhone and iPad.",
-    },
-    {
-      type: "figure",
-      frame: "mat",
-      shot: {
-        src: macNowPlaying,
-        alt: "Analog on Mac: Channel Orange playing, the cover beside all four sides",
-        caption: "Now playing on Mac",
-      },
-    },
-    {
-      type: "chapter",
-      number: 6,
-      name: "Apple Watch",
-      headline: ["Drop the needle.", "Raise your wrist."],
-      body: "On Apple Watch, see the record, the side and the time left at a glance, identify a record from your wrist, and see what to play next. The tracklist follows the side track by track, and a complication keeps the countdown on your watch face.",
     },
     {
       type: "watches",
@@ -222,34 +183,23 @@ export const analog = {
     },
     {
       type: "chapter",
-      number: 7,
-      name: "iPad and iPhone Duo",
-      headline: ["Bigger screens,", "the whole record."],
-      body: "Connect Discogs once and your whole collection syncs to every screen. On iPad, Analog sits beside your turntable with the record next to all its sides and your shelf at a glance. Open iPhone Duo and the record you’re playing sits on one side with its tracklist on the other; half open like a book, your collection spreads across two pages.",
+      number: 4,
+      name: "History",
+      headline: ["Every evening", "adds up."],
+      body: "History keeps every record you play: your time at the turntable this month, this year or since your first record, your most played records and each day’s listening. Share your month as a card made from your most played records, or save it to Photos.",
     },
     {
-      type: "tablets",
+      type: "phones",
       shots: [
         {
-          src: ipadCollection,
-          alt: "Analog on iPad: your favorite records in a grid of covers",
-          caption: "Your collection on iPad",
-        },
-      ],
-    },
-    {
-      type: "figures",
-      frame: "bleed",
-      shots: [
-        {
-          src: duoNowPlaying,
-          alt: "Analog on iPhone Duo, open: the Channel Orange cover on one half, its tracklist on the other",
-          caption: "iPhone Duo: the record beside its tracklist",
+          src: history,
+          alt: "Analog app: History: 26 hours at the turntable this month, and the most played records",
+          caption: "Your time at the turntable",
         },
         {
-          src: duoCollection,
-          alt: "Analog on iPhone Duo, open: the collection grid beside the vertical toolbar",
-          caption: "Your collection on iPhone Duo",
+          src: historyShare,
+          alt: "Analog app: your month as a card to share",
+          caption: "Share your month as a card",
         },
       ],
     },
