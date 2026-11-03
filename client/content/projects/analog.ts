@@ -35,7 +35,7 @@ export const analog = {
     { label: "Type", value: type },
     {
       label: "Tech stack",
-      value: "SwiftUI, SwiftData, ShazamKit, Cloudflare Workers",
+      value: "SwiftUI, SwiftData",
     },
     {
       label: "Live",
@@ -260,7 +260,7 @@ export const analog = {
       items: [
         {
           title: "Recognition",
-          body: "ShazamKit and SoundAnalysis identify the track, then a resolver maps it to the right record and side in your Discogs collection and follows the side by its track lengths.",
+          body: "Analog identifies the track from a few seconds of sound, then maps it to the right record and side in your Discogs collection and follows the side by its track lengths.",
         },
         {
           title: "Play Next",
@@ -268,7 +268,7 @@ export const analog = {
         },
         {
           title: "Analog Studio",
-          body: "A Cloudflare Worker drafts each session with Claude in four passes. The app proves itself with App Attest, so no API key ever ships in it.",
+          body: "Claude drafts each session in four passes on the server. The app proves itself with App Attest, so no API key ever ships in it.",
         },
         {
           title: "One app, every screen",
@@ -280,7 +280,7 @@ export const analog = {
         },
         {
           title: "The website",
-          body: "analogapp.co runs on Next.js and Vercel, with its Cloudflare and Vercel setup managed in Terraform.",
+          body: "analogapp.co runs on Next.js and Vercel, with its infrastructure managed in Terraform.",
         },
       ],
     },
