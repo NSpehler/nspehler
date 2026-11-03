@@ -72,7 +72,7 @@ export const analog = {
     "It’s made for physical records: Analog helps you enjoy your collection, but the music still comes from your turntable. I built the native app for iPhone, iPad, Mac and Apple Watch, the server behind Analog Studio and the website at analogapp.co.",
   ],
   video: {
-    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/analog-launch.mp4",
+    src: "https://vvcwfr2nfw2kpgef.public.blob.vercel-storage.com/videos/analog-launch-2026-11-03.mp4",
     poster: {
       src: videoPoster,
       alt: "The Analog launch video: “Drop the needle. Analog listens.” beside a spinning Analog record",
