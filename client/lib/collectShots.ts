@@ -26,6 +26,8 @@ export const collectShots = ({ lead, blocks }: Project): Shot[] => {
         return block.shots.map((shot) => ({ ...shot, kind: "phone" }))
       case "tablets":
         return block.shots.map((shot) => ({ ...shot, kind: "tablet" }))
+      case "watches":
+        return block.shots.map((shot) => ({ ...shot, kind: "device" }))
       default:
         return []
     }

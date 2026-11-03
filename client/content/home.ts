@@ -1,12 +1,12 @@
 import collection from "@/images/analog/collection.webp"
 import drafting from "@/images/analog/drafting.webp"
+import historyShare from "@/images/analog/history-share.webp"
+import history from "@/images/analog/history.webp"
+import lockScreen from "@/images/analog/lock-screen.webp"
 import nowPlaying from "@/images/analog/now-playing.webp"
 import playlists from "@/images/analog/playlists.webp"
 import review from "@/images/analog/review.webp"
-import sessionLength from "@/images/analog/session-length.webp"
 import session from "@/images/analog/session.webp"
-import settings from "@/images/analog/settings.webp"
-import sides from "@/images/analog/sides.webp"
 import vibe from "@/images/analog/vibe.webp"
 
 import type { HomeContent } from "./types"
@@ -38,32 +38,20 @@ export const home = {
   },
   nowBuilding: {
     slug: "analog",
-    body: "An iPhone and iPad app for vinyl collectors. It identifies what’s playing on your turntable and turns your record shelf into curated listening sessions.",
+    body: "An app for vinyl collectors on iPhone, iPad, Mac and Apple Watch. It identifies the record and the side playing on your turntable, suggests what to play next and turns your record shelf into curated listening sessions.",
     website: { label: "analogapp.co", href: "https://analogapp.co" },
     screens: [
       {
         src: nowPlaying,
         alt: "Analog app: Now playing",
         title: "Now playing",
-        subtitle: "Recognizes the record on your turntable",
-      },
-      {
-        src: playlists,
-        alt: "Analog app: Playlists",
-        title: "Playlists",
-        subtitle: "Built from records you already own",
+        subtitle: "Recognizes the record and the side on your turntable",
       },
       {
         src: vibe,
         alt: "Analog app: Choose a vibe",
         title: "Choose a vibe",
         subtitle: "Tap a mood or describe it in your own words",
-      },
-      {
-        src: sessionLength,
-        alt: "Analog app: Session length",
-        title: "Session length",
-        subtitle: "Tell Analog how long you want to listen",
       },
       {
         src: drafting,
@@ -78,28 +66,40 @@ export const home = {
         subtitle: "Check the draft, then save and start",
       },
       {
-        src: collection,
-        alt: "Analog app: Collection",
-        title: "Collection",
-        subtitle: "Your records, synced from Discogs",
-      },
-      {
         src: session,
         alt: "Analog app: Listening session",
         title: "Listening session",
         subtitle: "What’s playing now and what’s up next",
       },
       {
-        src: sides,
-        alt: "Analog app: Sides",
-        title: "Sides",
-        subtitle: "Choose which sides of a record to play",
+        src: collection,
+        alt: "Analog app: Collection",
+        title: "Collection",
+        subtitle: "Your records, synced from Discogs",
       },
       {
-        src: settings,
-        alt: "Analog app: Settings",
-        title: "Settings",
-        subtitle: "Discogs sync, recommendations and app icons",
+        src: playlists,
+        alt: "Analog app: Playlists",
+        title: "Playlists",
+        subtitle: "Your saved sessions, ready to play again",
+      },
+      {
+        src: history,
+        alt: "Analog app: History",
+        title: "History",
+        subtitle: "Your time at the turntable and your most played records",
+      },
+      {
+        src: historyShare,
+        alt: "Analog app: Share your month",
+        title: "Share your month",
+        subtitle: "A card made from your most played records",
+      },
+      {
+        src: lockScreen,
+        alt: "Analog app: Lock Screen",
+        title: "Lock Screen",
+        subtitle: "The side and the time left, without unlocking",
       },
     ],
   },

@@ -37,6 +37,7 @@ export type Block =
       shots: readonly [Shot, Shot] | readonly [Shot, Shot, Shot, Shot]
     }
   | { type: "tablets"; shots: readonly [Shot] | readonly [Shot, Shot] }
+  | { type: "watches"; shots: readonly [Shot, Shot, Shot] }
   | {
       type: "cards"
       heading: string
