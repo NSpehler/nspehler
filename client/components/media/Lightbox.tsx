@@ -279,9 +279,11 @@ export const Lightbox = ({
             swipeStart.current = null
           }}
           className={cn(
-            "pointer-events-auto absolute m-0 touch-pinch-zoom overflow-hidden select-none",
+            "pointer-events-auto absolute m-0 touch-pinch-zoom select-none",
+            // A device draws its own outline and drop shadow, which clipping
+            // would cut off at the image's edge.
             !device &&
-              "bg-mat shadow-[0_24px_80px_-24px_var(--shot-shadow)] ring-1 ring-bleed",
+              "overflow-hidden bg-mat shadow-[0_24px_80px_-24px_var(--shot-shadow)] ring-1 ring-bleed",
           )}
           style={frameStyle}
         >
