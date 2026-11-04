@@ -103,8 +103,8 @@ export const paperdrop = {
       type: "chapter",
       number: 3,
       name: "Preview",
-      headline: ["A mobile preview,", "then one click to publish."],
-      body: "Before publishing, the builder shows the form as engineers will see it on their phone. On site, they fill it in and sign on screen, and PaperDrop generates the finished certificate on the original PDF, with the job’s details already in place.",
+      headline: ["The form put in order,", "then checked against the PDF."],
+      body: "Once the fields are placed, they’re arranged in the order engineers will fill them in. The preview then puts the form next to its PDF: picking a job fills in its details, and hovering a field shows where it lands on the certificate. Publishing takes one click. On site, engineers fill in the form on their phone and sign on screen, and PaperDrop generates the finished certificate on the original PDF, with the job’s details already in place.",
     },
     {
       type: "figures",
