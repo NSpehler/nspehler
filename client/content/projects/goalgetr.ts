@@ -1,8 +1,10 @@
 import brand from "@/images/projects/goalgetr/brand.webp"
+import editCard from "@/images/projects/goalgetr/edit-card.webp"
 import filmPoster from "@/images/projects/goalgetr/film-poster.webp"
 import playerCalendar from "@/images/projects/goalgetr/player-calendar.webp"
 import playerCard from "@/images/projects/goalgetr/player-card.webp"
 import sessionPlanner from "@/images/projects/goalgetr/session-planner.webp"
+import skillRatings from "@/images/projects/goalgetr/skill-ratings.webp"
 import team from "@/images/projects/goalgetr/team.webp"
 import trainingVideo from "@/images/projects/goalgetr/training-video.webp"
 
@@ -39,7 +41,7 @@ export const goalgetr = {
     shot: {
       src: team,
       alt: "goalGetr on three phones: a team roster, a drill with its video and a coach’s calendar",
-      caption: "Team, drill and calendar",
+      caption: "A team, a drill and the coach’s week",
     },
   },
   overview: [
@@ -75,7 +77,7 @@ export const goalgetr = {
       shot: {
         src: sessionPlanner,
         alt: "Session planner: a session’s game board on the rink, with its drills and the equipment needed",
-        caption: "Session planner",
+        caption: "Planning a session on the rink",
       },
     },
     {
@@ -95,12 +97,28 @@ export const goalgetr = {
         {
           src: trainingVideo,
           alt: "Training video: a Morning Skate session with its video",
-          caption: "Training video",
+          caption: "Watching the drill before practice",
         },
         {
           src: playerCard,
           alt: "Player card with ratings for skating, shooting and puck handling, and badges to unlock",
-          caption: "Player card",
+          caption: "A player card that tracks progress",
+        },
+      ],
+    },
+    {
+      type: "figures",
+      frame: "bleed",
+      shots: [
+        {
+          src: skillRatings,
+          alt: "Skill ratings: progress rings for skating, shooting, puck skills, fitness, game sense and character",
+          caption: "Ratings across six skills",
+        },
+        {
+          src: editCard,
+          alt: "Edit card: a player’s card with an amber background, and the colors to choose from",
+          caption: "Customizing your player card",
         },
       ],
     },
@@ -117,7 +135,7 @@ export const goalgetr = {
       shot: {
         src: playerCalendar,
         alt: "Player calendar with practices from three different teams, each with a reply button",
-        caption: "Player calendar",
+        caption: "Every team’s practices on one calendar",
       },
     },
     {
