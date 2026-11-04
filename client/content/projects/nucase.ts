@@ -1,10 +1,13 @@
 import addTasks from "@/images/projects/nucase/add-tasks.webp"
 import ai from "@/images/projects/nucase/ai.webp"
 import brand from "@/images/projects/nucase/brand.webp"
+import building from "@/images/projects/nucase/building.webp"
 import chooseProject from "@/images/projects/nucase/choose-project.webp"
 import filmPoster from "@/images/projects/nucase/film-poster.webp"
+import house from "@/images/projects/nucase/house.webp"
 import jobs from "@/images/projects/nucase/jobs.webp"
 import phones from "@/images/projects/nucase/phones.webp"
+import relax from "@/images/projects/nucase/relax.webp"
 import screens from "@/images/projects/nucase/screens.webp"
 
 import type { Project } from "../types"
@@ -40,7 +43,7 @@ export const nucase = {
     shot: {
       src: screens,
       alt: "Nucase on three phones: the partner sign-up, the work to add for an area with its price, and the areas of a home",
-      caption: "Partner sign-up, tasks and areas, on mobile",
+      caption: "Pricing a renovation from your phone",
     },
   },
   overview: [
@@ -68,18 +71,27 @@ export const nucase = {
       body: "Homeowners start with their address and type of home, then pick the areas to renovate from illustrated cards, indoors and out. For each area they choose the work and the materials, and the estimate updates instantly, priced per item, per square meter or per meter.",
     },
     {
+      type: "figure",
+      frame: "bleed",
+      shot: {
+        src: chooseProject,
+        alt: "Choose a project, then the sections to renovate: roof, extension, cladding, foundations and entrance",
+        caption: "Picking the areas to renovate",
+      },
+    },
+    {
       type: "figures",
       frame: "bleed",
       shots: [
         {
-          src: chooseProject,
-          alt: "Choose a project, then the sections to renovate: roof, extension, cladding, foundations and entrance",
-          caption: "Choose a project and the areas to renovate",
-        },
-        {
           src: addTasks,
           alt: "Indoor areas like the kitchen, bathroom and basement, with the work to do in each",
-          caption: "Add the work for each area",
+          caption: "Adding the work for each room",
+        },
+        {
+          src: house,
+          alt: "An illustrated cutaway of a home, room by room, with a beaver mascot on each floor",
+          caption: "Every room of the home, ready to renovate",
         },
       ],
     },
@@ -89,7 +101,7 @@ export const nucase = {
       shot: {
         src: phones,
         alt: "Nucase on three phones: choosing the areas to renovate, the price estimate by area and the finished report, with the beaver mascots",
-        caption: "Areas, price estimate and report, on mobile",
+        caption: "From the first room to the final report",
       },
     },
     {
@@ -103,13 +115,20 @@ export const nucase = {
       body: "Homeowners who’d rather explain it in their own words can chat with the Nucase assistant. It adds the right areas, tasks and materials to the estimate and asks for approval before changing anything. The Nucase team decides which tasks it can suggest.",
     },
     {
-      type: "figure",
+      type: "figures",
       frame: "bleed",
-      shot: {
-        src: ai,
-        alt: "The Nucase assistant, introduced by the beaver mascot",
-        caption: "AI assistant",
-      },
+      shots: [
+        {
+          src: ai,
+          alt: "The Nucase assistant, introduced by the beaver mascot",
+          caption: "Describing the project to the AI assistant",
+        },
+        {
+          src: relax,
+          alt: "The beaver mascot lying back with its hands behind its head",
+          caption: "Letting the assistant do the work",
+        },
+      ],
     },
     {
       type: "chapter",
@@ -119,13 +138,20 @@ export const nucase = {
       body: "Contractors join Nucase as partners and get their own dashboard with the jobs assigned to them, where they update each job’s status and invite their team. Homeowners who arrive through a contractor’s invite link are assigned to that contractor automatically.",
     },
     {
-      type: "figure",
+      type: "figures",
       frame: "bleed",
-      shot: {
-        src: jobs,
-        alt: "Your jobs: an entrance renovation of 30 m³ with its price",
-        caption: "Your jobs, in the contractor dashboard",
-      },
+      shots: [
+        {
+          src: jobs,
+          alt: "Your jobs: an entrance renovation of 30 m³ with its price",
+          caption: "A new job in the contractor’s dashboard",
+        },
+        {
+          src: building,
+          alt: "Beaver mascots building a house, on scaffolding and up on the roof",
+          caption: "The right contractor takes it from there",
+        },
+      ],
     },
     {
       type: "figure",
