@@ -8,6 +8,7 @@ import dropFile from "@/images/projects/paperdrop/drop-file.webp"
 import fieldSettings from "@/images/projects/paperdrop/field-settings.webp"
 import formsList from "@/images/projects/paperdrop/forms-list.webp"
 import mobilePreview from "@/images/projects/paperdrop/mobile-preview.webp"
+import pdfPreview from "@/images/projects/paperdrop/pdf-preview.webp"
 import placingFields from "@/images/projects/paperdrop/placing-fields.webp"
 import upload from "@/images/projects/paperdrop/upload.webp"
 
@@ -106,13 +107,20 @@ export const paperdrop = {
       body: "Before publishing, the builder shows the form as engineers will see it on their phone. On site, they fill it in and sign on screen, and PaperDrop generates the finished certificate on the original PDF, with the job’s details already in place.",
     },
     {
-      type: "figure",
+      type: "figures",
       frame: "mat",
-      shot: {
-        src: mobilePreview,
-        alt: "Mobile preview of the form, with a signature field, before publishing",
-        caption: "The form as engineers see it on their phone",
-      },
+      shots: [
+        {
+          src: mobilePreview,
+          alt: "The Drop Form view, where the form’s fields are arranged in order before publishing",
+          caption: "Arranging the fields of the form",
+        },
+        {
+          src: pdfPreview,
+          alt: "The PDF certificate next to its form, filled in for a job, with the hovered field highlighted on the PDF",
+          caption: "The certificate filled in for a job",
+        },
+      ],
     },
     {
       type: "chapter",
